@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.system.mapper.DictionaryMapper">
+	
+	<select id="queryDictionaryInfo" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		select * from SYS_SETTING_TAB 
+		<if test="dictionaryName != null">
+			where DISPLAYVALUE like '%${dictionaryName}%' 
+			OR NOTES like '%${dictionaryName}%' 
+			OR SETTINGNAME like '%${dictionaryName}%' 
+		</if>
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countDictionaryDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM SYS_SETTING_TAB  
+		<if test="dictionaryName != null">
+			where DISPLAYVALUE like '%${dictionaryName}%' 
+			OR NOTES like '%${dictionaryName}%' 
+			OR SETTINGNAME like '%${dictionaryName}%' 
+		</if>
+	</select>
+	
+	<insert id="addDictionaryInfo" parameterType="string" >
+		insert into SYS_SETTING_TAB(
+			ID
+			<if test="DISPLAYVALUE != null">
+			,DISPLAYVALUE
+			</if>
+			<if test="NOTES != null">
+			,NOTES
+			</if>
+			<if test="SETTINGNAME != null">
+			,SETTINGNAME
+			</if>
+			<if test="STOREVALUE != null">
+			,STOREVALUE
+			</if>
+		) values (
+			SEQ_SYS_SETTING_TAB.NEXTVAL
+			<if test="DISPLAYVALUE != null">
+			,'${DISPLAYVALUE}'
+			</if>
+			<if test="NOTES != null">
+			,'${NOTES}'
+			</if>
+			<if test="SETTINGNAME != null">
+			,'${SETTINGNAME}'
+			</if>
+			<if test="STOREVALUE != null">
+			,'${STOREVALUE}'
+			</if>
+		)
+		
+	</insert>
+	
+	<update id="updateDictionaryInfo" parameterType="string"> 
+		update SYS_SETTING_TAB set
+		<if test="DISPLAYVALUE != null">
+		DISPLAYVALUE = '${DISPLAYVALUE}'
+		</if>
+		<if test="NOTES != null">
+		,NOTES = '${NOTES}'
+		</if>
+		<if test="SETTINGNAME != null">
+		,SETTINGNAME = '${SETTINGNAME}'
+		</if>
+		<if test="STOREVALUE != null">
+		,STOREVALUE = '${STOREVALUE}'
+		</if>
+		where ID = ${id}
+	</update>
+	
+	<delete id="deleteDictionaryInfo" parameterType="string">
+		delete from SYS_SETTING_TAB where ID in (${ids})
+	</delete>
+	
+	<select id="initDictionaryDetailInfo" parameterType="string" resultType="Map">
+		select * from SYS_SETTING_TAB
+		<if test="id != null">
+			WHERE ID = ${id}
+		</if>
+	</select>
+</mapper>

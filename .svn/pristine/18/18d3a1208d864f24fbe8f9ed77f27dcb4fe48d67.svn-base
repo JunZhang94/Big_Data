@@ -1,0 +1,154 @@
+@import url("public.css");
+
+body {
+	background: url(images/login/bg.jpg) repeat;
+}
+
+.login_right_menu {
+	padding-top: 5px;
+	height: 24px;
+	z-index:100;
+}
+
+.login_right_menu a {
+	font-size: 12px;
+	line-height: 24px;
+	color: #fff;
+	text-decoration: none;
+}
+
+.login_right_menu a:hover {
+	text-decoration: underline;
+}
+
+.add_fav {
+	background: url(images/login/login_ico.gif) no-repeat;
+	padding-left: 22px;
+	width: 80px;
+	height: 24px;
+	float: right;
+	display: block;
+}
+
+.set_home {
+	background: url(images/login/login_ico.gif) no-repeat 0 -22px;
+	padding-left: 22px;
+	width: 80px;
+	height: 24px;
+	float: right;
+	display: block;
+}
+
+.download_ico {
+	background: url(images/login/down.gif) no-repeat;
+	background-position:0 4px;
+	padding-left: 22px;
+	width: 80px;
+	height: 24px;
+	float: right;
+	display: block;
+}
+
+.login_page {
+	background: url(images/login/login_top.jpg) no-repeat 40% 0;
+}
+
+.login_box {
+	width: 540px;
+	height: 340px;
+	margin: 0 auto;
+	padding-top: 170px;
+}
+
+.logo {
+	background: url(images/login/logo.png) no-repeat;
+	_background: none;
+	_filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(src = "../images/login/logo.png");
+	height: 100px;
+}
+
+.login_conbg {
+	background: url(images/login/login_bg.png);
+	_background: url(images/login/login_bg.jpg);
+	height: 280px;
+}
+
+.login {
+	width: 280px;
+	padding-left: 38px;
+	padding-top: 30px;
+	margin-left: 185px;
+}
+
+.login_span {
+	background: url(images/login/text.png) no-repeat;
+	width: 210px;
+	height: 30px;
+	display:inline-block;
+	line-height: 26px;
+}
+.login_text {
+	width: 200px;
+	height: 26px;
+	border: none;
+	padding: 2px 5px;
+	background:transparent;
+	line-height: 26px;
+}
+
+.login .name {
+	height: 30px;
+	float: left;
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.login .name i {
+	font-style: normal;
+	margin-right: 14px;
+}
+
+.login_row {
+	padding-bottom: 10px;
+}
+
+.rem_pw {
+	padding-left: 60px;
+}
+
+.rem_pw input {
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.login_btnbox {
+	padding-left: 60px;
+	padding-top: 20px;
+}
+
+.login_btn {
+	width: 97px;
+	height: 32px;
+	background: url(images/login/btn.png) no-repeat;
+	font-weight: bold;
+	color: #fff;
+	font-size: 14px;
+	border: 0;
+}
+
+.login_btn:hover {
+	background: url(images/login/btn.png) no-repeat -109px 0;
+}
+
+.login_bottom {
+	background: url(images/login/login_bottombg.jpg) repeat-x;
+	text-align: center;
+	border-top: 1px solid #1E90B5;
+	color: #444;
+	width: 100%;
+	height: 35px;
+	padding-top: 3px;
+	line-height: 30px;
+	bottom:0px;
+}

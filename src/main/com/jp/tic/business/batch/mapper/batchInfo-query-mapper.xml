@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.batch.mapper.BatchDataQueryMapper">
+	
+	
+	<select id="findAllJobs" resultType="map">
+		SELECT 
+			id "id", job_name "jobName"
+		FROM DIS_JOB
+		ORDER BY job_name
+	</select>
+	
+	<select id="findTasksByJobId" parameterType="map" resultType="map">
+		select id "id", job_id "jobId", task_name "taskName", start_time "startTime",
+				end_time "endTime" 
+		from DIS_TASK t 
+		where 
+		<if test="jobId != null">
+			t.job_id = #{jobId}
+		</if>
+		<if test="jobId == null">
+			1=2
+		</if>
+	</select>
+</mapper>

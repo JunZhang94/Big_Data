@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.datacenter.mapper.GateCountStatusMapper">
+	
+	<select id="findCount4GateTime" parameterType="map" resultType="map">
+		<![CDATA[
+			SELECT 
+				*
+			FROM dis_gate_count t
+			WHERE  t.start_time >= #{startTime}
+			and t.end_time <= #{endTime}
+			and t.kkbh = #{kkbh}
+			order by t.kkbh,t.start_time
+		]]>
+	</select>
+	
+	<select id="findCount4SenderTime" parameterType="map" resultType="map">
+		<![CDATA[
+			SELECT 
+				*
+			FROM dis_gate_count t
+			WHERE  t.start_time >= #{startTime}
+			and t.end_time <= #{endTime}
+			and t.sender_ip = #{sender_ip}
+			order by t.sender_ip,t.start_time
+		]]>
+	</select>
+	
+	<select id="findCount4RecieverTime" parameterType="map" resultType="map">
+		<![CDATA[
+			SELECT 
+				*
+			FROM dis_gate_count t
+			WHERE  t.start_time >= #{startTime}
+			and t.end_time <= #{endTime}
+			and t.reciever_ip = #{reciever_ip}
+			order by t.reciever_ip,t.start_time
+		]]>
+	</select>
+	
+	<select id="sumCount4Gate" parameterType="map" resultType="map">
+		<![CDATA[
+			SELECT 
+				kkbh 'kkbh',
+				sum(RECIEVE_COUNT) 'recieve_count',
+				sum(SAVE_COUNT) 'save_count',
+				sum(HPHM_COUNT) 'hphm_count',
+				sum(NON_HPHM_COUNT) 'non_hphm_count'
+			FROM dis_gate_count t
+			WHERE  t.start_time >= #{startTime}
+			and t.end_time <= #{endTime}
+			group by t.kkbh
+			]]>
+	</select>
+	
+	<select id="sumCount4Sender" parameterType="map" resultType="map">
+		<![CDATA[
+			SELECT 
+				SENDER_IP 'sender_ip',
+				sum(RECIEVE_COUNT) 'recieve_count',
+				sum(IGNORE_COUNT) 'ignore_count',
+				sum(ERROR_COUNT) 'error_count'
+			FROM dis_gate_count t
+			WHERE  t.start_time >= #{startTime}
+			and t.end_time <= #{endTime}
+			group by t.SENDER_IP
+		]]>
+	</select>
+	
+	<select id="sumCount4Reciever" parameterType="map" resultType="map">
+		<![CDATA[
+			SELECT 
+				RECIEVER_IP 'reciever_ip',
+				sum(RECIEVE_COUNT) 'recieve_count',
+				sum(IGNORE_COUNT) 'ignore_count',
+				sum(ERROR_COUNT) 'error_count'
+			FROM dis_gate_count t
+			WHERE  t.start_time >= #{startTime}
+			and t.end_time <= #{endTime}
+			group by t.RECIEVER_IP
+		]]>
+	</select>
+	
+</mapper>

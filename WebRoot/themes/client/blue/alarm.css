@@ -1,0 +1,57 @@
+#gridPanelTopBar .x-toolbar-ct {
+  height : 40px;
+}
+#gridPanelBottomBar.x-toolbar {
+  background: none repeat scroll 0 0 #D2F0FF;
+  padding: 0px;
+}
+#gridPanelBottomBar .x-btn {
+  border: none;
+}
+#tbarRealtimeAlarm .x-toolbar-ct {
+  height : 40px;
+}
+
+/**tabpanel*/
+.x-tab-panel-header, .x-tab-panel-footer {
+  background-color: white;
+  padding: 0px;
+  border : 0px;
+}
+.x-tab-strip-top .x-tab-right, .x-tab-strip-top .x-tab-left, .x-tab-strip-top .x-tab-strip-inner {
+   background : transparent;
+   height : 27px;
+}
+ul.x-tab-strip-top {
+  background-color: #DCDCDC;
+  background-image: none;
+  border-bottom-color: #8DB2E3;
+  border: 0px;
+}
+ul.x-tab-strip li {
+  background : url("images/alarm/alarm.gif") no-repeat scroll -111px 0 transparent;
+  padding-left: 6px;
+  padding-right: 6px;
+  width: 100px;
+  margin-left: 0px;
+  height: 26px;
+}
+.x-tab-strip-top .x-tab-strip-active .x-tab-right {
+   background : url("images/alarm/alarm.gif") no-repeat scroll 0 0 transparent;
+   padding-left: 0px;
+   width: 108px;
+   height: 26px;
+   margin-left:-6px;
+   color: #1088DB;
+}
+.x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text {
+  padding-left: 16px;
+  color: #1088DB;
+}
+.x-tab-strip span.x-tab-strip-text {
+  color: #666666;
+  font-weight: bold;
+}
+.x-panel-noborder .x-panel-header-noborder {
+  border-color: #DCDCDC;
+}

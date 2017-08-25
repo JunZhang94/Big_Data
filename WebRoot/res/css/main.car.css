@@ -1,0 +1,263 @@
+@charset "utf-8";
+
+.content-box {
+	width: 100%;
+	min-width: 80%;
+	*min-width: 82%;
+}
+
+.content-box h2 {
+	background: url(../image/zxqyzn_top_bg.gif) repeat-x;
+	height: 31px;
+	line-height: 31px;
+	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 1px solid #c9cacb;
+	*width: 100%;
+}
+
+.content-box h2 span {
+	background: url(../image/ic01.png) no-repeat 3px 1px;
+	padding-left: 20px;
+}
+
+.content-box td {
+	font-size: 12px;
+}
+
+.text-area {
+	padding: 10px;
+}
+
+.text-area img {
+	padding-right: 15px;
+	vertical-align: middle;
+}
+
+.text-area img[title] {
+	cursor: pointer;
+}
+
+.text-list {
+	font-size: 12px;
+	line-height: 21px;
+	padding-top: 15px;
+}
+
+.text-list p {
+	text-indent: 2em;
+}
+
+/* ####################middleBox#################### */
+#middle-box {
+	float: left;
+	height: atuo;
+	width: 100%;
+	background-color: #E9E9EB;
+}
+
+#main {
+	float: left;
+	background-color: white;
+	min-height: 500px;
+	width: 79%; 
+	*width: 80%;
+}
+
+/*###################left#####################*/
+.left {
+	width: 20%;
+	background: #e9e9eb;
+	text-align: center;
+	padding: 15px 0;
+	height: auto;
+	float: left;
+}
+
+.left img {
+}
+
+.left div.text {
+	text-align: center;
+	font-size: 12px;
+	line-height: 34px;
+}
+
+.left div.content h2 {
+	font-size: 12px;
+	color: #373737;
+	text-indent: 5px;
+	background: url(../image/home/qxzn_bg.png) repeat-x;
+	border-bottom: 1px solid #c1c1c3;
+	border-top: 1px solid #c1c1c3;
+	line-height: 28px;
+	height: 28px;
+	text-align: left;
+}
+
+.left div.content h2 span {
+	background: url(../image/home/left_ic.png) no-repeat 3px 0px;
+	padding-left: 25px;
+}
+
+.left div.content ul {
+	padding-top: 10px;
+}
+
+.left div.content li {
+	list-style: none;
+	font-size: 12px;
+	line-height: 26px;
+	height: 26px;
+	font-family: aril;
+}
+
+.left div.content li img {
+	border: none;
+}
+
+#main {
+}
+
+/*--------------------------------TOP--CSS样式------------------------------*/
+.top {
+	background: url(../image/home/top_bg.jpg) repeat-x;
+	height: 100px;
+	clear: both;
+	border-bottom: 5px solid #d4d5d8;
+}
+
+.logo {
+	background: url(../image/home/logo.jpg) no-repeat;
+	width: 286px;
+	height: 100px;
+	float: left;
+}
+
+.menu {
+	float: right;
+	height: 100px;
+}
+
+.top-right-corner li {
+	float: right;
+	list-style: none;
+	line-height: 24px;
+}
+
+.top-right-corner li a {
+	padding: 0 7px;
+}
+
+.btn-menu ul {
+	padding: 79px 135px 0 0;
+}
+
+.btn-menu li {
+	float: right;
+	list-style: none;
+	margin: 0 3px;
+	cursor: pointer;
+}
+
+/*--------------------------------BOTTOM--CSS样式------------------------------*/
+.bottom {
+	background: url(../image/home/bottom_bg.gif) repeat-x;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	float: left;
+	width: 100%;
+}
+
+.navMain {
+	/*right: 50px;*/
+	width: 350px;
+	height: 25px;
+	float: right;
+}
+
+.navMain li {
+	list-style: none;
+	margin: 15px 3px 0 0;
+	float: left;
+	border: 1px solid #68696d;
+	border-bottom: none;
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	border-radius: 5px 5px 0 0;
+	behavior: url(../css/ie-css3.htc);
+}
+
+.navMain li a {
+	width: 75px;
+	height: 36px;
+	line-height: 36px;
+	display: inline-block;
+	background: url(../image/home/menu_bg_b.png) repeat-x;
+	text-align: center;
+	font-size: 14px;
+	color: white;
+	cursor: pointer;
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
+	position: relative;
+}
+
+.navMain .current {
+	border-color: #68696d;
+	border-bottom: none
+}
+
+.navMain .current a {
+	padding-bottom: 1px;
+	background: url(../image/home/menu_bg_w.png) repeat-x;
+	height: 36px;
+	cursor: pointer;
+	font-size: 14px;
+	color: #373737;
+	font-weight: bold;
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
+	position: relative;
+}
+
+/*---------------------------------------------------*/
+.input_text, select {
+	border:1px solid #c5c5c5;
+	padding:0 3px;
+    line-height:35px;
+    height:22px;
+    background-color: white;
+    width: 205px;
+}
+   
+table.search {
+    border-top: 1px solid #CCCCCC;
+    margin-bottom: 5px;
+}
+   
+table.search tr td {
+   	padding: 0;
+   	padding-top: 10px;
+}
+   
+.text-area {
+   	padding: 0;
+}
+   
+table td .btn {
+   	text-align: right;
+   	width: 12%;
+}
+   
+table tr td.td-label {
+	text-align: right;
+	min-width: 12%;
+}
+
+.pro {
+	cursor: pointer;
+}

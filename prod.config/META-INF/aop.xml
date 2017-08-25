@@ -1,0 +1,9 @@
+<aspectj>   
+	<weaver options="-showWeaveInfo -XmessageHandlerClass:org.springframework.aop.aspectj.AspectJWeaverMessageHandler">   
+		<include within="com.jp.tic..*" />
+		<exclude within="*..*CGLIB*" />
+	</weaver>   
+	<aspects>   
+		<aspect name="com.jp.tic.system.controller.LoggingAspect" />
+	</aspects>   
+</aspectj>

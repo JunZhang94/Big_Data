@@ -1,0 +1,694 @@
+/******************************************
+*YHUI STRUCTURE CSS
+*******************************************/
+/***** difficulity sort *****/
+.yhui-whole-overlay{
+	height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+	z-index:10001;
+}
+.yhui-whole-loading{
+	position:relative;
+	margin:200px auto 0 auto;
+	_margin:200px auto 1000px auto;
+	width:250px;
+	height:40px;
+	z-index:10002;
+}
+
+/*****fix Layout iframe drag*****/
+.cover{  
+	position:absolute; 
+	width:100%; 
+	height:100%; 
+	top:0; left:0; 
+	z-index:500; 
+	background:url(skinBlue/images/transparent.png);
+}
+.fixHeader-west, .fixHeader-center, .fixHeader-south{
+	position:relative;
+	min-width:600px;
+}
+.fixHeader-west{
+	min-width:240px;
+}
+.content-center, .content-west, .content-south{
+	position:relative;
+	overflow:auto;
+	border:none;
+	/* _overflow-x:hidden;*/
+	_display:none;
+	_zoom:1;
+}
+
+/* zTree contextmenu */
+.treeContextMenu{
+	position:absolute;
+	display:none;
+	list-style:none;
+	background-color: #F7FDFF;
+	border: 1px solid #54BFDF;
+	padding:2px;
+	box-shadow:2px 2px 2px #ddd;
+}
+.treeContextMenu li{
+	padding:1px 20px;
+	cursor:pointer;
+}
+.treeContextMenu li:hover{
+	background-color:#69B9DA;
+}
+/***** Difficulty Sort END *****/
+
+/***** HEADER *****/
+.header{
+	position:relative;
+	min-width:800px;
+	_white-space: nowrap;
+}
+	.header div.headerInner{
+		height:40px;
+		font-size:12px;
+		font-weight:normal;
+	}
+	.header div.headerInner div{
+		float:right;
+		margin:10px 40px 0 0;
+	}
+	.header div.headerInner div a{
+		margin:0 5px;
+	}
+	.header div.headerInner div a:hover{
+	}
+	.header .welcome{
+		display:inline-block;
+		width:auto;
+		padding-left:15px;
+	}
+	.header div.headerInner div a.passWordTip{
+		position:relative;
+		display:none;
+		margin:0;
+	}
+	.header div.headerInner div a.passWordTip:hover{
+		text-decoration:none;
+	}
+	.header div.headerInner div a.passWordTip span{
+		position:absolute;
+		top:18px;
+		left:-20px;
+		width:220px;
+		text-align:center;
+		z-index:10;
+		display:none;
+	}
+	.header span.userRole{
+		display:inline-block;
+		width:72px;
+		margin:1px 1px 0;
+		padding:1px 5px 3px 5px;
+		position:relative;
+		*padding:0 5px;
+		*line-height:1.5;
+	}
+	.header span.userRoleHover{
+		margin:0;
+	}
+		.header span.userRole ul.roleList{
+			position:absolute;
+			list-style:none;
+			display:none;
+			top:18px;
+			left:-1px;
+		}
+		.header span.userRole ul.roleList li{
+			width:90px;
+			overflow:hidden;
+		}
+		.header span.userRole ul.roleList li a{
+			display:block;
+			text-decoration:none;
+			_zoom:1;
+			width:100%;
+			heigth:100%;
+			text-indent:1.5em;
+			margin:0;
+			padding:1px 0;
+		}
+		.header span.userRole ul.roleList li a:hover{
+		}
+/***** HEADER END *****/
+
+/***** MENU *****/
+.yhmenu{
+	list-style: none;
+	padding-left: 10px;
+}
+.yhmenu .firstLi{
+	float:left;
+	height:22px;
+	padding:0 30px 0 6px;
+	line-height:1.8;
+	font-size:12px;
+	text-align:center;
+	cursor:pointer;
+	position:relative;
+	overflow:visible;
+}
+.yhmenu .firstLi:hover, .firHover{
+}
+.yhmenu .firstLi:hover a{
+}
+.yhmenu .firstLi a{
+}
+.yhmenu .secUl{
+	list-style: none;
+	position:absolute;
+	left:-1px;
+	overflow:visible;
+	display:none;   
+	*top:22px;
+}
+.yhmenu .secUl li{
+	height:22px;
+	width:128px;
+	text-align:left;
+	padding-left:5px;
+	position:relative;
+	overflow:visible;
+	padding-top:0;
+}
+
+.yhmenu .secUl li:hover, .secLiHover{
+	cursor:pointer;
+}
+
+.yhmenu .firstLi span, .secLi span{
+	position:absolute;
+	right:5px;
+	*top:0;
+}
+.yhmenu .secUl span{
+	_color:#666;
+}
+.yhmenu .secUl a{
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.yhmenu .thiUl{
+	list-style:none;
+	position:relative;
+	width:133px;
+	top:-23px;
+	left:128px;
+	_position:absolute;
+	_left:133px;
+	_top:-1px;
+}
+.yhmenu .alignCenter{
+	text-align:center;
+	padding: 0 18px;
+}
+/*****MENU END*****/
+
+/*****NAVBAR*****/
+.navbar{
+	height:23px;
+	line-height:2;
+	_overflow:hidden;
+}
+.navbar span{
+	display: inline-block;
+    height: 23px;
+    margin: 0 10px;
+    width: 7px;
+	overflow:hidden;
+	vertical-align:middle;
+	text-indent:-9999px;
+	zoom:1;
+	margin: 0 10px;
+	_margin:0 5px;
+	*float:left;
+	*display:block;
+}
+.navbar a{
+	*margin-top: 2px;
+	_position: relative;
+	_top: 3px;
+}
+.navbar a:hover{
+	*margin-top: 2px;
+	_position: relative;
+	_top: 3px;
+}
+/*****NAVBAR END*****/   
+
+
+
+.yhui-searchbar{
+	height:27px;
+	_overflow:hidden;
+}
+.yhui-search-input {
+	height:22px;
+	width:150px;
+	overflow:hidden;
+	padding:3px 0 0 3px;
+	margin-left:5px;
+	line-height:24px;
+}
+.yhui-search-search, .yhui-search-cancel {
+	cursor:pointer;
+	height:27px;
+	width:30px;
+	float:left;
+	padding:0;
+}
+.yhui-search-search {
+	margin-left: 2px;
+}
+
+
+/**** Portlets 2012 4 16 jiangyuan ****/
+.column{
+	float:left;
+	padding-bottom:100px;
+	position:relative;
+	_display:inline;
+}
+.column2{
+	width:48%; 
+	margin-left:1.5%;
+	*width:46%;
+	*margin-left:2%;
+}
+.column3{
+	width:30%; 
+	margin-left:2.5%;
+}
+.portlet{
+	margin:10px 0;
+}
+.portlet .title{
+	font:normal 12px 'SinSum'; 
+	padding:6px 0 6px 27px;
+	padding:4px 0 4px 27px\0;
+	position:relative;
+}
+/** hack IE9 **/
+:root .portlet .title{
+	padding:6px 0 6px 27px;
+}
+.portlet .title a{
+	display:inline-block;
+	width:40px;
+	height:24px;
+	position:absolute;
+	right:10px;
+	top:0;
+	
+}
+.portlet .title span{
+	position:absolute;
+	left:10px;
+	top:8px;
+	_left:-25px;
+	_top:7px;
+	display:inline-block;
+	width:11px;
+	height:11px;
+	cursor:pointer;
+}
+
+.portlet ul.newList {list-style:none; padding:0px;  font:normal 12px "ËÎÌו";}
+.portlet ul.newList { padding:10px 0 10px 0;}
+.portlet ul.newList li { position:relative;  height:25px; line-height:25px; _line-height:26px;font-size:0; overflow:hidden; }
+.portlet ul.newList li a{ text-decoration:none; float:left; width:76%; padding-left:102px; margin-right:112px; _margin-right:0;  font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis; -moz-binding:url('ellipsis.xml#ellipsis'); }
+.portlet ul.newList li a:hover {  }
+.portlet ul.newList li img { position:absolute; float:left; clear:right; margin-left:-110px; _margin-left:0px; top:4px;}
+.portlet ul.newList li span { position:absolute; width:85px; left:18px; font-size:12px;}
+.portlet .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
+.portlet .ui-sortable-placeholder * { visibility: hidden; }
+/**** Portlets  END ****/
+
+/*****form 2012 5 4 jiangyuan *****/
+/* yhFormField **/
+form.yhFormField{zoom: 1;}
+table.yhFormField-table{width: 100%;zoom: 1;font-size:13px;}
+table.yhFormField-table td{
+	padding:1px;white-space:nowrap;
+	border:1px solid #E0F0F2;zoom: 1;
+}
+table.yhFormField-table td.column2Even{
+	width:40%;text-align:right;
+}
+table.yhFormField-table td.column2Odd{
+	background-color:#FFF;
+}
+table.yhFormField-table td.column4Even{
+	width:15%;text-align:right;
+}
+table.yhFormField-table td.column4Odd{
+	width:35%;background-color:#FFF;
+}
+table.yhFormField-table td.column6Even{
+	width:10%;text-align:right;
+}
+table.yhFormField-table td.column6Odd{
+	width:23.33%;background-color:#FFF;
+}
+table.yhFormField-table td.hover{
+	background-color:#C3EAF7;
+}
+
+	
+/* btn ***/
+.btnHolder{
+	text-align:center;
+	padding:5px 0;
+}
+	div.btnHolder a{
+		margin-left:10px;
+	}
+
+a.btn{
+	display:inline-block;
+	padding:0 5px;
+	text-decoration:none;
+}
+.icon{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	margin:0 4px 0 0;
+	vertical-align:middle;
+	cursor:pointer;
+	_vertical-align:baseline;
+}
+
+/**** yhButton *****/
+.yhButton{
+	overflow: hidden;
+}
+	.yhButton .yhButtonInner{
+		
+	}
+
+/* DropDown ***/
+.yhWrapDrop{
+	position:relative;
+	padding:2px 0 0 0;
+	*padding:0;
+	display:inline-block;
+	*zoom:1;
+	*display:inline;
+}
+	.yhWrapDrop input{
+		/*padding: 0 0 2px 0;*/
+		margin: 0 0 2px 0;
+		border:0;
+		font-size: 12px;
+	}
+	a.dropClickArrow{
+		position:absolute;
+		top:2px;
+		*top:2px;
+		right:1px;
+		display:block;
+		width:16px;
+		height:16px;
+		_line-height:0;
+		_font-size:0;
+	}
+
+	.yhWrapDrop .dropDisabled {
+		cursor: no-drop;
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		z-index:4;
+		display:none;
+	}
+.dropTreeUl{
+	border-top:1px solid #36B1D9;
+}	
+.dropTree{
+	z-index: 100;
+	position: absolute;
+	background-color:#F7FDFF;
+	border:1px solid #36B1D9;	
+}
+.dropTree .dropTreeUl{
+	overflow: auto;
+	*max-height: 200px;
+}
+
+	:root .dropTree .dropTreeUl{
+		max-height:200px;
+	}
+	:root .dropTree .dropTreeUl:hover{
+		height:	100%\9;
+	}
+.dropTree .buttonPanel{
+	padding: 3px 0;
+}
+	.dropTree .buttonPanel a {
+		margin-left: 9px;
+	}
+
+/*****YHTABS*****/
+.wrapHeader{
+	position:relative;
+	height:22px;
+	height:20px\9;
+	*z-index:100;
+}
+    /* hack ie9 */
+    :root .wrapHeader{
+        height:22px\9;
+    }
+    /*hack ff*/
+    @-moz-document url-prefix() {
+        .wrapHeader {
+            height: 23px;
+        }
+    }
+.yhTabsHeader{
+	overflow:hidden;
+	position:relative;
+	height:23px;
+	margin:0 36px 0 0;
+}
+.yhTabsHeader .ui-tabs-nav{
+	width:10000px;
+	position:absolute;
+}
+	.yhTabsHeader ul.ui-tabs-nav{
+		position:absolute;
+	}
+	.yhTabsHeader ul.ui-tabs-nav li{
+		margin:0 3px 0 0;
+		width:100px;
+		position:relative;
+	}
+	.yhTabsHeader ul.ui-tabs-nav li a{
+		width:65%;
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
+	.yhTabsHeader ul.ui-tabs-nav li span{
+		position:absolute;
+		right:0;
+	}
+.wrapHeader .wArrow, .wrapHeader .eArrow, .wrapHeader .sArrow, .wrapHeader .refresh{
+	position:absolute;
+	top:2px;
+	top:1px\9;
+	display:none;
+	cursor:pointer;
+}
+.wrapHeader div.tabsList{
+	width:150px;
+	padding:5px;
+	display:none;
+	position:absolute;
+	font:12px 'SimSun';
+	right:0;
+	top:20px;
+	z-index:200;
+}
+.wrapHeader div.tabsList ul{
+	list-style:none;
+}
+.wrapHeader div.tabsList ul.menu{
+}
+.wrapHeader div.tabsList li{
+	padding:4px 4px;
+	margin-top:2px;
+	cursor:pointer;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.tabsListHover{
+}
+:root .wrapHeader .wArrow, :root .wrapHeader .eArrow, :root .wrapHeader .sArrow, :root .wrapHeader .refresh {
+	top:2px\9;
+}
+.arrowHover{
+}
+.wrapHeader .wArrow{
+	left:0;
+}
+.wrapHeader .eArrow{
+	right:34px;
+}
+.wrapHeader .refresh{
+	right:17px;
+	display:block;
+}
+.wrapHeader .sArrow{
+	right:0;
+	display:block;
+}
+span.yhTabsClose{
+	cursor:pointer;
+}
+/*****yhTabs END*****/
+
+/***** yhSwitchPanel *****/
+.yhSwitchPanel span.activateAll{
+	right: 16px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+}
+.yhSwitchPanel span.foldAll{
+	right: 0;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+}
+.yhSwitchPanel .panel{
+	position: relative;
+	overflow: hidden !important;
+}
+.yhSwitchPanel div.contentLoading{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+/***** yhSwitchPanel END *****/
+
+/***** yhSelector *****/
+.yhSelector{
+	position: relative;
+}
+.yhSelector .panel{
+	position: absolute;
+	top: 0;
+	overflow: auto;
+}
+	.yhSelector .panel.leftPanel{
+		left: 0;
+	}
+	.yhSelector .panel.rightPanel{
+		right: 0;
+	}
+	.yhSelector .panel div {
+		margin-top: 1px;
+		padding: 1px 2px;
+	}
+.yhSelector div.btnContainer{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 20px;
+	height: 140px;
+	margin-top: -70px;
+	margin-left: -10px;
+}
+
+.yhSelector .yhSelectorBtn{
+	margin: 13px auto 0 auto;
+	cursor: pointer;
+}
+/***** yhSelector END *****/
+
+.yhui-portlet{ min-width: 740px; overflow: auto; display: none;  }
+.yhui-portlet-column { float: left; padding-bottom: 100px; _display: inline; }
+.yhui-portlet-panel { margin-top: 10px; margin-bottom: 10px; border-radius: 4px; }
+.yhui-portlet-head { position: relative; padding: 4px 0 4px 28px; cursor: move; _zoom:1; }
+.yhui-portlet-logo { position: absolute; display: block; width: 16px; height: 16px; top: 4px; left: 8px; }
+.yhui-portlet-head .yhui-portlet-title { cursor: move; }
+.yhui-portlet-panelcontrol { float: right; margin-top: -1px; margin-top: 0\9; *margin-top: -22px; _margin-top: -18px;  margin-right: 5px; }
+:root .yhui-portlet-panelcontrol { margin-top: -2px\9; }
+.yhui-portlet-content { min-height: 150px; max-height: 400px; _height: 150px; }
+.yhui-portlet-content iframe, .yhui-portlet-dialog iframe { width: 100%; height: 100%; }
+.yhui-portlet .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 100px !important; }
+.yhui-portlet .ui-sortable-placeholder * { visibility: hidden; }
+.yhui-portlet-back { cursor: pointer; }
+
+
+/* clear space */
+.noPadding{
+	padding:0 !important;
+}
+.noMargin{
+	margin: 0 !important;
+}
+.noMP{
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.noBorder{
+	border: none !important;
+}
+/******************************************
+*FOR LAYOUT
+*******************************************/
+/*****About Pane*****/
+.ui-layout-pane{
+	padding:0 !important;
+	position:relative;
+	overflow:auto;
+}
+/**.ui-layout-north{
+	overflow: visible;
+	z-index:100 !important;
+	border:1px solid #54BFDF;
+}**/
+/******************************************
+*For contextMenu
+*******************************************/
+.context-menu-theme-default {}
+.context-menu-theme-default .context-menu-item {
+	text-align:left;
+	cursor:pointer;
+	padding:4px 14px 4px 8px;
+	font:12px 'SimSun',Tahoma,Arial;
+	margin:2px;
+}
+.context-menu-theme-default .context-menu-item label{
+	cursor:pointer;
+}
+.context-menu-theme-default .context-menu-separator {
+	font-size:0px;
+}
+.context-menu-theme-default .context-menu-item-disabled {}
+.context-menu-theme-default .context-menu-item .context-menu-item-inner {
+	background:none no-repeat fixed 999px 999px; /* Make sure icons don't appear */
+}
+.context-menu-theme-default .context-menu-item-hover {}
+.context-menu-theme-default .context-menu-item-disabled-hover {}
+

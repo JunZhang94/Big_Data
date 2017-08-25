@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE>多选树</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="../../../css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="../../../../jquery/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript" src="pinyin.js"></script>
+	<style text="text/css">
+		.ztree * {padding:0; margin:0; font-size:15px; font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif}
+		body{margin:2px auto; padding:10px;}
+		#main{ margin:5px; padding0;width:100%; height:85%; }
+		#treeDiv{float:left; margin:5px 0; padding0;width:49%; height:90%; border:1px gray solid; overflow:auto;}
+		#showDiv{float:left; margin:5px 3px;padding:0;width:49%; height:90%;border:1px gray solid;overflow:auto;}
+		#searchDiv{padding:0 5px;width:100%;}
+		#searchDiv #key{width:100%; border:1px gray solid;height:23px;}
+		#searchDiv #search{width:100%;width:12%;height:28px; cursor:pointer;border:1px gray solid;}
+		#btnDiv{margin:0;text-align:center; cursor:pointer;}
+		input,button{ vertical-align:middle}
+	</style>
+	
+	<SCRIPT type="text/javascript">
+		var setting = {
+			check: {
+				enable: true,
+				chkboxType:{ "Y" : "ps", "N" : "ps" }
+			},
+			view:{
+				showLine:false
+			},
+			data: {
+				simpleData: {
+					enable: true,
+					idKey: "id",
+					pIdKey: "pId",
+					rootPId: 0
+				}
+			},
+			callback: {
+				onClick: onClick,
+				onCheck: onCheck
+			}
+		};
+
+		var zNodes;
+		$(function(){
+			$("#treeDiv").css("height", parent.kwin.height - 130);
+			$("#showDiv").css("height", parent.kwin.height - 130);
+			$("#key").css("width", "86%");
+			$.ajax({
+				url:"../../data/FormService.jsp?method=getKKTreeData",
+				dataType:"json",
+				async : false,
+				success:function(data){
+					zNodes=data;
+					$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+					$("#tree").val(data);
+				}
+			});
+			var parentForm = parent.Ext.getCmp('hotRecodeDetailForm');
+			var parentDatas = parentForm.form.findField('kkbhs').getValue();
+			var checkedDatas = parentDatas.split(',');
+			initCheckedTree(checkedDatas);
+		});
+		/**
+		*	响应回车事件搜索功能
+		*/
+		document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];          
+            if(e && e.keyCode==13){ // enter 键
+                searchTreeNodes($('#key').val().toLowerCase());
+            }
+        }; 
+
+        //初始化选择树节点
+        function initCheckedTree(checkedDatas) {
+        	$.fn.zTree.init($("#treeDemo"), setting, zNodes);	
+        	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");			
+			var nodes = treeObj.getNodes();
+			if (checkedDatas && checkedDatas.length > 0) {
+				var checkedNodes = [];
+				for (var m = 0; m < checkedDatas.length; m++) {
+					var childrens = null;
+					for(var i=0; i<nodes.length; i++){	
+						if (nodes[i].isParent) {
+							childrens = nodes[i].children;
+							for(var j=0; j<childrens.length; j++){	
+								if (checkedDatas[m] == childrens[j].id) {
+									checkedNodes.push(childrens[j]);
+									break;
+								}
+							}
+						}
+					}
+				}
+				var parentNodes = [];
+				if (checkedNodes && checkedNodes.length > 0) {
+					for (var n = 0; n < checkedNodes.length; n++) {
+						checkedNodes[n].checked = true;
+						var flag = false;
+						for (var k = 0; k < parentNodes.length; k++) {
+							if (parentNodes[k].id == checkedNodes[n].getParentNode().id) {
+								flag = true;
+							}
+						}
+						if (!flag) {
+							parentNodes.push(checkedNodes[n].getParentNode());
+						}
+					}
+					treeObj.updateNode(checkedNodes,true);
+					if (parentNodes) {
+						for (var j = 0; j < parentNodes.length; j++) {
+							treeObj.expandNode(parentNodes[j], true);
+						}
+					}
+					dealShowLog(checkedNodes);
+				}
+			}
+        }
+		
+		/**
+		*	搜索树方法入口
+		*/
+		function searchTreeNodes(key){
+			
+			//$("#key").val('');
+			if(key == '' || key == undefined){
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);	
+				return;
+			}
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);	
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");			
+			var nodes = treeObj.getNodes();//treeObj.transformToArray(treeObj.getNodes());//获取所有结点
+			var resultNodes = [];//搜索获取的树	
+			//alert(resultNodes);		
+			dealNodes(key, nodes, resultNodes);	
+			//alert(resultNodes);
+			$.fn.zTree.init($("#treeDemo"), setting, resultNodes);
+			var treeObjt = $.fn.zTree.getZTreeObj("treeDemo");
+			treeObjt.expandAll(true);
+		}
+		
+		/**
+		**	递归处理树节点
+		*/
+		function dealNodes(key, nodes, resultNodes, pNode){
+			var addPnode = false;//添加父节点标记
+			for(var i=0; i<nodes.length; i++){		
+				//console.log(nodes[i].name+'  '+key);
+				if(nodes[i].name.indexOf(key)!=-1 || makePy(nodes[i].name).toLowerCase().indexOf(key)!=-1 || makePinyin(nodes[i].name).toLowerCase().indexOf(key)!=-1){//拼音在此插入
+					if(!addPnode && pNode){
+						putNode(pNode, resultNodes);//添加当前节点的父节点
+						addPnode = true;
+					}	
+					putNode(nodes[i], resultNodes);//添加当前节点					
+				}
+				if(nodes[i].children){
+					dealNodes(key, nodes[i].children, resultNodes, nodes[i]);
+				}
+			}	
+		}
+		/**
+		*	添加节点到resultNodes，检查是否已经包含该节点，如果不存在则添加，否则不添加
+		*/
+		function putNode(node, resultNodes){
+			//console.log(node);
+			var contains = false;//是否包含node节点标记
+			for(var i=0; i<resultNodes.length; i++){//检查是否已经包含该节点
+				if(node.id == resultNodes[i].id){
+					contains = true;
+					break;
+				}
+			}
+			if(!contains){
+				if(node.open){
+					resultNodes.push({ id:node.id, pId:node.pId, name:node.name, open:true});
+				}else{
+					resultNodes.push( {id:node.id, pId:node.pId, name:node.name});
+				}
+			}
+		}
+		
+		/**
+		*	监听结点勾选状态
+		*/
+		function onCheck(e, treeId, treeNode) {
+			//alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
+				//$('#log').empty();
+				var treeObj = $.fn.zTree.getZTreeObj(treeId);			
+				var nodes = treeObj.getCheckedNodes();
+				var datas = $("#log").find("li");
+				if (datas&&datas.length > 0) {
+					var unselectNodes = [];
+					var kkbh = '';
+					var havingFlag = false;
+					for (var i = 0; i < datas.length; i++) {
+						kkbh = $(datas[i]).attr('class');
+						havingFlag = false;
+						if (nodes&&nodes.length > 0) {
+							for (var j = 0; j < nodes.length; j++) {
+								if (kkbh == nodes[j].id) {
+									havingFlag = true;
+								}
+							}
+						}
+						if (!havingFlag) {
+							unselectNodes.push(datas[i]);
+						}
+					}
+					if (unselectNodes&&unselectNodes.length > 0) {
+						for (var m = 0; m < unselectNodes.length; m++) {
+							$(unselectNodes[m]).remove();
+						}
+					}
+					
+				}
+				var counts = 0;
+				for (var i = 0; i < nodes.length; i++) {
+					if(!nodes[i].isParent){
+						counts = counts + 1;
+					}
+				}
+				if (counts >= 20) {
+					if (!confirm('所选卡口超过20个，卡口过多可能引起错误，是否继续?')) {
+						return;
+					}
+				}
+				dealShowLog(nodes);
+		}		
+	
+		/**
+		*	监听节点点击事件
+		*/
+		function onClick(e, treeId, treeNode, clickFlag) { 
+			var treeObj = $.fn.zTree.getZTreeObj(treeId);	
+			var datas = $("#log").find("li");
+			if (datas.length >= 20) {
+				if (!confirm('所选卡口超过20个，卡口过多可能引起错误，是否继续?')) {
+					return;
+				}
+			}
+			var nodes = treeObj.getSelectedNodes();
+			nodes[0].checked = true;
+			treeObj.updateNode(nodes[0],true);
+			var childNodes = [];
+			var dataNodes = [];
+			if(nodes && nodes.length>0){
+				if(nodes[0].isParent){
+					childNodes = nodes[0].children;
+					dataNodes = childNodes;
+				} else {
+					dataNodes = nodes;
+				}
+			}
+			if (datas.length < 20) {
+				if (dataNodes.length >= 20) {
+					if (!confirm('所选卡口超过20个，卡口过多可能引起错误，是否继续?')) {
+						return;
+					}
+				}
+			}
+			dealShowLog(dataNodes);
+		}	
+		/**
+		*	右边框节点展示
+		*/
+		function dealShowLog(nodes){
+			var log = $('#log');
+			var liNodes = log.children("li");
+			//alert(liNodes.size());
+			//log.empty();
+			if(nodes && nodes.length>0){
+				for(var i=0; i<nodes.length; i++){
+					if(!nodes[i].isParent){
+						if(liNodes.size()==0){
+							log.append("<li class='"+nodes[i].id+"' title='点击删除' onclick='uncheckNode(this)' style='cursor:pointer;'><a href='javascript:void(0)'>"+nodes[i].name+"</a></li>");
+						}else{
+						var k=0;	
+						liNodes.each(function(j,item){
+							t=$(this).text();
+							n=nodes[i].name;
+							//alert(t+"="+n);
+							//alert(t.indexOf(n));
+							if(t.indexOf(n)!=-1){
+								k+=1;	
+							}
+						});
+						
+						if(k==0){
+							log.append("<li class='"+nodes[i].id+"' title='点击删除' onclick='uncheckNode(this)' style='cursor:pointer;'><a href='javascript:void(0)'>"+nodes[i].name+"</a></li>");
+						}else{
+							//alert('不能重复选择！');
+						}
+					}	
+					}
+				}
+			}
+		}
+		
+		/**
+		*	取消右边选中节点
+		*/
+		function uncheckNode(liNode){
+			//alert($(liNode).attr('class'));
+			var id = $(liNode).attr('class');
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");			
+			var checkedNodes = treeObj.getCheckedNodes();
+			if(checkedNodes){
+				for(var i=0; i<checkedNodes.length; i++){
+					if(checkedNodes[i].id == id){
+						checkedNodes[i].checked = false;
+						treeObj.updateNode(checkedNodes[i],true) //联动更新选择的节点被取消的状态
+					}
+				}
+			}
+			var selectedNodes = treeObj.getSelectedNodes();
+			
+			$(liNode).remove();
+			
+		}
+		/**
+		*	获取选中的节点数据
+		*/
+		function getData(){
+			var log = $('#log');
+			var liNodes = log.children("li");
+			//以下二选一
+			var text = [];//设置回input框的值
+			var id = [];//设置回input框的值
+			liNodes.each(function(i,item){
+				//console.log($(this).attr('class'));
+				id.push($(this).attr('class'));
+				//console.log($(this).text());
+				text.push($(this).text());
+			});
+			
+			//在这里将值set回父窗口的input框，将值设置为  text或者id
+			//...
+			var data = {};
+        	data.id = id.join(",");
+        	data.text = text.join(",");
+        	parent.setKKValueWin(data);
+        	
+			//hidPage();
+		}
+		
+		function hidPage(){
+			//alert('将页面隐藏');
+			var log = $('#log');
+			log.empty();
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			//parent.cancelKK();
+		}
+	</SCRIPT>
+</HEAD>
+
+<BODY>
+<div id="container">
+	<div id="searchDiv">
+		<input type="text" name="key" id="key" /><input value="查询" type="button"  id="search" onclick="searchTreeNodes($('#key').val().toLowerCase())"/>
+	</div>
+	
+	<div id="main">
+		<div id="treeDiv">
+			<ul id="treeDemo" class="ztree"></ul>
+		</div>
+		<div id="showDiv">
+			<!-- <textarea id="showNode" style="width:98%;height:100%">example</textarea>-->
+			<ul id="log" class="log" style="margin:5px 0;padding:5px;width:85%;height:85%;list-style:none;line-height1px;text-align:left;white-space:nowrap;"></ul>
+		</div>
+	</div>
+	<div id="btnDiv">
+		<input value="确定" type="button" id="submit" onclick="getData()"/>
+		<input value="重置" type="button" id="cancel" onclick="hidPage()"/>
+		<input type="text" style="display:none" id="tree"/>
+	</div>
+</div>
+</BODY>
+</HTML>

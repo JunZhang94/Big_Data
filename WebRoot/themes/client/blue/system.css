@@ -1,0 +1,86 @@
+/*********************realtime module*********************/
+@import url("public.css");
+
+.system_mod .x-panel-body {
+	background: #FFFFFF;
+}
+
+.system_mod .filter_area {
+	border: 1px solid #DDDDDD;
+	background-color: #F7F7F7;
+	padding: 5px;
+}
+
+.system_mod .filter_area .x-panel-body {
+	background-color: #F7F7F7;
+}
+
+.system_mod .small_btn {
+	background: url(images/system/btn.gif);
+	background-position: 0 -61px;
+	height: 24px;
+	border: 1px solid #1D95DD;
+	padding: 0 10px;
+}
+
+.system_mod .small_btn button {
+	color: #FFFFFF;
+}
+
+.system_mod .toolbar {
+	margin: 5px 0px;
+}
+
+.system_mod .x-btn {
+	border: 0px;
+}
+
+.system_mod .x-btn-icon .x-btn-small .x-btn-text {
+	height: 18px;
+	width: 22px;
+}
+
+.system_mod .x-panel-bbar .paging {
+	background: #D2F0FF;
+	border: 1px solid #DDDDDD;
+}
+
+.system_mod .x-tbar-page-first {
+	background: url("images/btn_ico.gif") no-repeat scroll -27px -211px
+		transparent !important;
+}
+
+.system_mod .x-tbar-page-prev {
+	background: url("images/btn_ico.gif") no-repeat scroll -55px -211px
+		transparent !important;
+}
+
+.system_mod .x-tbar-page-next {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -258px
+		transparent !important;
+}
+
+.system_mod .x-tbar-page-last {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -258px
+		transparent !important;
+}
+
+.system_mod .x-tbar-page-go {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -211px
+		transparent !important;
+}
+
+.system_mod .x-toolbar {
+	border: 0px;
+}
+
+.x-form-element {
+	padding-left: 0px;
+	position: relative;
+}
+
+.system_mod .area1 {
+	background: #F7FAFD;
+	border: 1px solid #B9CAD2;
+	margin: 2px;
+}

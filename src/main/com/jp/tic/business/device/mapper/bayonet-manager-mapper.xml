@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.device.mapper.BayonetManagerMapper">
+	
+	<select id="queryBayonetInfoByPage" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		SELECT 
+			*
+		FROM MOUNT_TAB where 1=1
+		<if test="code != null">
+			AND DWBH = #{code}
+		</if>
+		<if test="deviceName != null">
+			AND KKMC like '%${deviceName}%'
+		</if>
+		<if test="kakouStatus != null">
+			AND KKZT = '${kakouStatus}'
+		</if>
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="checkBayonetInfo" parameterType="string" resultType="Map">
+		select a.*,m.dwmc,
+		substr(a.KKBH, 4, 15) as LAST_KKBH,
+       	substr(a.KKBH, 1, 6) as DISTRICT_NO,
+       	substr(a.KKBH, 7, 5) as ADDRESS_CODING,
+       	substr(a.KKBH, 12, 4) as MILEAGE,
+       	substr(a.KKBH, 16, 3) as PILE_METERS 
+       	from MOUNT_TAB a left join MGMTDEPT_TAB m on a.dwbh = m.dwbh 
+		<if test="KKBH != null">
+			WHERE a.KKBH = #{KKBH}
+		</if>
+	</select>
+	
+	<select id="countBayonetInfoDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM MOUNT_TAB where 1=1 
+		<if test="code != null">
+			AND DWBH = #{code}
+		</if>
+		<if test="deviceName != null">
+			AND KKMC like '%${deviceName}%'
+		</if>
+	</select>
+	
+	<insert id="addBayonetInfo" parameterType="string" >
+		insert into MOUNT_TAB_EDIT(
+			KKBH
+			<if test="BAYONET_TYPE != null">
+			,KKLX
+			</if>
+			<if test="SJSCMS != null">
+			,SJSCMS
+			</if>
+			<if test="KKJD != null">
+			,KKJD
+			</if>
+			<if test="DLDM != null">
+			,DLDM
+			</if>
+			<if test="DLMC != null">
+			,DLMC
+			</if>
+			<if test="QGKDBH != null">
+			,QGKDBH
+			</if>
+			<if test="DWBH != null">
+			,DWBH
+			</if>
+			<if test="DWDM != null">
+			,DWDM
+			</if>
+			<if test="KKMC != null">
+			,KKMC
+			</if>
+			<if test="KKLX2 != null">
+			,KKLX2
+			</if>
+			<if test="KKXZ != null">
+			,KKXZ
+			</if>
+			<if test="KKWD != null">
+			,KKWD
+			</if>
+			<if test="KKZT != null">
+			,KKZT
+			</if>
+			<if test="KKWZ != null">
+			,KKWZ
+			</if>
+			<if test="RJKFS != null">
+			,RJKFS
+			</if>
+			<if test="XZQHMC != null">
+			,XZQHMC
+			</if>
+			<if test="CONTACT_NUMBER != null">
+			,LXDH
+			</if>
+			<if test="GABH != null">
+			,GABH
+			</if>
+			<if test="DLLX != null">
+			,DLLX
+			</if>
+			<if test="DLMS != null">
+			,DLMS
+			</if>
+			<if test="SBGYS != null">
+			,SBGYS
+			</if>
+			<if test="KKDZ != null">
+			,KKDZ
+			</if>
+			<if test="CONTACT_ADDRESS != null">
+			,LXDZ
+			</if>
+			<if test="REMARK != null">
+			,BZ
+			</if>
+			<if test="SFLJ_RESULT != null">
+			,SFLJ
+			</if>
+			<if test="SFBJKK_RESULT != null">
+			,SFBJKK
+			</if>
+			<if test="SFKH_RESULT != null">
+			,SFKH
+			</if>
+			<if test="SFTGTZCP_RESULT != null">
+			,SFTGTZCP
+			</if>
+			<if test="SFJBSPGN_RESULT != null">
+			,SFJBSPGN
+			</if>
+			<if test="SFJGKK_RESULT != null">
+			,SFJGKK
+			</if>
+			<if test="SFWFZP_RESULT != null">
+			,SFWFZP
+			</if>
+			<if test="SFCS_RESULT != null">
+			,SFCS
+			</if>
+			<if test="GXSJ != null">
+			,GXSJ
+			</if>
+			<if test="CJSJ != null">
+			,CJSJ
+			</if>
+			<if test="OPTION_TYPE != null">
+			,OPTION_TYPE
+			</if>
+		) values (
+			'${KKBH}'
+			<if test="BAYONET_TYPE != null">
+			,'${BAYONET_TYPE}'
+			</if>
+			<if test="SJSCMS != null">
+			,'${SJSCMS}'
+			</if>
+			<if test="KKJD != null">
+			,'${KKJD}'
+			</if>
+			<if test="DLDM != null">
+			,'${DLDM}'
+			</if>
+			<if test="DLMC != null">
+			,'${DLMC}'
+			</if>
+			<if test="QGKDBH != null">
+			,'${QGKDBH}'
+			</if>
+			<if test="DWBH != null">
+			,'${DWBH}'
+			</if>
+			<if test="DWDM != null">
+			,'${DWDM}'
+			</if>
+			<if test="KKMC != null">
+			,'${KKMC}'
+			</if>
+			<if test="KKLX2 != null">
+			,'${KKLX2}'
+			</if>
+			<if test="KKXZ != null">
+			,'${KKXZ}'
+			</if>
+			<if test="KKWD != null">
+			,'${KKWD}'
+			</if>
+			<if test="KKZT != null">
+			,'${KKZT}'
+			</if>
+			<if test="KKWZ != null">
+			,'${KKWZ}'
+			</if>
+			<if test="RJKFS != null">
+			,'${RJKFS}'
+			</if>
+			<if test="XZQHMC != null">
+			,'${XZQHMC}'
+			</if>
+			<if test="CONTACT_NUMBER != null">
+			,'${CONTACT_NUMBER}'
+			</if>
+			<if test="GABH != null">
+			,'${GABH}'
+			</if>
+			<if test="DLLX != null">
+			,'${DLLX}'
+			</if>
+			<if test="DLMS != null">
+			,'${DLMS}'
+			</if>
+			<if test="SBGYS != null">
+			,'${SBGYS}'
+			</if>
+			<if test="KKDZ != null">
+			,'${KKDZ}'
+			</if>
+			<if test="CONTACT_ADDRESS != null">
+			,'${CONTACT_ADDRESS}'
+			</if>
+			<if test="REMARK != null">
+			,'${REMARK}'
+			</if>
+			<if test="SFLJ_RESULT != null">
+			,'${SFLJ_RESULT}'
+			</if>
+			<if test="SFBJKK_RESULT != null">
+			,'${SFBJKK_RESULT}'
+			</if>
+			<if test="SFKH_RESULT != null">
+			,'${SFKH_RESULT}'
+			</if>
+			<if test="SFTGTZCP_RESULT != null">
+			,'${SFTGTZCP_RESULT}'
+			</if>
+			<if test="SFJBSPGN_RESULT != null">
+			,'${SFJBSPGN_RESULT}'
+			</if>
+			<if test="SFJGKK_RESULT != null">
+			,'${SFJGKK_RESULT}'
+			</if>
+			<if test="SFWFZP_RESULT != null">
+			,'${SFWFZP_RESULT}'
+			</if>
+			<if test="SFCS_RESULT != null">
+			,'${SFCS_RESULT}'
+			</if>
+			<if test="GXSJ != null">
+			,to_date('${GXSJ}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="CJSJ != null">
+			,to_date('${CJSJ}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="OPTION_TYPE != null">
+			,${OPTION_TYPE}
+			</if>
+		)
+		
+	</insert>
+	
+	<insert id="addBayonetEditInfo" parameterType="string" >
+		insert into MOUNT_TAB_EDIT(
+			KKBH
+			<if test="BAYONET_TYPE != null">
+			,KKLX
+			</if>
+			<if test="SJSCMS != null">
+			,SJSCMS
+			</if>
+			<if test="KKJD != null">
+			,KKJD
+			</if>
+			<if test="DLDM != null">
+			,DLDM
+			</if>
+			<if test="DLMC != null">
+			,DLMC
+			</if>
+			<if test="QGKDBH != null">
+			,QGKDBH
+			</if>
+			<if test="DWBH != null">
+			,DWBH
+			</if>
+			<if test="DWDM != null">
+			,DWDM
+			</if>
+			<if test="KKMC != null">
+			,KKMC
+			</if>
+			<if test="KKLX2 != null">
+			,KKLX2
+			</if>
+			<if test="KKXZ != null">
+			,KKXZ
+			</if>
+			<if test="KKWD != null">
+			,KKWD
+			</if>
+			<if test="KKZT != null">
+			,KKZT
+			</if>
+			<if test="KKWZ != null">
+			,KKWZ
+			</if>
+			<if test="RJKFS != null">
+			,RJKFS
+			</if>
+			<if test="XZQHMC != null">
+			,XZQHMC
+			</if>
+			<if test="CONTACT_NUMBER != null">
+			,LXDH
+			</if>
+			<if test="GABH != null">
+			,GABH
+			</if>
+			<if test="DLLX != null">
+			,DLLX
+			</if>
+			<if test="DLMS != null">
+			,DLMS
+			</if>
+			<if test="SBGYS != null">
+			,SBGYS
+			</if>
+			<if test="KKDZ != null">
+			,KKDZ
+			</if>
+			<if test="CONTACT_ADDRESS != null">
+			,LXDZ
+			</if>
+			<if test="REMARK != null">
+			,BZ
+			</if>
+			<if test="SFLJ_RESULT != null">
+			,SFLJ
+			</if>
+			<if test="SFBJKK_RESULT != null">
+			,SFBJKK
+			</if>
+			<if test="SFKH_RESULT != null">
+			,SFKH
+			</if>
+			<if test="SFTGTZCP_RESULT != null">
+			,SFTGTZCP
+			</if>
+			<if test="SFJBSPGN_RESULT != null">
+			,SFJBSPGN
+			</if>
+			<if test="SFJGKK_RESULT != null">
+			,SFJGKK
+			</if>
+			<if test="SFWFZP_RESULT != null">
+			,SFWFZP
+			</if>
+			<if test="SFCS_RESULT != null">
+			,SFCS
+			</if>
+			<if test="GXSJ != null">
+			,GXSJ
+			</if>
+			<if test="CJSJ != null">
+			,CJSJ
+			</if>
+			<if test="OPTION_TYPE != null">
+			,OPTION_TYPE
+			</if>
+		) values (
+			'${KKBH}'
+			<if test="BAYONET_TYPE != null">
+			,'${BAYONET_TYPE}'
+			</if>
+			<if test="SJSCMS != null">
+			,'${SJSCMS}'
+			</if>
+			<if test="KKJD != null">
+			,'${KKJD}'
+			</if>
+			<if test="DLDM != null">
+			,'${DLDM}'
+			</if>
+			<if test="DLMC != null">
+			,'${DLMC}'
+			</if>
+			<if test="QGKDBH != null">
+			,'${QGKDBH}'
+			</if>
+			<if test="DWBH != null">
+			,'${DWBH}'
+			</if>
+			<if test="DWDM != null">
+			,'${DWDM}'
+			</if>
+			<if test="KKMC != null">
+			,'${KKMC}'
+			</if>
+			<if test="KKLX2 != null">
+			,'${KKLX2}'
+			</if>
+			<if test="KKXZ != null">
+			,'${KKXZ}'
+			</if>
+			<if test="KKWD != null">
+			,'${KKWD}'
+			</if>
+			<if test="KKZT != null">
+			,'${KKZT}'
+			</if>
+			<if test="KKWZ != null">
+			,'${KKWZ}'
+			</if>
+			<if test="RJKFS != null">
+			,'${RJKFS}'
+			</if>
+			<if test="XZQHMC != null">
+			,'${XZQHMC}'
+			</if>
+			<if test="CONTACT_NUMBER != null">
+			,'${CONTACT_NUMBER}'
+			</if>
+			<if test="GABH != null">
+			,'${GABH}'
+			</if>
+			<if test="DLLX != null">
+			,'${DLLX}'
+			</if>
+			<if test="DLMS != null">
+			,'${DLMS}'
+			</if>
+			<if test="SBGYS != null">
+			,'${SBGYS}'
+			</if>
+			<if test="KKDZ != null">
+			,'${KKDZ}'
+			</if>
+			<if test="CONTACT_ADDRESS != null">
+			,'${CONTACT_ADDRESS}'
+			</if>
+			<if test="REMARK != null">
+			,'${REMARK}'
+			</if>
+			<if test="SFLJ_RESULT != null">
+			,'${SFLJ_RESULT}'
+			</if>
+			<if test="SFBJKK_RESULT != null">
+			,'${SFBJKK_RESULT}'
+			</if>
+			<if test="SFKH_RESULT != null">
+			,'${SFKH_RESULT}'
+			</if>
+			<if test="SFTGTZCP_RESULT != null">
+			,'${SFTGTZCP_RESULT}'
+			</if>
+			<if test="SFJBSPGN_RESULT != null">
+			,'${SFJBSPGN_RESULT}'
+			</if>
+			<if test="SFJGKK_RESULT != null">
+			,'${SFJGKK_RESULT}'
+			</if>
+			<if test="SFWFZP_RESULT != null">
+			,'${SFWFZP_RESULT}'
+			</if>
+			<if test="SFCS_RESULT != null">
+			,'${SFCS_RESULT}'
+			</if>
+			<if test="GXSJ != null">
+			,to_date('${GXSJ}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="CJSJ != null">
+			,to_date('${CJSJ}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="OPTION_TYPE != null">
+			,${OPTION_TYPE}
+			</if>
+		)
+	</insert>
+	
+	<update id="updateBayonetInfo" parameterType="string"> 
+		update MOUNT_TAB set 
+		<if test="KKMC != null">
+		KKMC = '${KKMC}'
+		</if>
+		<if test="BAYONET_TYPE != null">
+		,KKLX = '${BAYONET_TYPE}'
+		</if>
+		<if test="SJSCMS != null">
+		,SJSCMS = '${SJSCMS}'
+		</if>
+		<if test="KKJD != null">
+		,KKJD = '${KKJD}'
+		</if>
+		<if test="DLDM != null">
+		,DLDM = '${DLDM}'
+		</if>
+		<if test="DLMC != null">
+		,DLMC = '${DLMC}'
+		</if>
+		<if test="QGKDBH != null">
+		,QGKDBH = '${QGKDBH}'
+		</if>
+		<if test="DWBH != null">
+		,DWBH = '${DWBH}'
+		</if>
+		<if test="DWDM != null">
+		,DWDM = '${DWDM}'
+		</if>
+		<if test="KKLX2 != null">
+		,KKLX2 = '${KKLX2}'
+		</if>
+		<if test="KKXZ != null">
+		,KKXZ = '${KKXZ}'
+		</if>
+		<if test="KKWD != null">
+		,KKWD = '${KKWD}'
+		</if>
+		<if test="KKZT != null">
+		,KKZT = '${KKZT}'
+		</if>
+		<if test="KKWZ != null">
+		,KKWZ = '${KKWZ}'
+		</if>
+		<if test="RJKFS != null">
+		,RJKFS = '${RJKFS}'
+		</if>
+		<if test="XZQHMC != null">
+		,XZQHMC = '${XZQHMC}'
+		</if>
+		<if test="CONTACT_NUMBER != null">
+		,LXDH = '${CONTACT_NUMBER}'
+		</if>
+		<if test="GABH != null">
+		,GABH = '${GABH}'
+		</if>
+		<if test="DLLX != null">
+		,DLLX = '${DLLX}'
+		</if>
+		<if test="DLMS != null">
+		,DLMS = '${DLMS}'
+		</if>
+		<if test="SBGYS != null">
+		,SBGYS = '${SBGYS}'
+		</if>
+		<if test="KKDZ != null">
+		,KKDZ = '${KKDZ}'
+		</if>
+		<if test="CONTACT_ADDRESS != null">
+		,LXDZ = '${CONTACT_ADDRESS}'
+		</if>
+		<if test="REMARK != null">
+		,BZ = '${REMARK}'
+		</if>
+		<if test="SFLJ_RESULT != null">
+		,SFLJ = '${SFLJ_RESULT}'
+		</if>
+		<if test="SFBJKK_RESULT != null">
+		,SFBJKK = '${SFBJKK_RESULT}'
+		</if>
+		<if test="SFKH_RESULT != null">
+		,SFKH = '${SFKH_RESULT}'
+		</if>
+		<if test="SFTGTZCP_RESULT != null">
+		,SFTGTZCP = '${SFTGTZCP_RESULT}'
+		</if>
+		<if test="SFJBSPGN_RESULT != null">
+		,SFJBSPGN = '${SFJBSPGN_RESULT}'
+		</if>
+		<if test="SFJGKK_RESULT != null">
+		,SFJGKK = '${SFJGKK_RESULT}'
+		</if>
+		<if test="SFWFZP_RESULT != null">
+		,SFWFZP = '${SFWFZP_RESULT}'
+		</if>
+		<if test="SFCS_RESULT != null">
+		,SFCS = '${SFCS_RESULT}'
+		</if>
+		<if test="GXSJ != null">
+		,GXSJ = to_date('${GXSJ}','yyyy-MM-dd HH24:mi:ss')
+		</if>
+		where KKBH = '${KKBH}'
+	</update>
+	
+	<update id="goUpdateBayonetInfo" parameterType="string"> 
+		update MOUNT_TAB set 
+		<if test="OPTION_TYPE != null">
+		OPTION_TYPE = ${OPTION_TYPE}
+		</if>
+		where KKBH = '${KKBH}'
+	</update>
+	
+	<delete id="deleteBayonetInfo" parameterType="string">
+		delete from MOUNT_TAB where KKBH in (${KKBHS})
+	</delete>
+	
+	<delete id="deleteTimeStatusInfo" parameterType="string">
+		delete from DIS_GATE_TIME_STATUS_NEW where KKBH in (${KKBHS})
+	</delete>
+</mapper>

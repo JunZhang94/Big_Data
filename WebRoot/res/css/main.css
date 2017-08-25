@@ -1,0 +1,340 @@
+/*********************************周雪峰设计的公共style***************************************/
+* { margin: 0; padding: 0; }
+body { position: relative;  background-color: #fff; font-size: 12px;  font-family: "微软雅黑", arial, sans-serif; text-shadow: none;  }
+p { margin: 0 0 5px; padding: 0; line-height: 1.8em; }
+img, fieldset { border: 0 none; }
+img { height: auto; max-width: 100%; margin: 0 0 10px; }
+img:hover { opacity: 0.85; filter: alpha(opacity=80); }/*鼠标功过时图片变浅色*/
+.ie8 img { height: auto; width: auto; }
+ul, ol, li { list-style: none }
+a, a:hover, a:link, a:visited, a:active { text-decoration: none; }
+em { font-style: normal }
+h1 { font-size: 3em; margin: 20px auto 10px; line-height: 1.4em; }
+table { border-collapse: collapse; border-spacing: 0 }
+th, td { border-collapse: collapse; }
+em, strong, cite, i { font-style: normal; }
+button { overflow: visible; cursor: pointer }
+input, select, form, img, button, textarea { vertical-align: middle; }
+input, button, select, textarea { outline: none; background-color: transparent; } /*防止在IE中点击后出现黄边*/
+textarea { background-color: #fff; }
+hr { -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: #DBE8ED -moz-use-text-color -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 1px 0 0; height: 1px; }
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; }
+.clearfix { display: block; }
+.clear { clear: both; }
+.right { float: right }
+.left { float: left; }
+.p2 { text-indent: 2em; padding: 0; margin: 0; }/*段落缩进两个字*/
+:focus, a:focus { outline: 0; outline: none; }/*css去掉a标签点击后的虚线*/
+/**************字体定义*************/
+.font { font-family: "微软雅黑"; font-family: "宋体"; font-family: 'Microsoft JhengHei'; }
+input, button, select, textarea {font-family: "微软雅黑";
+}
+/*************menu***************/
+
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+color: #eee;
+text-shadow: none;
+}
+.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
+
+background: url(../img/main/header-bg2.png) repeat-x;
+}
+
+body > .navbar { font-size: 16px; }
+body > .navbar .brand {  width:200px; font-size: 16px; margin-left: 20px;  padding: 0; margin-right: 20px; float: left; color: #eee; text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125); -webkit-transition: all .2s linear; -moz-transition: all .2s linear; transition: all .2s linear; }
+body > .navbar .brand:hover { text-decoration: none; text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4); }
+.secondary-menu { height: 0px; float: right; }
+
+
+
+.nav {
+margin-bottom: 0;}
+
+
+
+
+.navbar {
+margin-bottom: 0;}
+
+.navbar-inverse .navbar-inner{filter:none;}
+
+
+/******logo*****/
+#name-and-slogan h1 { font-style: normal; line-height: 20px; margin: 0; padding: 0; }
+#name-and-slogan h1 a { color: #0096da; }
+#name-and-slogan h1 a:hover { text-decoration: none; text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4); }
+/* 章节线------------------ */
+.page-header { border-bottom: 1px solid #ddd; margin: 20px 0 10px; padding-bottom: 9px; }
+/* 填充在页面的书签和固定导航栏*/
+section > .page-header, section > .lead { color: #5a5a5a; }
+section > ul li { margin-bottom: 5px; }
+/* -------------首页图标定义---------------- */
+.icon { text-align: center; color: #5a5a5a; margin-top: 30px; }
+.icon h2 { font-weight: normal; margin: 0; font-size: 22px; margin-bottom: 20px; }
+.icon .icon-byline { margin-bottom: 40px; font-size: 20px; font-weight: 300; line-height: 1.25; color: #999; }
+.icon img { display: block; margin: 0 auto 0; }
+/*------------------ bottom --------------*/
+.bottom { background: url("../img/bottom-bg.jpg") repeat scroll 0 0 #202020; color: #A1A1A1; padding: 12px 0 30px; }
+.bottom h2 { background: url("../img/dotted-line.png") repeat-x scroll 0 50% rgba(0, 0, 0, 0); font-size: 16px !important; margin-bottom: 15px; }
+.bottom h2 span { background: url("../img/bottom-bg.jpg") repeat scroll 0 0 #202020; padding-right: 10px; }
+.bottom h3 { line-height: 14px; font-size: 12px; font-weight: normal; text-align: center; }
+.bottom img { margin: 0; }
+
+/***********内容边距************/
+.bj-content { padding: 0 80px; }
+.node-content { padding: 2px 0 20px; }
+/* 下载的页面------------ */
+.dongdong { padding: 20px 0; }
+.dongdong img:hover { opacity: 1; }
+.description span { color: #08C; }
+.dongdong .down { font-size: 24px; font-weight: normal; }
+.f123 { color: #F00; }
+/*---------表格-----------*/
+.list-width { width: 60%; }/*---表格标题宽---*/
+table {  background-color: rgba(0, 0, 0, 0); border-collapse: collapse; border-spacing: 0; margin-bottom: 20px; width: 100%; }
+table th, table td { line-height: 20px; padding: 8px; text-align: left; vertical-align: top; }
+tr.even, tr.odd { background-color: #f1f4f9; border-bottom: 1px solid #ccc; padding: 0.1em 0.6em; }
+/*----------作者及发布日期与内容的间隔-----------*/
+.submitted { margin-bottom: 10px; }
+/*---------评论的保存按钮样式---------*/
+.form-actions { padding: 0; margin-bottom: 0; background-color: transparent; border: none; }
+input[type="submit"] { border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25); display: inline-block; padding: 4px 12px; margin-bottom: 0; text-align: center; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; cursor: pointer; background-image: linear-gradient(to bottom, #ffffff, #e6e6e6); background-repeat: repeat-x; border: 1px solid #bbbbbb; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
+input[type="submit"]:hover { color: #333333; text-decoration: none; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; background-color: #e6e6e6; }
+.comment-form label { display: none; }/*隐藏评论的不必要的“您的名字”文字*/
+.comment { padding-bottom: 20px; margin: 20px 0 20px; border-bottom: 1px dashed #dcdcdc; }/*每条评论的间隔线*/
+.links li a.active { color: #0088c5; }/*定义“添加新评论”的颜色*/
+.submitted .permalink { display: none; }/*隐藏评论的不必要的“永久连接”文字*/
+/* 申明 */
+.tishi { color: #f00; font-weight: bold; }
+/*个人档案*/
+
+.profile h3 { border: none; }
+.profile .user-picture { margin-right: 0; background: #fff; border: 1px solid #eee; padding: 8px; }
+.profile .user-picture img { margin: 0; }
+/*********footer*********************************/
+.footer { display: none; text-shadow: none; font-size: 12px; position: absolute; left: 0; bottom: -5px; height: 26px; width: 100%; background: url(../img/main/footer-bg.png) repeat-x; }
+.footer .tishi { width: 60%; padding-left: 10px; color: #333; float: left; line-height: 26px; }
+.footer .copyright { width: auto; padding-left: 10px; color: #333; float: right; line-height: 26px; }
+.footer .light { width: 68px; float: right; }
+.navbar-inverse .navbar-inner { border: none; border-radius: 0; background: url(../img/main/header-bg.png) repeat-x !important; }
+
+
+
+.form-horizontal .control-group {
+margin-bottom: 6px;
+}
+
+/*********表*********************************/
+.table th, .table td {
+padding: 4px;}
+.table-bordered {
+
+-moz-border-radius: 0;
+border-radius: 0;
+}
+
+
+
+.well {
+min-height: 20px;
+padding: 19px;
+margin-bottom: 20px;
+background-color: #fff;
+border: 1px solid #e3e3e3;
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+
+.form-horizontal{ margin-bottom:10px;}
+
+.nav-tabs > li > a {
+
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+}
+
+/* 大桌面------------------------- */
+@media (min-width: 1200px) {
+.bs-docs-container { max-width: 970px; }
+.bs-docs-sidenav { width: 258px; }
+.bs-docs-sidenav > li > a { width: 230px \9; /* Override the previous IE8-9 hack */ }
+}
+
+/* 桌面------------------------- */
+@media (max-width: 980px) {
+/* Unfloat brand */
+body > .navbar-fixed-top .brand { float: left; margin-left: 0; padding-left: 10px; padding-right: 10px; }
+/* Inline-block quick links for more spacing */
+.quick-links li { display: inline-block; margin: 5px; }
+/* When affixed, space properly */
+.bs-docs-sidenav { top: 0; margin-top: 30px; margin-right: 0; }
+/***********share内容左右收70px************/
+.bj-content { padding: 0 10px; }
+}
+
+/* 平板 to 桌面-------------------- */
+@media (min-width: 768px) and (max-width: 980px) {
+/* Remove any padding from the body */
+body { padding-top: 0; }
+/* Widen banner and social buttons to fill body padding */
+.banner { overflow: hidden; margin-top: -20px; /* Offset bottom margin on .navbar */ }
+/* Adjust sidenav width */
+.bs-docs-sidenav { width: 166px; margin-top: 20px; }
+.bs-docs-sidenav.affix { top: 0; }
+.banner { padding: 50px; }
+.navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner { padding: 0 10px; }
+}
+
+/* 平板---------------------- */
+@media (max-width: 767px) {
+body { padding-top: 0; }
+h1 { font-size: 1.6em; margin: 3px auto 10px; }
+.container { padding: 0 30px; }
+/* Widen banner and social buttons to fill body padding */
+.banner { overflow: hidden; padding: 30px; margin-top: -20px; /* Offset bottom margin on .navbar */ margin-right: -20px; margin-left: -20px; }
+.banner h1 { font-size: 50px; }
+.icon .span4 { margin-bottom: 40px; }
+.bs-docs-social { margin: 0 -20px; }
+/* Space out the show-grid examples */
+.show-grid [class*="span"] { margin-bottom: 5px; }
+/* Sidenav */
+.bs-docs-sidenav { width: auto; margin-bottom: 20px; }
+.bs-docs-sidenav.affix { position: static; width: auto; top: 0; }
+/* Unfloat the back to top link in footer */
+.footer { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+.footer p { margin-bottom: 9px; }
+.course-list-page .views-row { text-align: center; }
+.footer .pull-right { float: none; }
+.bottom h2 span { padding-left: 10px; }
+.bottom, .footer { text-align: center; margin: 0 -20px; }
+.navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner { padding: 0 10px; }
+.bj-content { padding: 0; }
+}
+
+/* 适应手机---------------------- */
+@media (max-width: 480px) {
+/* Remove padding above banner */
+body { padding-top: 0; }
+h1 { font-size: 1.2em; margin: 8px auto 6px; }
+.fengnav { padding: 0 20px; }
+/* Change up some type stuff */
+h2 small { display: block; }
+/* Downsize the banners */
+.banner { overflow: hidden; padding: 15px; }
+.banner h1 { font-size: 45px; }
+.banner p, .banner .btn { font-size: 18px; }
+.banner .btn { display: block; margin: 0 auto; }
+/* icon on home */
+.icon h1 { font-size: 30px; }
+.icon-byline { font-size: 18px; }
+/* center example sites */
+.example-sites { margin-left: 0; }
+.example-sites > li { float: none; display: block; max-width: 280px; margin: 0 auto 18px; text-align: center; }
+.example-sites .thumbnail > img { max-width: 270px; }
+/* Do our best to make tables work in narrow viewports */
+table code { white-space: normal; word-wrap: break-word; word-break: break-all; }
+/* Modal example */
+.modal-example .modal { position: relative; top: auto; right: auto; bottom: auto; left: auto; }
+/* Tighten up footer */
+.footer { padding-top: 20px; padding-bottom: 20px; }
+/* Unfloat the back to top in footer to prevent odd text wrapping */
+.footer .pull-right { float: none; }
+.navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner { padding: 0 10px; }
+}
+
+
+/*###################################################*/
+
+.brand, .nav {
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	color: #CCC;
+}
+
+.brand {
+	padding-left: 1em; 
+	padding-right: 1em;
+	height: auto;
+}
+
+.nav li {
+	line-height: 38px;
+}
+
+.navbar {
+	width: 100%;
+	height: 25px;
+} 
+
+.navbar-inner {
+	width: 100%;
+}
+
+ul li {
+	list-style: none;
+	float: left;
+}
+
+.navbar-inner ul {
+	margin: 5px 1em;
+}
+
+.nav-tabs {
+}
+
+.tab-content {
+	width: 1400px;;
+}
+
+.tab-content {
+	margin-top: 5px;
+}
+
+.nav-tabs li {
+	margin: 0 .5em;
+	padding: 0 1em;  
+	border: 1px solid #ccc;
+	background-color: rgb(237, 237, 237);
+}
+
+.span9 {
+	width: 71%;
+	float: left;
+}
+
+.span3 {
+	float: left;
+}
+
+.tab {
+	width: 104%;
+}
+
+.disInput {
+	background-color: #ccc;
+	width: 280px;
+	border: 1px solid #ccc;
+}
+
+.w210, .span12 {
+	width: 280px;
+	border: 1px solid #ccc;
+	background-color: white;
+}
+
+.widget-content label {
+	text-align: left;
+	margin-left: 3em;
+	width: 100%;
+}
+
+.btn {
+	padding: 2px 1em;
+}

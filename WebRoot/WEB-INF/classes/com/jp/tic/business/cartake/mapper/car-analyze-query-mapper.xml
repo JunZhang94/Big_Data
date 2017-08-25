@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.cartake.mapper.CarQueryAnalyzeStatMapper">
+	
+	<select id="queryAnalyzeFakePlate" parameterType="map" resultType="map">
+		select 
+			dis_fake_plate.*, 
+			to_char(jgsj1, 'yyyy-MM-dd hh24:mi:ss') || ' - ' || 
+			to_char(jgsj2, 'yyyy-MM-dd hh24:mi:ss') as jgsj,
+		    (select kkmc from mount_tab where kkbh = kkbh1) || ' - ' ||
+		    (select kkmc from mount_tab where kkbh = kkbh2) kkmc
+		from dis_fake_plate 
+		where jgsj1 between to_date(#{startDate}, 'yyyy-MM-dd hh24:mi:ss') and to_date(#{endDate}, 'yyyy-MM-dd hh24:mi:ss')
+			or jgsj2 between to_date(#{startDate}, 'yyyy-MM-dd hh24:mi:ss') and to_date(#{endDate}, 'yyyy-MM-dd hh24:mi:ss')
+	</select>
+	
+	<select id="queryAnalyzeCarPlateRate" parameterType="map" resultType="map">
+		select 
+			dis_gate_count.*, 
+			to_char(start_time, 'yyyy-MM-dd hh24:mi:ss') startDate,
+			to_char(end_time, 'yyyy-MM-dd hh24:mi:ss') endDate,
+		    (select kkmc from mount_tab where kkbh = dis_gate_count.kkbh and rownum = 1) kkmc
+		from dis_gate_count 
+		where 
+			(start_time between to_date(#{startDate}, 'yyyy-MM-dd hh24:mi:ss') and to_date(#{endDate}, 'yyyy-MM-dd hh24:mi:ss')
+			or end_time between to_date(#{startDate}, 'yyyy-MM-dd hh24:mi:ss') and to_date(#{endDate}, 'yyyy-MM-dd hh24:mi:ss')
+			) and kkbh = #{mount}
+	</select>
+<select id="queryAnalyzeCarPlateRates" parameterType="map" resultType="map">
+   ${sss1} select startT  as jieshushijian,
+                            kkmc,
+                            couns,
+                            hphm_couns,
+                            non_hphm_couns
+                       from ( select ${startDate} startT,
+                                    a.kkmc kkmc,
+                                    a.KKBH,
+                                    b.DWBH,
+                                    sum(dgc.save_count) couns,
+                                    sum(hphm_count) hphm_couns,
+                                    sum(non_hphm_count) non_hphm_couns
+                               from dis_gate_count_status dgc, mount_tab a, MGMTDEPT_TAB b, AREA_TAB c
+                              where dgc.kkbh = a.kkbh and a.dwbh = b.dwbh and  b.dwxzqh = c.qydm
+                                and start_time between to_date('${startdates}', 'yyyy-MM-dd hh24:mi:ss')
+                                and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+                                <if test="orgId!=null and orgId!=''">
+                                and
+                                <!--   mt.kkbh = ${orgId}-->
+                                ${sss3}
+                                 </if>
+                             group by ${startDate}, a.kkmc,
+                                    a.KKBH,
+                                    b.DWBH) t ${sss2}
+
+
+			<!-- add_months(to_date(startT,'yyyy-mm'),1)    to_date(startT,'${startDate}')+1   
+select sysdate+1/24 from dual--> 
+	</select>
+	
+	
+	<!-- 统计分页总数 -->
+		<select id="queryAnalyzeCarcpcxl" parameterType="map" resultType="java.lang.Integer">
+
+ select count(*) from (select ${startDate} startT,
+                                    a.kkmc kkmc,
+                                    a.KKBH,
+                                    b.DWBH,
+                                    sum(dgc.save_count) couns,
+                                    sum(hphm_count) hphm_couns,
+                                    sum(non_hphm_count) non_hphm_couns
+                               from dis_gate_count_status dgc, mount_tab a, MGMTDEPT_TAB b, AREA_TAB c
+                              where dgc.kkbh = a.kkbh and a.dwbh = b.dwbh and  b.dwxzqh = c.qydm
+                                and start_time between to_date('${startdates}', 'yyyy-MM-dd hh24:mi:ss')
+                                and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+                                <if test="orgId!=null and orgId!=''">
+                                and
+                                <!--   mt.kkbh = ${orgId}-->
+                                ${sss3}
+                                 </if>
+                              group by ${startDate}, a.kkmc,
+                                    a.KKBH,
+                                    b.DWBH) t
+	</select>
+			<select id="queryAnalyzecheliuliang" parameterType="map" resultType="java.lang.Integer">
+
+ 		select count(*) from (select to_char(start_time, '${startDateType}') startT
+				,mt.kkmc kkmc,sum(dgc.recieve_count) couns,
+				sum(dgc.hphm_count) hphm_couns,sum(dgc.non_hphm_count) non_hphm_couns 
+				from DIS_GATE_COUNT_STATUS dgc, mount_tab mt,mgmtdept_tab dept,area_tab area  
+				where mt.kkbh = dgc.kkbh and mt.dwbh = dept.dwbh and dept.dwxzqh = area.qydm
+                               <if test="orgId!=null and orgId!=''">
+                                ${sss3}
+                                 </if>	
+                 and start_time between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss')
+				 and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+				group by to_char(start_time, '${startDateType}'),mt.kkmc) t
+                         
+
+	</select>
+	
+	<select id="areaStatisticsGrouppingInfo" parameterType="map" resultType="map">
+ 				${sss1}
+ 				select startT as statistical_time,couns,hphm_couns,non_hphm_couns,dwmc from (
+				select to_char(start_time, '${startDateType}') startT,
+                area.qymc as dwmc, sum(dgc.recieve_count) couns,
+				sum(dgc.hphm_count) hphm_couns,sum(dgc.non_hphm_count) non_hphm_couns 
+				from DIS_GATE_COUNT_STATUS dgc, mount_tab mt,mgmtdept_tab dept,area_tab area 
+				where mt.kkbh = dgc.kkbh and mt.dwbh = dept.dwbh and dept.dwxzqh = area.qydm
+                               <if test="orgId!=null and orgId!=''">
+
+                                <!--   mt.kkbh = ${orgId}-->
+                                ${sss3}
+                                 </if>	
+                 and start_time between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss')
+				 and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+				group by to_char(start_time, '${startDateType}'), area.qymc) t
+                          ${sss2}
+
+	</select>
+	
+	<select id="deptStatisticsGrouppingInfo" parameterType="map" resultType="map">
+ 				${sss1}
+ 				select startT as statistical_time,couns,hphm_couns,non_hphm_couns,dwmc,qymc from (
+				select to_char(start_time, '${startDateType}') startT, dept.dwmc,
+                area.qymc, sum(dgc.recieve_count) couns,
+				sum(dgc.hphm_count) hphm_couns,sum(dgc.non_hphm_count) non_hphm_couns 
+				from DIS_GATE_COUNT_STATUS dgc, mount_tab mt,mgmtdept_tab dept,area_tab area 
+				where mt.kkbh = dgc.kkbh and mt.dwbh = dept.dwbh and dept.dwxzqh = area.qydm
+                               <if test="orgId!=null and orgId!=''">
+
+                                <!--   mt.kkbh = ${orgId}-->
+                                ${sss3}
+                                 </if>	
+                 and start_time between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss')
+				 and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+				group by to_char(start_time, '${startDateType}'), dept.dwmc, area.qymc) t
+                          ${sss2}
+
+	</select>
+	
+			<select id="queryAnalyzecheliuliangs" parameterType="map" resultType="map">
+ ${sss1}
+ 				select startT as statistical_time,kkmc,couns,hphm_couns,non_hphm_couns,dwmc,qymc from (
+				select to_char(start_time, '${startDateType}') startT,mt.kkmc kkmc, dept.dwmc,
+                area.qymc, sum(dgc.recieve_count) couns,
+				sum(dgc.hphm_count) hphm_couns,sum(dgc.non_hphm_count) non_hphm_couns 
+				from DIS_GATE_COUNT_STATUS dgc, mount_tab mt,mgmtdept_tab dept,area_tab area 
+				where mt.kkbh = dgc.kkbh and mt.dwbh = dept.dwbh and dept.dwxzqh = area.qydm
+                               <if test="orgId!=null and orgId!=''">
+
+                                <!--   mt.kkbh = ${orgId}-->
+                                ${sss3}
+                                 </if>	
+                 and start_time between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss')
+				 and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+				group by to_char(start_time, '${startDateType}'),mt.kkmc, dept.dwmc, area.qymc) t
+                          ${sss2}
+
+	</select>
+	
+	
+	
+	<!-- 套牌车 -->
+		<select id="queryAnalyzeFakePlates" parameterType="map" resultType="map">
+	${sss1}	select 
+			dis_fake_plate.*, 
+			to_char(jgsj1, 'yyyy-MM-dd hh24:mi:ss') || ' - ' || 
+			to_char(jgsj2, 'yyyy-MM-dd hh24:mi:ss') jgsj,
+		    (select kkmc from mount_tab where kkbh = kkbh1)  || ' - ' || 
+		    (select kkmc from mount_tab where kkbh = kkbh2) kkmc
+		from dis_fake_plate 
+		where 
+		<if test="carNum != null">
+			hphm like '%${carNum}%' and 
+		</if>
+		    view_flag = 1 and 
+		<if test="mounts != null">
+		    (kkbh1 in (${mounts}) or kkbh2 in (${mounts})) and 
+		</if>
+		<if test = "carSpeed > 0 ">
+			<![CDATA[ CLSD >=${carSpeed} and ]]> 
+		</if>
+		<if test = "confimFlag == 1 ">
+			OPERATE_STATUS = ${confimFlag} and
+		</if>
+		(jgsj1 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss')
+			or jgsj2 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss')) order by jgsj1 desc
+			${sss2}
+	</select>	
+	
+	<!-- 本地套牌车分析 -->
+		<select id="queryAnalyzeFakeiLocalCar" parameterType="map" resultType="map">
+	${sss1}	select 
+			DIS_FAKE_LOCAL_PLATE.*, 
+			to_char(jgsj1, 'yyyy-MM-dd hh24:mi:ss') || ' - ' || 
+			to_char(jgsj2, 'yyyy-MM-dd hh24:mi:ss') jgsj,
+		    (select kkmc from mount_tab where kkbh = kkbh1)  || ' - ' || 
+		    (select kkmc from mount_tab where kkbh = kkbh2) kkmc
+		from DIS_FAKE_LOCAL_PLATE 
+		where 
+		<if test="carNum != null">
+			hphm like '%${carNum}%' and 
+		</if>
+		<if test="carNumList != null">
+			hphm in (${carNumList}) and 
+		</if>
+		    view_flag = 1 and 
+		<if test="mounts != null">
+		    (kkbh1 in (${mounts}) or kkbh2 in (${mounts})) and 
+		</if>
+		<if test = "carSpeed > 0 ">
+			<![CDATA[ CLSD >=${carSpeed} and ]]> 
+		</if>
+		<if test = "confimFlag == 1 ">
+			OPERATE_STATUS = ${confimFlag} and
+		</if>
+		(jgsj1 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss')
+			or jgsj2 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss')) order by jgsj1 desc
+			${sss2}
+	</select>	
+	
+	<!-- 本地套牌车分页统计 -->
+		<select id="queryAnalyzeTaopaiLocalCar" parameterType="map" resultType="java.lang.Integer">
+		select 
+			count(1)
+		from DIS_FAKE_LOCAL_PLATE 
+		where 
+		<if test="carNum != null ">
+			hphm like '%${carNum}%' and 
+		</if>
+		<if test="carNumList != null">
+			hphm in (${carNumList}) and 
+		</if>
+			view_flag = 1 and
+		<if test="mounts != null">
+		    (kkbh1 in (${mounts}) or kkbh2 in (${mounts})) and 
+		</if>
+		<if test="carSpeed>0">
+		<![CDATA[ CLSD >=cast(${carSpeed} as number) and ]]> 
+		</if>
+		<if test = "confimFlag == 1 ">
+			OPERATE_STATUS = ${confimFlag} and
+		</if>
+		
+		(jgsj1 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss')
+			or jgsj2 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss'))
+	</select>
+	
+	<!-- 套牌车分页统计 -->
+		<select id="queryAnalyzeTaopaiche" parameterType="map" resultType="java.lang.Integer">
+		select 
+			count(1)
+		from dis_fake_plate 
+		where 
+		<if test="carNum != null ">
+			hphm like '%${carNum}%' and 
+		</if>
+			view_flag = 1 and
+		<if test="mounts != null">
+		    (kkbh1 in (${mounts}) or kkbh2 in (${mounts})) and 
+		</if>
+		<if test="carSpeed>0">
+		<![CDATA[ CLSD >=cast(${carSpeed} as number) and ]]> 
+		</if>
+		<if test = "confimFlag == 1 ">
+			OPERATE_STATUS = ${confimFlag} and
+		</if>
+		
+		(jgsj1 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss')
+			or jgsj2 between to_date('${startdate}', 'yyyy-MM-dd hh24:mi:ss') and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss'))
+	</select>
+	
+
+	<!-- 套牌车分页统计 -->
+		<select id="queryAnalyzeTaopaichess" parameterType="map" resultType="map">
+	select dis_fake_plate.*, to_char(jgsj1, 'yyyy-MM-dd hh24:mi:ss') jgsj_a, to_char(jgsj2, 'yyyy-MM-dd hh24:mi:ss') jgsj_b,
+        (select kkmc from mount_tab where kkbh = kkbh1) kkmc1,
+        (select kkmc from mount_tab where kkbh = kkbh2) kkmc2 from dis_fake_plate
+        where id = #{ID}
+	</select>
+	
+	<!-- 套牌车分析，本地套牌车分析 -->
+		<select id="queryAnalyzeTaopaicheLocal" parameterType="map" resultType="map">
+	select DIS_FAKE_LOCAL_PLATE.*, to_char(jgsj1, 'yyyy-MM-dd hh24:mi:ss') jgsj_a, to_char(jgsj2, 'yyyy-MM-dd hh24:mi:ss') jgsj_b,
+        (select kkmc from mount_tab where kkbh = kkbh1) kkmc1,
+        (select kkmc from mount_tab where kkbh = kkbh2) kkmc2 from DIS_FAKE_LOCAL_PLATE
+        where id = #{ID}
+	</select>
+	
+	<!--获取套牌车分析中的图片地址 -->
+	<select id ="getPictureURLInCarQuery" parameterType="string" resultType="map">
+	  select t.id,t.tx1,t.tx2,t.hphm from dis_fake_plate t where id in(${idstr})
+	</select>
+	<!-- 汇聚统计 -->
+		<select id="huijutongjis" parameterType="map" resultType="map">
+		   ${sss1} select startT  as jieshushijian,
+                            kkmc,
+                            kkbh,
+                            couns,
+                            hphm_couns,
+                            non_hphm_couns
+                       from ( select ${startDate} startT,
+                                    a.kkmc kkmc,
+                                    a.KKBH,
+                                    b.DWBH,
+                                    sum(dgc.recieve_count) couns,
+                       				sum(dgc.hphm_count) hphm_couns,
+                       				sum(dgc.non_hphm_count) non_hphm_couns
+                               from DIS_GATE_COUNT_STATUS dgc, mount_tab a, MGMTDEPT_TAB b, AREA_TAB c
+                              where dgc.kkbh = a.kkbh and a.dwbh = b.dwbh and  b.dwxzqh = c.qydm
+                                and start_time between to_date('${startdates}', 'yyyy-MM-dd hh24:mi:ss')
+                                and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+                                <if test="orgId!=null and orgId!=''">
+                                and
+                                ${sss3}
+                                 </if>
+                             group by ${startDate}, a.kkmc,
+                                    a.KKBH,
+                                    b.DWBH) t ${sss2}
+	<!--  
+     ${sss1} select startT  as jieshushijian,
+                            kkmc,
+                            kkbh,
+                            couns,
+                            hphm_couns,
+                            non_hphm_couns
+                       from ( select ${startDate} startT,
+                                    a.kkmc kkmc,
+                                    a.KKBH,
+                                    b.DWBH,
+                                    sum(dgc.count) couns,
+                                    sum(hphm_count) hphm_couns,
+                                    sum(non_hphm_count) non_hphm_couns
+                               from dis_gate_count dgc, mount_tab a, MGMTDEPT_TAB b, AREA_TAB c
+                              where dgc.kkbh = a.kkbh and a.dwbh = b.dwbh and  b.dwxzqh = c.qydm
+                                and start_time between to_date('${startdates}', 'yyyy-MM-dd hh24:mi:ss')
+                                and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+                                <if test="orgId!=null and orgId!=''">
+                                and
+                                ${sss3}
+                                 </if>
+                             group by ${startDate}, a.kkmc,
+                                    a.KKBH,
+                                    b.DWBH) t ${sss2}
+
+								-->
+			<!-- add_months(to_date(startT,'yyyy-mm'),1)    to_date(startT,'${startDate}')+1   
+select sysdate+1/24 from dual--> 
+	</select>
+	
+	<!--  汇聚统计分页-->
+			<select id="huijutongjiss" parameterType="map" resultType="java.lang.Integer">
+
+ <!--  	select count(*) from (select ${startDate} startT,
+                                    a.kkmc kkmc,
+                                    a.KKBH,
+                                    b.DWBH,
+                                    sum(dgc.save_count) couns,
+                                    sum(hphm_count) hphm_couns,
+                                    sum(non_hphm_count) non_hphm_couns
+                               from DIS_GATE_COUNT_STATUS dgc, mount_tab a, MGMTDEPT_TAB b, AREA_TAB c
+                              where dgc.kkbh = a.kkbh and a.dwbh = b.dwbh and  b.dwxzqh = c.qydm
+                                and start_time between to_date('${startdates}', 'yyyy-MM-dd hh24:mi:ss')
+                                and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+                                <if test="orgId!=null and orgId!=''">
+                                and
+                                ${sss3}
+                                 </if>
+                              group by ${startDate},
+                                       a.kkmc,
+                                    a.KKBH,
+                                    b.DWBH) t
+                                    -->
+                                    
+                                    select count(*) from (select ${startDate} startT,
+                                    a.kkmc kkmc,
+                                    a.KKBH,
+                                    b.DWBH,
+                                    sum(dgc.recieve_count) couns,
+                       				sum(dgc.hphm_count) hphm_couns,
+                       				sum(dgc.non_hphm_count) non_hphm_couns
+                               from DIS_GATE_COUNT_STATUS dgc, mount_tab a, MGMTDEPT_TAB b, AREA_TAB c
+                              where dgc.kkbh = a.kkbh and a.dwbh = b.dwbh and  b.dwxzqh = c.qydm
+                                and start_time between to_date('${startdates}', 'yyyy-MM-dd hh24:mi:ss')
+                                and to_date('${enddate}', 'yyyy-MM-dd hh24:mi:ss') 
+                                <if test="orgId!=null and orgId!=''">
+                                and
+                                <!--   mt.kkbh = ${orgId}-->
+                                ${sss3}
+                                 </if>
+                              group by ${startDate}, a.kkmc,
+                                    a.KKBH,
+                                    b.DWBH) t
+	</select>
+</mapper>

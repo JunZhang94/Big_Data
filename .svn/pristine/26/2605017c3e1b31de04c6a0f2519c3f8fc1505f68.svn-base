@@ -1,0 +1,25 @@
+.team_leftico,.team_leftico:hover,.team_rightico,.team_rightico:hover {
+	width: 17px;
+	height: 17px;
+	display: block;
+	float: left;
+	background: url(images/teamico.gif) no-repeat;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.team_leftico {
+	background-position: 0 0;
+}
+
+.team_rightico {
+	background-position: 0 -34px;
+}
+
+.team_leftico:hover {
+	background-position: -28px 0;
+}
+
+.team_rightico:hover {
+	background-position: -28px -34px;
+}

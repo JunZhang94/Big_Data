@@ -1,0 +1,56 @@
+package com.jp.tic.business.datacenter.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.jp.tic.business.datacenter.dao.DataQualityDao;
+import com.jp.tic.business.datacenter.service.DataQualityService;
+
+@Service
+public class DataQualityServiceImpl implements DataQualityService {
+
+	@Autowired
+	DataQualityDao dataQualityDao;
+	
+	/**
+	 * 数据质量管理
+	 * @param param 查询参数
+	 * @param dept 部门
+	 * @return 返回结果
+	 */
+	public List<Map<String, String>> dataQualityInfo(Map<String, String> param, List<Map<String, String>> dept) {
+		return dataQualityDao.dataQualityInfo(param, dept); 
+	}
+	
+	/**
+	 * 数据质量管理数量
+	 * @param param 查询参数
+	 * @param dept 部门
+	 * @return 返回结果
+	 */
+	public List<Map<String, String>> dataQualityAmounts(Map<String, String> param, List<Map<String, String>> dept) {
+		return dataQualityDao.dataQualityAmounts(param, dept); 
+	}
+	
+	/**
+	 * 导出数据质量信息数据
+	 * @param partIds 查询参数
+	 * @return 返回结果
+	 */
+	public List<Map<String, String>> exportDataQualityById(String[] partIds) {
+		return dataQualityDao.exportDataQualityById(partIds); 
+	}
+	
+	/**
+	 * 根据查询条件导出查询数据
+	 * @param param 查询参数
+	 * @param dept 部门
+	 * @return 查询结果
+	 */
+	public String exportQuerySql(Map<String, String> param, List<Map<String, String>> dept) {
+		return dataQualityDao.exportQuerySql(param, dept); 
+	}
+}

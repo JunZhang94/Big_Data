@@ -1,0 +1,11 @@
+/* CSS Document */
+.banner_common{position:relative;width:1090px;margin:0 auto;
+height:100%;}
+.banner_pre{position:absolute;top:50%;left:0;margin-top:-30px;width:60px;height:60px;cursor:pointer;background:url(../images/banner_btn_l_24.png) no-repeat;
+cursor:pointer;
+}
+.banner_next{position:absolute;top:50%;right:0;margin-top:-30px;width:60px;height:60px;cursor:pointer;background:url(../images/banner_btn_r_24.png) no-repeat;
+cursor:pointer;
+}
+
+

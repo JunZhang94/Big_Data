@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.device.mapper.DeviceInfoMapper">
+	
+	<sql id="device_conditions">
+		<where>
+			<if test="ssdw != null and ssdw.length() > 0">
+				and t.kkbh = #{ssdw}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getList" resultType="com.jp.tic.business.device.entity.DeviceInfo">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				deviceInfo_tab t
+			WHERE sblx in ('Cabinet', 'Camera')
+		]]>
+	</select>
+	
+	<select id="findDeptByAreaCode" parameterType="string" resultType="map">
+		SELECT 
+			dwmc "dwmc", dwbh "dwbh" 
+		FROM MGMTDEPT_TAB 
+		WHERE dwxzqh = #{areaCode}
+	</select>
+	
+	<select id="findMountByDeptCode" parameterType="string" resultType="map">
+		SELECT 
+			kkmc "kkmc", kkbh "kkbh", kkjd "kkjd", kkwd "kkwd" 
+		FROM MOUNT_TAB WHERE DWBH = #{deptCode}
+	</select>
+
+	<select id="getDeviceStateBySbbh" parameterType="string" resultType="string">
+		select * from (
+			select dqzt from devicestate_tab where sbbh = #{sbbh} order by ztsj desc
+		) t where rownum = 1
+	</select>
+	
+	<select id="findDevicesByKkbh" parameterType="deviceInfo" resultMap="device.simple_resultMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				deviceInfo_tab 
+			WHERE sblx in ('Cabinet') and sskkbh = #{sskkbh}
+		]]>
+		<if test="sbzt != null and sbzt.length() > 0">
+			and sbzt = #{sbzt}
+		</if>
+	</select>
+	
+	<!-- 查询区域树形数据 -->
+	<!-- 企业或单位 区域 -->
+	<select id="getNavTreeData" resultMap="device.tree_area_resultMap">
+		<![CDATA[
+			SELECT
+				qydm, qymc, 'area' sblx,
+				0 leaf, 0 checked, 'folder' cls
+			FROM
+				area_tab order by qydm
+		]]>
+	</select>
+	
+	<!-- 部门 -->
+	<select id="findDeptByEnterpriseCode" parameterType="string" resultMap="device.tree_dept_resultMap">
+		SELECT 
+			dwmc, dwbh, 'dept' sblx,
+			0 leaf, 0 checked, 'folder' cls
+		FROM MGMTDEPT_TAB WHERE dwxzqh = #{enterpriseCode}
+	</select>
+	
+	<!-- 卡口 -->
+	<select id="findMountByUnitCode" parameterType="string" resultMap="device.tree_mount_resultMap">
+		SELECT 
+			kkmc, kkbh, 'mount' sblx,
+			0 leaf, 0 checked, 'folder' cls
+		FROM MOUNT_TAB WHERE DWBH = #{deptCode}
+	</select> 
+	
+	<select id="findDeviceByMountCode" parameterType="string" resultType="deviceInfo">
+		<![CDATA[
+			SELECT
+				t.*,
+				1 leaf, 0 checked
+			FROM
+				deviceInfo_tab t
+			WHERE sskkbh = #{sskkbh}
+		]]>
+	</select>		
+</mapper>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.device.mapper.KkDirectionManagerMapper">
+	
+	<select id="queryDeviceDirInfo" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		SELECT 
+			*
+		FROM c_direction_tab where 1=1
+		<if test="ID != null">
+			AND ID = '${ID}'
+		</if>
+		<if test="code != null">
+		    AND KKBH = '${code}'
+		</if>
+		<if test="kakouStatus != null">
+			AND MOUNT_DEVICE_TYPE = '${kakouStatus}'
+		</if>
+		<if test="deviceName != null">
+		    AND DIRECTION_NAME like '%${deviceName}%'
+		</if>
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countDeviceDirDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM c_direction_tab where 1=1 
+		<if test="ID != null">
+			AND ID = '${ID}'
+		</if>
+		<if test="code != null">
+		    AND KKBH = '${code}'
+		</if>
+		<if test="kakouStatus != null">
+			AND MOUNT_DEVICE_TYPE = '${kakouStatus}'
+		</if>
+		<if test="deviceName != null">
+			AND DIRECTION_NAME like '%${deviceName}%'
+		</if>
+	</select>
+	
+	<insert id="addDeviceDirInfo" parameterType="string" >
+		insert into c_direction_tab (
+			ID
+			<if test="DIRECTION_NUMBER != null">
+			,DIRECTION_NUMBER
+			</if>
+			<if test="DIRECTION_NAME != null">
+			,DIRECTION_NAME
+			</if>
+			<if test="TYPE != null">
+			,TYPE
+			</if>
+			<if test="CREATE_TIME != null">
+			,CREATE_TIME
+			</if>
+			<if test="KKBH != null">
+			,KKBH
+			</if>
+			<if test="REMARK != null">
+			,REMARK
+			</if>
+			<if test="UNIT != null">
+			,UNIT
+			</if>
+			<if test="UNIT_PHONE != null">
+			,UNIT_PHONE
+			</if>
+			<if test="TACKL_UNIT != null">
+			,TACKL_UNIT
+			</if>
+			<if test="TACKL_UNIT_PHONE != null">
+			,TACKL_UNIT_PHONE
+			</if>
+			<if test="OPERATION_UNIT != null">
+			,OPERATION_UNIT
+			</if>
+			<if test="OPERATION_PERSON != null">
+			,OPERATION_PERSON
+			</if>
+			<if test="OPERATION_PHONE != null">
+			,OPERATION_PHONE
+			</if>
+			<if test="MOUNT_DEVICE_TYPE != null">
+			,MOUNT_DEVICE_TYPE
+			</if>
+			<if test="DRIVEWAY_MOUNT != null">
+			,DRIVEWAY_MOUNT
+			</if>
+			<if test="MONITOR_STATE != null">
+			,MONITOR_STATE
+			</if>
+		) values (
+			${ID}
+			<if test="DIRECTION_NUMBER != null">
+			,'${DIRECTION_NUMBER}'
+			</if>
+			<if test="DIRECTION_NAME != null">
+			,'${DIRECTION_NAME}'
+			</if>
+			<if test="TYPE != null">
+			,'${TYPE}'
+			</if>
+			<if test="CREATE_TIME != null">
+			,to_date('${CREATE_TIME}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="KKBH != null">
+			,'${KKBH}'
+			</if>
+			<if test="REMARK != null">
+			,'${REMARK}'
+			</if>
+			<if test="UNIT != null">
+			,'${UNIT}'
+			</if>
+			<if test="UNIT_PHONE != null">
+			,'${UNIT_PHONE}'
+			</if>
+			<if test="TACKL_UNIT != null">
+			,'${TACKL_UNIT}'
+			</if>
+			<if test="TACKL_UNIT_PHONE != null">
+			,'${TACKL_UNIT_PHONE}'
+			</if>
+			<if test="OPERATION_UNIT != null">
+			,'${OPERATION_UNIT}'
+			</if>
+			<if test="OPERATION_PERSON != null">
+			,'${OPERATION_PERSON}'
+			</if>
+			<if test="OPERATION_PHONE != null">
+			,'${OPERATION_PHONE}'
+			</if>
+			<if test="MOUNT_DEVICE_TYPE != null">
+			,'${MOUNT_DEVICE_TYPE}'
+			</if>
+			<if test="DRIVEWAY_MOUNT != null">
+			,'${DRIVEWAY_MOUNT}'
+			</if>
+			<if test="MONITOR_STATE != null">
+			,'${MONITOR_STATE}'
+			</if>
+		)
+		
+	</insert>
+	
+	<update id="updateDeviceDirInfo" parameterType="string"> 
+		update c_direction_tab set
+		<if test="DIRECTION_NUMBER != null">
+			DIRECTION_NUMBER='${DIRECTION_NUMBER}'
+			</if>
+			<if test="DIRECTION_NAME != null">
+			,DIRECTION_NAME='${DIRECTION_NAME}'
+			</if>
+			<if test="TYPE != null">
+			,TYPE='${TYPE}'
+			</if>
+			<if test="CREATE_TIME != null">
+			,CREATE_TIME=to_date('${CREATE_TIME}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="KKBH != null">
+			,KKBH='${KKBH}'
+			</if>
+			<if test="REMARK != null">
+			,REMARK='${REMARK}'
+			</if>
+			<if test="REMARK == null">
+			,REMARK=''
+			</if>
+			<if test="UNIT != null">
+			,'UNIT='${UNIT}'
+			</if>
+			<if test="UNIT_PHONE != null">
+			,UNIT_PHONE='${UNIT_PHONE}'
+			</if>
+			<if test="TACKL_UNIT != null">
+			,TACKL_UNIT='${TACKL_UNIT}'
+			</if>
+			<if test="TACKL_UNIT_PHONE != null">
+			,TACKL_UNIT_PHONE='${TACKL_UNIT_PHONE}'
+			</if>
+			<if test="OPERATION_UNIT != null">
+			,OPERATION_UNIT='${OPERATION_UNIT}'
+			</if>
+			<if test="OPERATION_PERSON != null">
+			,OPERATION_PERSON='${OPERATION_PERSON}'
+			</if>
+			<if test="OPERATION_PHONE != null">
+			,OPERATION_PHONE='${OPERATION_PHONE}'
+			</if>
+			<if test="MOUNT_DEVICE_TYPE != null">
+			,MOUNT_DEVICE_TYPE='${MOUNT_DEVICE_TYPE}'
+			</if>
+			<if test="DRIVEWAY_MOUNT != null">
+			,DRIVEWAY_MOUNT='${DRIVEWAY_MOUNT}'
+			</if>
+			<if test="MONITOR_STATE != null">
+			,MONITOR_STATE='${MONITOR_STATE}'
+			</if>
+		where ID = '${ID}'
+	</update>
+	
+	<delete id="deleteDeviceDirInfo" parameterType="string">
+		delete from c_direction_tab where ID in (${KKBHS})
+	</delete>
+	
+	<select id="initDeviceDirDetailInfo" parameterType="string" resultType="Map">
+		select * from c_direction_tab where 1=1 
+		<if test="ID != null">
+			AND ID = '${ID}' 
+		</if>
+	</select>
+</mapper>

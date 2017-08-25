@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.device.mapper.DeviceManagerMapper">
+	
+	<select id="queryDeviceInfo" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		SELECT 
+			*
+		FROM DEVICEINFO_TAB where 1=1
+		<if test="deviceNumber != null">
+			AND sbbh = #{deviceNumber}
+		</if>
+		<if test="code != null">
+			AND SSKKBH = #{code}
+		</if>
+		<if test="deviceName != null">
+		    AND sbmc like '%${deviceName}%'
+		</if>
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countDeviceDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM DEVICEINFO_TAB where 1=1 
+		<if test="deviceNumber != null">
+			AND sbbh = #{deviceNumber}
+		</if>
+		<if test="code != null">
+			AND SSKKBH = #{code}
+		</if>
+		<if test="deviceName != null">
+			AND sbmc like '%${deviceName}%'
+		</if>
+	</select>
+	
+	<insert id="addDeviceInfo" parameterType="string" >
+		insert into DEVICEINFO_TAB(
+			SBBH
+			<if test="JD != null">
+			,JD
+			</if>
+			<if test="WD != null">
+			,WD
+			</if>
+			<if test="SBMC != null">
+			,SBMC
+			</if>
+			<if test="SBZT != null">
+			,SBZT
+			</if>
+			<if test="IPDZ != null">
+			,IPDZ
+			</if>
+			<if test="DKH != null">
+			,DKH
+			</if>
+			<if test="SBLX != null">
+			,SBLX
+			</if>
+			<if test="DLMC != null">
+			,DLMC
+			</if>
+			<if test="DLMM != null">
+			,DLMM
+			</if>
+			<if test="SBCJ != null">
+			,SBCJ
+			</if>
+			<if test="SSDW != null">
+			,SSDW
+			</if>
+			<if test="SSKKBH != null">
+			,SSKKBH
+			</if>
+			<if test="CONTACT_NUMBER != null">
+			,CONTACT_NUMBER
+			</if>
+			<if test="CONTACT_ADDRESS != null">
+			,CONTACT_ADDRESS
+			</if>
+			<if test="INTERCEPT != null">
+			,INTERCEPT
+			</if>
+			<if test="DEVICE_MODEL != null">
+			,DEVICE_MODEL
+			</if>
+			<if test="DEVICE_ADRESS != null">
+			,DEVICE_ADRESS
+			</if>
+			<if test="PILE_METERS != null">
+			,PILE_METERS
+			</if>
+			<if test="REMARK != null">
+			,REMARK
+			</if>
+			<if test="usingDate != null">
+			,USING_DATE
+			</if>
+			<if test="stopeDate != null">
+			,STOP_DATE
+			</if>
+			<if test="scrapDate != null">
+			,SCRAP_DATE
+			</if>
+			<if test="updateDate != null">
+			,UPDATE_DATE
+			</if>
+			<if test = "DIRECTION_NUMBER!=null">
+			,DIRECTION_NUMBER
+			</if>
+		) values (
+			${SBBH}
+			<if test="JD != null">
+			,'${JD}'
+			</if>
+			<if test="WD != null">
+			,'${WD}'
+			</if>
+			<if test="SBMC != null">
+			,'${SBMC}'
+			</if>
+			<if test="SBZT != null">
+			,'${SBZT}'
+			</if>
+			<if test="IPDZ != null">
+			,'${IPDZ}'
+			</if>
+			<if test="DKH != null">
+			,'${DKH}'
+			</if>
+			<if test="SBLX != null">
+			,'${SBLX}'
+			</if>
+			<if test="DLMC != null">
+			,'${DLMC}'
+			</if>
+			<if test="DLMM != null">
+			,'${DLMM}'
+			</if>
+			<if test="SBCJ != null">
+			,'${SBCJ}'
+			</if>
+			<if test="SSDW != null">
+			,'${SSDW}'
+			</if>
+			<if test="SSKKBH != null">
+			,'${SSKKBH}'
+			</if>
+			<if test="CONTACT_NUMBER != null">
+			,'${CONTACT_NUMBER}'
+			</if>
+			<if test="CONTACT_ADDRESS != null">
+			,'${CONTACT_ADDRESS}'
+			</if>
+			<if test="INTERCEPT != null">
+			,'${INTERCEPT}'
+			</if>
+			<if test="DEVICE_MODEL != null">
+			,'${DEVICE_MODEL}'
+			</if>
+			<if test="DEVICE_ADRESS != null">
+			,'${DEVICE_ADRESS}'
+			</if>
+			<if test="PILE_METERS != null">
+			,'${PILE_METERS}'
+			</if>
+			<if test="REMARK != null">
+			,'${REMARK}'
+			</if>
+			<if test="usingDate != null">
+			,to_date('${usingDate}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="stopeDate != null">
+			,to_date('${stopeDate}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="scrapDate != null">
+			,to_date('${scrapDate}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test="updateDate != null">
+			,to_date('${updateDate}','yyyy-MM-dd HH24:mi:ss')
+			</if>
+			<if test = "DIRECTION_NUMBER != null">
+			,'${DIRECTION_NUMBER}'
+			</if>
+		)
+		
+	</insert>
+	
+	<update id="updateDeviceInfo" parameterType="string"> 
+		update DEVICEINFO_TAB set
+		<if test="SBMC != null">
+		SBMC = '${SBMC}'
+		</if>
+		<if test="JD != null">
+		,JD = '${JD}'
+		</if>
+		<if test="WD != null">
+		,WD = '${WD}'
+		</if>
+		<if test="SBZT != null">
+		,SBZT = '${SBZT}'
+		</if>
+		<if test="IPDZ != null">
+		,IPDZ = '${IPDZ}'
+		</if>
+		<if test="DKH != null">
+		,DKH = '${DKH}'
+		</if>
+		<if test="SBLX != null">
+		,SBLX = '${SBLX}'
+		</if>
+		<if test="DLMC != null">
+		,DLMC = '${DLMC}'
+		</if>
+		<if test="DLMM != null">
+		,DLMM = '${DLMM}'
+		</if>
+		<if test="SBCJ != null">
+		,SBCJ = '${SBCJ}'
+		</if>
+		<if test="SSDW != null">
+		,SSDW = '${SSDW}'
+		</if>
+		<if test="SSKKBH != null">
+		,SSKKBH = '${SSKKBH}'
+		</if>
+		<if test="CONTACT_NUMBER != null">
+		,CONTACT_NUMBER = '${CONTACT_NUMBER}'
+		</if>
+		<if test="CONTACT_ADDRESS != null">
+		,CONTACT_ADDRESS = '${CONTACT_ADDRESS}'
+		</if>
+		<if test="INTERCEPT != null">
+		,INTERCEPT = '${INTERCEPT}'
+		</if>
+		<if test="DEVICE_MODEL != null">
+		,DEVICE_MODEL = '${DEVICE_MODEL}'
+		</if>
+		<if test="DEVICE_ADRESS != null">
+		,DEVICE_ADRESS = '${DEVICE_ADRESS}'
+		</if>
+		<if test="PILE_METERS != null">
+		,PILE_METERS = '${PILE_METERS}'
+		</if>
+		<if test="REMARK != null">
+		,REMARK = '${REMARK}'
+		</if>
+		<if test="usingDate != null">
+		,USING_DATE = to_date('${usingDate}','yyyy-MM-dd HH24:mi:ss')
+		</if>
+		<if test="stopeDate != null">
+		,STOP_DATE = to_date('${stopeDate}','yyyy-MM-dd HH24:mi:ss')
+		</if>
+		<if test="scrapDate != null">
+		,SCRAP_DATE = to_date('${scrapDate}','yyyy-MM-dd HH24:mi:ss')
+		</if>
+		<if test="updateDate != null">
+		,UPDATE_DATE = to_date('${updateDate}','yyyy-MM-dd HH24:mi:ss')
+		</if>
+		where SBBH = '${SBBH}'
+	</update>
+	
+	<delete id="deleteDeviceInfo" parameterType="string">
+		delete from DEVICEINFO_TAB where SBBH in (${KKBHS})
+	</delete>
+	
+	<select id="queryDeviceState" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		SELECT 
+			a.*
+		FROM DEVICESTATE_TAB a, (select max(SCSJ) maxtime,SBBH from DEVICESTATE_TAB where 1 = 1 
+		<if test="deviceStateNumber != null">
+			AND SBBH = #{deviceStateNumber}
+		</if>
+		<if test="deviceState != null">
+			AND DQZT = #{deviceState}
+		</if>
+		group by SBBH ) b where a.SCSJ=b.maxtime and a.SBBH=b.SBBH and a.GZZT1 is null
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countDeviceStateCounts" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM DEVICESTATE_TAB a, (select max(SCSJ) maxtime,SBBH from DEVICESTATE_TAB where 1 = 1 
+		<if test="deviceStateNumber != null">
+			AND SBBH = #{deviceStateNumber}
+		</if>
+		<if test="deviceState != null">
+			AND DQZT = #{deviceState}
+		</if>
+		group by SBBH ) b where a.SCSJ=b.maxtime and a.SBBH=b.SBBH 
+	</select>
+	
+	<select id="queryDeviceTroubleState" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		SELECT 
+			a.*
+		FROM DEVICESTATE_TAB a, (select max(SCSJ) maxtime,SBBH from DEVICESTATE_TAB where 1 = 1 
+		<if test="deviceNumber != null">
+			AND SBBH = #{deviceNumber}
+		</if>
+		<if test="troubleState != null">
+			AND GZZT1 = #{troubleState}
+		</if>
+		 group by SBBH ) b where a.GZSJ=b.maxtime and a.SBBH=b.SBBH and a.GZZT1 IS NOT NULL
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countDeviceTroubleCounts" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM DEVICESTATE_TAB a, (select max(SCSJ) maxtime,SBBH from DEVICESTATE_TAB where 1 = 1 
+		<if test="deviceNumber != null">
+			AND SBBH = #{deviceNumber}
+		</if>
+		<if test="troubleState != null">
+			AND GZZT1 = #{troubleState}
+		</if>
+		group by SBBH ) b where a.GZSJ=b.maxtime and a.SBBH=b.SBBH and a.GZZT1 IS NOT NULL
+	</select>
+	
+	<select id="initDeviceDetailInfo" parameterType="string" resultType="Map">
+		select * from DEVICEINFO_TAB where 1=1 
+		<if test="deviceNumber != null">
+			AND SBBH = #{deviceNumber}
+		</if>
+		<if test="code != null">
+			AND SSKKBH = #{code}
+		</if>
+		<if test="deviceName != null">
+			AND sbmc like '%${deviceName}%'
+		</if>
+	</select>
+	
+	<select id="findAllDeviceInfo" parameterType="string" resultType="Map">
+		select SBBH,SBMC,IPDZ,DKH,JD,WD,substr(SSKKBH,4,15) as SSKKBH from DEVICEINFO_TAB
+	</select>
+	
+	<select id="queryDeviceTroubleInfo" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		SELECT 
+			*
+		FROM DEVICESTATE_TAB where GZZT1 IS NOT NULL
+		<if test="deviceTroubleName != null">
+		    AND DEVICE_NAME like '%${deviceTroubleName}%'
+		</if>
+		<if test="deviceSearchName != null">
+		    AND DEVICE_NAME like '%${deviceSearchName}%'
+		</if>
+		<if test="troubleVerifyName != null">
+		    AND DEVICE_NAME like '%${troubleVerifyName}%'
+		</if>
+		<if test="troubleDealWithName != null">
+		    AND DEVICE_NAME like '%${troubleDealWithName}%'
+		</if>
+		<if test="registerFlag != null">
+		    AND REGISTER_FLAG = ${registerFlag}
+		</if>
+		<if test="verifyFlag != null">
+		    AND VERIFY_STATUS = ${verifyFlag}
+		</if>
+		<if test="dealWithFlag != null">
+		    AND DEAL_WITH_FLAG = ${dealWithFlag}
+		</if>
+		<if test="autoAlarm != null">
+		   AND ceil((sysdate - GZSJ)*24) > 48
+		</if>
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countDeviceTroubleDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM DEVICESTATE_TAB where GZZT1 IS NOT NULL
+		<if test="deviceTroubleName != null">
+		    AND DEVICE_NAME like '%${deviceSearchName}%'
+		</if>
+		<if test="registerFlag != null">
+		    AND REGISTER_FLAG = ${registerFlag}
+		</if>
+		<if test="verifyFlag != null">
+		    AND VERIFY_STATUS = ${verifyFlag}
+		</if>
+		<if test="dealWithFlag != null">
+		    AND DEAL_WITH_FLAG = ${dealWithFlag}
+		</if>
+		<if test="autoAlarm != null">
+		   AND ceil((sysdate - GZSJ)*24) > 48
+		</if>
+	</select>
+</mapper>

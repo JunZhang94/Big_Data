@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.user.mapper.UserQueryMapper">
+	
+	<select id="findWordbookByType" parameterType="map" resultType="string">
+		select t.displayvalue from sys_setting_tab t where t.settingname = #{type} and t.storevalue = #{val}
+	</select>
+	
+	<select id="findUser" parameterType="map" resultType="map">
+		SELECT 
+			s.*,m.uint_name as DWMC
+		FROM sys_t_user s left join j_user_org_map m on s.org_code = m.uint_code 
+		where ((user_code = #{userName} and password = #{password}) or id_card = #{idCard})
+	</select>
+	
+	<select id="getUserList" parameterType="com.jp.tic.business.user.entity.User" resultType="com.jp.tic.business.user.entity.User">
+		SELECT 
+			user_id "userId",
+			user_name "userName",
+			user_code "userCode",
+			sex,
+			password,
+			phone,
+			id_card "idCard" 
+		FROM sys_t_user
+		<where>
+			<if test="userCode != null and userCode.length() != 0">
+				and user_code like '%${userCode}%'
+				or user_name like '%${userCode}%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryUserInfo" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if><!--
+		
+		select t.*,m.dwmc from SYS_T_USER t left join MGMTDEPT_TAB m on t.organ_id = m.dwbh where 1=1-->
+		
+		select t.*,b.orgName,s.role_name, j.uint_name from SYS_T_USER t left join organization_view b on t.organ_id = b.id left join sys_t_roles s on cast(s.role_id as varchar(100)) = t.role_id left join j_user_org_map j on t.ORG_CODE = j.uint_code where 1=1 
+		
+		<if test="orgType == 0">
+			<if test="code != null">
+				AND ORGAN_ID ${code}
+			</if>
+		</if>
+		<if test="orgType != 0">
+			<if test="code != null">
+				AND (ORGAN_ID ${code} OR j.uint_code like '${code_end}%')
+			</if>
+		</if>
+		<if test="userName != null">
+			AND USER_NAME like '%${userName}%'
+		</if>
+		<if test="userRole != null">
+			AND t.ROLE_ID = '${userRole}'
+		</if>
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countUserDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM SYS_T_USER t left join j_user_org_map j on t.ORG_CODE = j.uint_code where 1=1 
+		<if test="deviceNumber != null">
+			AND sbbh = #{deviceNumber}
+		</if>
+		<if test="orgType == 0">
+			<if test="code != null">
+				AND ORGAN_ID ${code}
+			</if>
+		</if>
+		<if test="orgType != 0">
+			<if test="code != null">
+				AND (ORGAN_ID ${code} OR j.uint_code like '${code_end}%')
+			</if>
+		</if>
+		<if test="userName != null">
+			AND USER_NAME like '%${userName}%'
+		</if>
+		<if test="userRole != null">
+			AND t.ROLE_ID = '${userRole}'
+		</if>
+	</select>
+	
+	<insert id="addUserInfo" parameterType="string" >
+		insert into SYS_T_USER(
+			USER_ID
+			,USER_CODE
+			,USER_NAME
+			
+			<if test="ORGAN_ID != null">
+			,ORGAN_ID
+			</if>
+			<if test="SEX != null">
+			,SEX
+			</if>
+			,PASSWORD
+			,PHONE
+			,ID_CARD
+			,ROLE_ID
+			,IP1
+			,IP2
+			,STARTTIME
+			,ENDTIME
+			,USER_TYPE
+		) values (
+			SEQ_SYS_T_USER.NEXTVAL
+			,'${USER_CODE}'
+			,'${USER_NAME}'
+			<if test="ORGAN_ID != null">
+			</if>
+			,${ORGAN_ID}
+			<if test="SEX != null">
+			,'${SEX}'
+			</if>
+			,'${PASSWORD}'
+			,'${PHONE}'
+			,'${ID_CARD}'
+			,'${ROLE_ID}'
+			,'${IP1}'
+			,'${IP2}'
+			,${startTime}
+			,${endTime}
+			,'NORMAL'
+		)
+		
+	</insert>
+	
+	<update id="updateUserInfo" parameterType="string"> 
+		update SYS_T_USER set
+		<if test="USER_CODE != null">
+		USER_CODE = '${USER_CODE}'
+		</if>
+		,USER_NAME = '${USER_NAME}'
+		<if test="ORGAN_ID != null">
+		,ORGAN_ID = ${ORGAN_ID}
+		</if>
+		<if test="SEX != null">
+		,SEX = '${SEX}'
+		</if>
+		,PASSWORD = '${PASSWORD}'
+		,PHONE = '${PHONE}'
+		,ID_CARD = '${ID_CARD}'
+		,ROLE_ID = '${ROLE_ID}'
+		,IP1 = '${IP1}'
+		,IP2 = '${IP2}'
+		,STARTTIME = ${startTime}
+		,ENDTIME = ${endTime}
+		where USER_ID = '${USER_ID}'
+	</update>
+	
+	<delete id="deleteUserInfo" parameterType="string">
+		delete from SYS_T_USER where USER_ID in (${USER_IDS})
+	</delete>
+	
+	<select id="initUserDetailInfo" parameterType="string" resultType="Map">
+		select * from SYS_T_USER
+		<if test="USER_ID != null">
+			WHERE USER_ID = '${USER_ID}'
+		</if>
+	</select>
+	
+	<select id="checkUserInfo" parameterType="string" resultType="Map">
+		select * from SYS_T_USER
+		<if test="USER_CODE != null">
+			WHERE USER_CODE = '${USER_CODE}'
+		</if>
+	</select>
+	
+	
+</mapper>

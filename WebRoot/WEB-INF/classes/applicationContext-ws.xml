@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd 
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+	<!-- Web Service 配置 -->
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+	
+	<!-- ################################## Server ##################################### -->
+	<!-- Server  访问 -> http://localhost:host/Project/ws -->
+	<!-- 发布一个WebService  -->
+	<jaxws:endpoint implementor="#remoteUploadServiceImpl" address="/RemoteUploadService"/>
+	
+	<jaxws:endpoint implementor="#gateWSImpl" address="/Gate"/>
+	
+	<jaxws:endpoint implementor="#carTypeSearchWSImpl" address="/CarTypeSearch"/>
+	
+	<jaxws:endpoint implementor="#deviceManagerWSImpl" address="/DeviceManager"/>
+	
+	<!-- ################################# Client #################################### -->
+	<!-- 调用外部WebService接口
+	<jaxws:client id="carQueryService"  
+		serviceClass="com.jp.tic.electronicpolice.car.service.CarQueryService"  
+		address="${jtzhjk.url}/ws/CarQueryService"/>   -->
+		
+	
+	<!-- ################################# RESTful WebService ################################# -->
+	<!-- Restful Service Server 访问 -> http://localhost:host/Project/ws/rest 
+	<jaxrs:server id="restContainer" address="/rest" >
+		<jaxrs:serviceBeans>
+			<!-/- 对应接口实现bean的id -/->
+			<ref bean="remoteUploadServiceImpl" />
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+			<entry key="json" value="application/json"/>
+			<entry key="xml" value="application/xml"/>
+		</jaxrs:extensionMappings>
+	</jaxrs:server>-->
+</beans>

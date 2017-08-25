@@ -1,0 +1,459 @@
+.x-panel-body-noheader, .x-panel-mc .x-panel-body {
+	border-width: 0px;
+}
+
+/**raido group*/
+.x-form-check-wrap input {
+  float: left;
+  margin-top: 5px;
+}
+/**window*/
+.x-window{
+	border:2px solid #37A0DD
+}
+.x-window-tl {
+ padding-left:0px;
+ background: url("images/layer/top_lf.gif") no-repeat scroll 0 0 transparent;
+ 
+}
+.x-window-tr {
+  padding-right:0px;
+  background: url("images/layer/top_rt.gif") no-repeat scroll right 0 transparent;
+}
+.x-window-tc {
+  /*background: url("images/layer/top.gif") repeat-x scroll 0 0 transparent;*/
+  background:url("images/layer/layer_bg.gif") repeat-x scroll 0 0 transparent;
+}
+.x-window-ml{
+	padding-left:0px;
+	background: url("images/layer/left.gif") repeat-y scroll 0 0 transparent;
+}
+.x-window-mr{
+	padding-right:0px;
+	background: url("images/layer/right.gif") repeat-y scroll right 0 transparent;
+}
+.x-window-mc{	
+	margin-bottom: -1px;
+	background-color: white;
+    border-color: white;
+    border-width: 0px;
+}
+.x-window-bl {
+  padding-left:0px;
+  background: url("images/layer/left.gif") repeat-y scroll 0 0 transparent;
+}
+.x-window-br {
+  padding-right:0px;
+  background: url("images/layer/right.gif") repeat-y scroll right 0 transparent;
+}
+.x-window-bc {
+  background:none;
+  /*background: url("images/layer/b.gif") repeat-x scroll 0 bottom transparent;*/
+  background-color: white;
+}
+/*
+window button
+*/
+.x-window .x-btn {
+	background: url(images/btn.gif);
+	background-position: 0 -61px;
+	height: 18px;
+	border: 1px solid #1D95DD;
+	padding: 0 10px
+}
+
+.x-window .x-btn button,.x-date-picker .x-btn button {
+	color: white
+}
+
+.x-window .x-btn-over {
+	background-position: 0 -94px;
+}
+/**toolbar*/
+.x-toolbar{
+	background: none;
+	background-color: white;
+}
+.x-window-bbar .x-toolbar {
+  border: 0px;
+  padding-bottom: 12px;
+}
+/**button*/
+.x-btn-tl, .x-btn-tr, .x-btn-tc, .x-btn-ml, .x-btn-mr, .x-btn-mc, .x-btn-bl, .x-btn-br, .x-btn-bc {
+  background: transparent;
+}
+.x-toolbar .x-btn-tl, .x-toolbar .x-btn-tr, .x-toolbar .x-btn-tc, .x-toolbar .x-btn-ml, .x-toolbar .x-btn-mr, .x-toolbar .x-btn-mc, .x-toolbar .x-btn-bl, .x-toolbar .x-btn-br, .x-toolbar .x-btn-bc {
+  background :transparent;
+}
+/*
+.x-btn{
+	border: 1px solid #03A1D8;
+	color: black;
+}
+.btn{
+	 background: url("images/btn.gif") repeat-x scroll 0 -35px transparent;
+}
+.btn-over{
+	 background: url("images/btn.gif") repeat-x scroll 0 -70px transparent;
+}
+*/
+/**window*/
+.x-tool {
+    /*background-image: url("images/layer/close.gif");*/
+    background:url(images/layer/layer_bg.gif) no-repeat scroll 0 -53px transparent;
+    width: 31px;
+    height: 18px;
+}
+.x-tool-close {
+   /* background-position: 0 0;*/
+   background-position: 0 -53px;
+}
+.x-tool-close-over {
+    background-position: 0 -88px;;
+}
+.x-window-draggable, .x-window-draggable .x-window-header-text {
+  color: white;
+  padding-left:5px
+}
+/**fieldset*/
+.x-fieldset legend {
+  color: #cccccc;
+  font-weight: normal;
+}
+
+/**tabpanel*/
+ul.x-tab-strip {
+  width: 100%;
+}
+.x-tab-panel-header, .x-tab-panel-footer {
+  background-color: white;
+  padding: 0px;
+  border : 0px;
+}
+
+ul.x-tab-strip-top {
+  background: url("images/header/menubg.jpg") repeat-x scroll 0 0 transparent;
+  height: 33px;
+  padding-left: 30px;
+  border: 0px;
+}
+
+.x-tab-strip-top .x-tab-right, .x-tab-strip-top .x-tab-left, .x-tab-strip-top .x-tab-strip-inner {
+   background : transparent;
+   height : 34px;
+  _height : 33px;
+}
+
+ul.x-tab-strip li {
+  background: url(images/header/mnu_s.gif) no-repeat 100% -55px transparent;
+  padding-left: 6px;
+  padding-right: 6px;
+  width: 100px;
+  _width: 97px;
+  margin-left: 0px;
+  height: 30px;
+}
+
+.x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text {
+  padding-top:8px;
+  color : #444444;
+}
+.x-tab-strip-top .x-tab-right {
+  padding-right: 0px;
+  padding-left: 0px;
+   width: 100px;
+}
+
+.x-tab-right{
+	width: 85px;
+}
+.x-tab-strip span.x-tab-strip-text {
+   padding-top:8px;
+   color: white;
+   font-weight: bold;
+   font-size: 14px;
+   text-align:center;
+}
+.x-tab-strip-top .x-tab-strip-over .x-tab-strip-inner{
+	 background: url("images/header/menubg.gif") repeat-x scroll 100% -211px transparent;
+	 /* background: url("images/header/menu_h.gif") no-repeat center -1px transparent; */
+     width: 100px;
+}
+.x-tab-strip-top .x-tab-strip-over .x-tab-right{
+   background: url("images/header/menubg.gif") repeat-x scroll 0 -168px transparent;
+    /* background: none no-repeat center -1px  transparent; */
+}
+
+.x-tab-strip-top .x-tab-strip-active .x-tab-right {
+	/* background: url("images/header/mnu_s.gif") no-repeat scroll 0 0 transparent; */
+   background: url("images/header/menubg.gif") repeat-x scroll 0 -86px transparent;
+   padding-right: 10px;
+   padding-left: 10px;
+   width: 60px;
+}
+.x-tab-strip-top .x-tab-strip-active .x-tab-strip-inner {
+	/* background: url("images/header/mnu_s.gif") no-repeat scroll 100% -95px transparent; */
+   background: url("images/header/menubg.gif") repeat-x scroll 100% -127px transparent;
+   padding-right: 15px;
+   width: 70px;
+}
+.x-tab-strip-top .x-tab-left {
+	padding-right: 0px;
+  _padding-right: 0px;/**fix for ie6*/
+}
+.x-tab-panel-body-top {
+  border-width:0;
+}
+
+/**Messagebox*/
+body.x-body-masked .x-window-plain .x-window-mc {
+  background-color: white;
+}
+
+/**realtime notification*/
+.alarm_con {
+	background: url(images/alarm.gif) repeat-y -289px 0;
+	border: 1px solid #007cb9;
+	height: 78px;
+	border-top: 0;
+	padding: 8px 10px;
+}
+
+.alarm_con p span.txt_name {
+	color: #FF0000;
+	line-height: 24px;
+}
+
+.alarm_con p span.time {
+	color: #9d9d9d;
+	padding-left: 5px;
+	line-height: 24px;
+}
+
+#realTimeNotification .x-tool {
+    background-image: url("images/btn_ico.gif");
+    width: 17px;
+    height: 14px;
+}
+#realTimeNotification .x-tool-close {
+    background-position: 0 -157px;
+}
+#realTimeNotification .x-tool-close-over {
+    background-position: -29px -157px;
+}
+#realTimeNotification .x-tool-pin {
+  background-position: 0 -111px;
+}
+#realTimeNotification .x-tool-pin-over {
+    background-position: -29px -111px;
+}
+#realTimeNotification .x-window-header-text {
+  color: white;
+}
+/**system clock*/
+#systemClock{
+  color : white;
+  float:right;
+  width: 250px;
+  background: transparent;
+  line-height: 30px;
+}
+
+
+/**alarm tabpanel*/
+.alaramTabPanel .x-tab-strip-wrap {
+	overflow: hidden;
+	position: relative;
+}
+
+.alaramTabPanel .x-tab-panel-header,.alaramTabPanel .x-tab-panel-footer {
+	background-color: white;
+	border: 0px;
+}
+
+.alaramTabPanel .x-tab-strip-top .x-tab-right,.alaramTabPanel .x-tab-strip-top .x-tab-left,.alaramTabPanel .x-tab-strip-top .x-tab-strip-inner
+	{
+	background: transparent;
+	
+}
+
+.alaramTabPanel ul.x-tab-strip-top {
+	background: url("images/bg.gif") repeat-x scroll 0 -7px transparent;
+	padding-left: 5px;
+	border-bottom-width: 0px;
+}
+
+.alaramTabPanel ul.x-tab-strip li {
+	background: transparent;
+	margin-left: 0px;
+	height: 25px;
+	width: 80px;
+}
+
+.alaramTabPanel .x-tab-strip-top .x-tab-right {
+	padding-left: 10px;
+	width: 80px;
+	text-align: center;
+}
+
+.alaramTabPanel .x-tab-strip-top .x-tab-strip-active .x-tab-right {
+	background: repeat-x scroll 0 -40px transparent;
+	padding-left: 0px;
+	width: 80px;
+	height: 26px;
+	text-align: center;
+	color: #1088DB;
+}
+
+.alaramTabPanel .x-tab-strip-active {
+	border-color: #B5B5B5;
+	border-style: solid;
+	margin-left: -1px;
+	margin-right: -1px;
+	border-width: 1px 1px 0 1px;
+}
+
+.alaramTabPanel .x-tab-strip-active a.x-tab-right {
+	border-color: #B5B5B5;
+	border-style: solid;
+	margin-left: -1px;
+	margin-right: -1px;
+	border-width: 0px 1px;
+}
+
+.alaramTabPanel .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text
+	{
+	color: #1088DB;
+}
+
+.alaramTabPanel .x-tab-strip-top .x-tab-strip-active .x-tab-strip-inner {
+	background: url("images/bg.gif") repeat-x scroll 0 -40px transparent;
+	width: 80px;
+}
+
+.alaramTabPanel .x-tab-strip span.x-tab-strip-text {
+	color: #666666;
+	font-weight: bold;
+	font-size:12px;
+}
+
+.alaramTabPanel .x-tab-panel-body-top {
+	border-bottom-width: 0px;
+	border-color: #BBBBBB;
+}
+
+.alaramTabPanel .x-tab-strip-top .x-tab-left {
+	_padding-right: 0px;
+}
+.alaramTabPanel .x-tab-strip-top .x-tab-strip-over .x-tab-strip-inner{
+     width: 80px;
+}
+.alaramTabPanel ul.x-tab-strip li {
+  padding-left: 0px;
+  padding-right: 6px;
+}
+.alaramTabPanel .x-tab-strip-top .x-tab-strip-active .x-tab-strip-inner {
+   padding-right: 6px;
+}
+.alaramTabPanel .x-tab-strip-top .x-tab-strip-active .x-tab-right {
+   padding-right: 0px;
+}
+
+/*��ҳ��������ʽ(����client.js����ʽ�����ǣ������ش������ʽ��)*/
+.x-item-disabled .x-tbar-page-first {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -211px
+		transparent !important;
+}
+
+.x-tbar-page-first {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -211px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-prev {
+	background: url("images/btn_ico.gif") no-repeat scroll -55px -211px
+		transparent !important;
+}
+
+.x-tbar-page-prev {
+	background: url("images/btn_ico.gif") no-repeat scroll -55px -211px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-next {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -258px
+		transparent !important;
+}
+
+.x-tbar-page-next {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -258px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-last {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -258px
+		transparent !important;
+}
+
+.x-tbar-page-last {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -258px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-go {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -211px
+		transparent !important;
+}
+
+.x-tbar-page-go {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -211px
+		transparent !important;
+}
+
+#PagingToolbar .x-toolbar-ct {
+	background: #D2F0FF;
+}
+
+#PagingToolbarCar .x-toolbar-ct {
+	background: #D2F0FF;
+}
+
+#PigPagingToolbarCar .x-toolbar-ct {
+	background: #D2F0FF;
+}
+
+#PagingToolbar .x-btn-icon .x-btn-small .x-btn-text {
+	height: 18px;
+	width: 22px;
+}
+
+#PagingToolbarCar .x-btn-icon .x-btn-small .x-btn-text {
+	height: 18px;
+	width: 22px;
+}
+
+#PigPingToolbarCar .x-btn-icon .x-btn-small .x-btn-text {
+	height: 18px;
+	width: 22px;
+}
+
+.x-window #PagingToolbar .x-btn {
+	background: none;
+	height: 18px;
+	border: none;
+	padding: 0 0;
+}
+
+.x-window #PagingToolbarCar .x-btn {
+	background: none;
+	height: 18px;
+	border: none;
+	padding: 0 0;
+}
+
+.x-window #PigPagingToolbarCar .x-btn {
+	background: none;
+	height: 18px;
+	border: none;
+	padding: 0 0;
+}

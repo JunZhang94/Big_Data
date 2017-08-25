@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE>多选树</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="../../../css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="../../../js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.ztree.excheck-3.5.js"></script>
+	<style text="text/css">
+		body{margin:50px auto; padding:10px; width:400px;}
+		#treeDiv{ margin:5px; padding0;width:98%; height:500px; border:1px gray solid; overflow:scroll;}
+		#searchDiv{margin:5px;padding:0;width:98%;text-align:center;}
+		#searchDiv #key{ border:1px gray solid; width:76%;}
+		#searchDiv #search{margin-left:5px; width:18%; cursor:pointer;border:1px gray solid;}
+	</style>
+	<SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			check: {
+				enable: true,
+				chkboxType:{ "Y" : "ps", "N" : "ps" }
+			},
+			view:{
+				showLine:false
+			},
+			data: {
+				simpleData: {
+					enable: true,
+					idKey: "id",
+					pIdKey: "pId",
+					rootPId: 0
+				}
+			}
+		};
+
+		var zNodes =[
+			{ id:1, pId:0, name:"subject", open:true},
+			{ id:11, pId:1, name:"math", open:true},
+			{ id:111, pId:11, name:"math-1"},
+			{ id:112, pId:11, name:"math-2"},
+			{ id:12, pId:1, name:"chinesse", open:true},
+			{ id:121, pId:12, name:"chinesse-1"},
+			{ id:122, pId:12, name:"chinesse-2"},
+			{ id:2, pId:0, name:"language", open:true},
+			{ id:21, pId:2, name:"C#"},
+			{ id:22, pId:2, name:"java", open:true},
+			{ id:221, pId:22, name:"hibernate"},
+			{ id:222, pId:22, name:"struts2"}
+		];
+		
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			
+		});
+		&{}
+		/**
+		*	搜索树方法入口
+		*/
+		function searchTreeNodes(key){
+			$("#key").val('');
+			if(key == '' || key == undefined){
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);	
+				return;
+			}
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);	
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");			
+			var nodes = treeObj.getNodes();//treeObj.transformToArray(treeObj.getNodes());//获取所有结点
+			var resultNodes = [];//搜索获取的树			
+			dealNodes(key, nodes, resultNodes);	
+			$.fn.zTree.init($("#treeDemo"), setting, resultNodes);
+		}
+		
+		/**
+		**	递归处理树节点
+		*/
+		function dealNodes(key, nodes, resultNodes, pNode){
+			var addPnode = false;//添加父节点标记
+			for(var i=0; i<nodes.length; i++){		
+				if(nodes[i].name.indexOf(key) != -1){//拼音在此插入
+					if(!addPnode && pNode){
+						putNode(pNode, resultNodes);//添加当前节点的父节点
+						addPnode = true;
+					}	
+					putNode(nodes[i], resultNodes);//添加当前节点
+					if(nodes[i].children){
+						dealNodes(key, nodes[i].children, resultNodes, nodes[i]);
+					}
+				}
+			}	
+		}
+		/**
+		*	添加节点到resultNodes，检查是否已经包含该节点，如果不存在则添加，否则不添加
+		*/
+		function putNode(node, resultNodes){
+			//console.log(node);
+			var contains = false;//是否包含node节点标记
+			for(var i=0; i<resultNodes.length; i++){//检查是否已经包含该节点
+				if(node.id == resultNodes[i].id){
+					contains = true;
+					break;
+				}
+			}
+			if(!contains){
+				if(node.open){
+					resultNodes.push({ id:node.id, pId:node.pId, name:node.name, open:true});
+				}else{
+					resultNodes.push( {id:node.id, pId:node.pId, name:node.name});
+				}
+			}
+		}
+		//-->
+	</SCRIPT>
+</HEAD>
+
+<BODY>
+
+<div id="container">
+	<div id="searchDiv">
+		<input type="text" name="key" id="key"/><input value="查询" type="button" id="search" onclick="searchTreeNodes($('#key').val().toLowerCase())"/>
+	</div>
+	
+	
+	<div id="treeDiv">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.cartake.mapper.BasicDataQueryMapper">
+	
+	<select id="findAreas" resultType="map">
+		SELECT 
+			* 
+		FROM area_tab 
+	</select>
+	
+	<select id="findDeptsByAreaCode" parameterType="string" resultType="map">
+		SELECT 
+			dwmc "dwmc", dwbh "dwbh" 
+		FROM MGMTDEPT_TAB 
+		<where>
+			<if test="areaCode != null and areaCode.length() > 0">
+				dwxzqh = #{areaCode}
+			</if>
+		</where>
+		ORDER BY dwbh
+	</select>
+	
+	<select id="findDepts" parameterType="string" resultType="map">
+		SELECT 
+			dwmc "dwmc", dwbh "dwbh" 
+		FROM MGMTDEPT_TAB 
+	</select>
+	
+	<select id="findAllMounts" resultType="com.jp.tic.system.entity.Gate">
+		SELECT 
+			kkmc "kkmc", kkbh "kkbh", kkjd "kkjd", kkwd "kkwd" 
+		FROM MOUNT_TAB 
+		ORDER BY kkmc
+	</select>
+	
+	<select id="findAllMounts4Gis" resultType="com.jp.tic.system.entity.Gate">
+		SELECT 
+			kkmc "kkmc", kkbh "kkbh", kkjd "kkjd", kkwd "kkwd", dwbh "dwbh" 
+		FROM MOUNT_TAB 
+		WHERE kkjd is not null and kkwd is not null
+		ORDER BY kkmc
+	</select>
+	
+	<select id="findMountsByDeptCode" parameterType="string" resultType="map">
+		SELECT 
+			kkmc "kkmc", kkbh "kkbh", kkjd "kkjd", kkwd "kkwd" 
+		FROM MOUNT_TAB WHERE DWBH = #{deptCode}
+		ORDER BY kkmc
+	</select>
+	
+	<select id="findMountById" parameterType="map" resultType="map">
+		select t.kkmc "kkmc", (select dwmc from MGMTDEPT_TAB a where a.dwbh = t.dwbh and rownum = 1) "dwmc", t.kkjd "kkjd", t.kkwd "kkwd" 
+		from (
+		select m1.kkbh,m1.kkmc,m1.kkjd,m1.kkwd,m1.dwbh 
+		from mount_tab m1 
+		union all 
+		select m2.kkbh,m2.kkmc,m2.kkjd,m2.kkwd,m2.dwbh 
+		from mount_virtual_tab m2
+		) t 
+		where 
+		<if test="kkbh != null">
+			t.kkbh = #{kkbh}
+		</if>
+		<if test="kkbh == null">
+			1=2
+		</if>
+	</select>
+	
+	<select id="findWordbookByType" parameterType="map" resultType="string">
+		select t.displayvalue from sys_setting_tab t where t.settingname = #{type} and t.storevalue = #{val}
+	</select>
+	
+	<select id="findWordbookByName" parameterType="string" resultType="map">
+		select displayvalue "displayvalue", storevalue "storevalue" from sys_setting_tab t where settingname = #{typeName}
+	</select>
+	
+	<update id="updateMountTabXY" parameterType="string"> 
+		update mount_tab t set t.kkjd = '${kkjd}',t.kkwd = '${kkwd}' where t.kkbh = ${kkbh}
+	</update>
+	
+</mapper>

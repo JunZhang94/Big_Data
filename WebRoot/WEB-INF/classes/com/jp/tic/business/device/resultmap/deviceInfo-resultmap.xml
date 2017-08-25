@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="device">
+
+	<resultMap type="deviceInfo" id="simple_resultMap">
+		<id column="sbbh" property="sbbh" />
+
+		<result column="jd" property="jd" />
+		<result column="wd" property="wd" />
+		<result column="ipdz" property="ipdz" />
+		<result column="sblx" property="sblx" />
+		<result column="sbzt" property="sbzt" />
+
+		<result column="dkh" property="dkh" />
+		<result column="sskkbh" property="sskkbh" />
+		<result column="sbcj" property="sbcj" />
+		<result column="sbmc" property="sbmc" />
+		
+		<result column="leaf" property="leaf" />
+		<result column="checked" property="checked" />
+		<result column="cls" property="cls" />
+
+		<association property="sbzt" column="sbbh" 
+			select="com.jp.tic.business.device.mapper.DeviceInfoMapper.getDeviceStateBySbbh" />
+	</resultMap>
+
+	<resultMap type="deviceInfo" id="group_resultMap">
+		<id column="kkbh" property="sskkbh" />
+		<!-- 这里用deviceInfo实体的设备名称存储卡口mount中的卡口名称 -->
+		<result column="kkmc" property="sbmc" />
+		<result column="sbzt" property="sbzt" />
+
+		<collection property="children" column="{sskkbh=kkbh, sbzt=sbzt}"
+			ofType="deviceInfo" select="com.jp.tic.business.device.mapper.DeviceInfoMapper.findDevicesByKkbh"/>
+	</resultMap>
+
+	<!-- 树形map数据 -->
+	<resultMap type="deviceInfo" id="tree_area_resultMap">
+		<id column="id" property="id" />
+		<!-- 这里用deviceInfo实体的设备名称存储卡口mount中的卡口名称 -->
+		<result column="qydm" property="sbbh" />
+		<result column="qymc" property="sbmc" />
+		<result column="sblx" property="sblx" />
+		
+		<result column="leaf" property="leaf"/>
+		<result column="checked" property="checked" />
+		<result column="cls" property="cls" />
+		
+		<collection property="children" column="qydm"
+			ofType="deviceInfo" select="com.jp.tic.business.device.mapper.DeviceInfoMapper.findDeptByEnterpriseCode"/>
+	</resultMap>
+	
+	<resultMap type="deviceInfo" id="tree_dept_resultMap">
+		<id column="id" property="id" />
+		<!-- 这里用deviceInfo实体的设备名称存储卡口mount中的卡口名称 -->
+		<result column="dwbh" property="sbbh" />
+		<result column="dwmc" property="sbmc" />
+		<result column="sblx" property="sblx" />
+		
+		<result column="leaf" property="leaf" />
+		<result column="checked" property="checked" />
+		<result column="cls" property="cls" />
+		
+		<collection property="children" column="dwbh"
+			ofType="deviceInfo" select="com.jp.tic.business.device.mapper.DeviceInfoMapper.findMountByUnitCode"/>
+	</resultMap>
+	
+	<resultMap type="deviceInfo" id="tree_mount_resultMap">
+		<id column="id" property="id" />
+		<!-- 这里用deviceInfo实体的设备名称存储卡口mount中的卡口名称 -->
+		<result column="kkbh" property="sbbh" />
+		<result column="kkmc" property="sbmc" />
+		<result column="sblx" property="sblx" />
+		
+		<result column="leaf" property="leaf" />
+		<result column="checked" property="checked" />
+		<result column="cls" property="cls" />
+		
+		<collection property="children" column="kkbh"
+			ofType="deviceInfo" select="com.jp.tic.business.device.mapper.DeviceInfoMapper.findDeviceByMountCode"/>
+	</resultMap>
+</mapper>

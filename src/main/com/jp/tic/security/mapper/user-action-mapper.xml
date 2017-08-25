@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.security.mapper.UserActionMapper">
+
+	<!-- sql条件过滤 -->
+	<sql id="action_conditions">
+		<where>
+			<if test="roleId != null">
+				id in (select actionId from sys_role where roleId = ${roleId})
+			</if>
+			<if test="userId != null">
+				id in (select actionId from sys_role, sys_t_user where roleId = role_id and user_id = ${userId})
+			</if>
+		</where>
+	</sql>
+	
+	<!--权限管理查询列表 -->
+    <select id="getList" parameterType="map" resultType="com.jp.tic.security.entity.UserAction">
+		<![CDATA[
+			select 
+				id,
+				parentId as "parentId",
+				code,
+				name,
+				describe,
+				actionType as "actionType",
+				isvalid,
+				url,
+				iconName "iconName",
+				remark
+			from SYS_ACTION t
+		]]>
+		<include refid="action_conditions"/>
+	</select>
+	
+	<!--权限管理查询列表 -->
+    <select id="getListByParentId" parameterType="map" resultType="com.jp.tic.common.entity.Tree">
+			select 
+				id,
+				parentId,
+				code as nodeId,
+				name as text,
+				actionType type,
+				isValId as nodeLevel,
+				url,
+				iconName "iconName"
+			from SYS_ACTION t where parentId = #{parentId} order by id asc
+	</select>
+	
+	<!--用户所属权限查询 -->
+    <select id="getActionGroupList" parameterType="map" resultType="map">
+    	<![CDATA[
+			select 
+				t.parentid "parentId",
+				(select temp.code from sys_action temp where temp.id = t.parentId) "parentName",
+				wm_concat(t.code) "codes"
+			from SYS_ACTION t 
+		]]>
+		<include refid="action_conditions"/>
+		group by t.parentId
+	</select>
+	<!-- 角色详细信息根据ID找值 -->
+		<select id="xiangxi" parameterType="map" resultType="map">
+	select t.role_id "roleId",
+       t.role_code "roleCode",
+       t.role_name "roleName",
+       to_char(t.create_date, 'yyyy-MM-dd HH:mm:ss') "createDate",
+       t.create_user "createUser",
+       wmsys.wm_concat(sys_role.actionId) "actions"
+  from SYS_T_ROLEs t, sys_role
+ where roleId = t.role_id and roleId =${id}
+ group by t.role_id, t.role_code, t.role_name, t.create_date, t.create_user
+
+
+		<!--  select * from SYS_T_ROLEs
+		<if test="roleId != null">
+			WHERE role_id = '${roleId}'
+		</if>-->
+	</select>
+	
+	<!-- 删除角色 -->
+	
+			<delete id="roleDelete" parameterType="string" >
+		delete sys_t_roles where role_Id in (${USER_IDS})
+
+	</delete>
+	
+</mapper>

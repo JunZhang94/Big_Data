@@ -1,0 +1,162 @@
+/*********************replay*********************/
+@import url("public.css");
+
+.skyPlayer {
+	 WIDTH: 100%; HEIGHT: 100%; TOP: 0px; LEFT: 0px
+}
+.windowTable
+{
+ 	padding-top:   1px; 
+	padding-right:   1px; 
+	padding-bottom:   1px; 
+	padding-left:   1px; 
+	BORDER-BOTTOM: #21455A 1px solid; BORDER-LEFT: #21455A 1px solid; BORDER-TOP: #21455A 1px solid; CURSOR: default; BORDER-RIGHT: #21455A 1px solid
+}
+.trControl
+{
+ 	 width:100%;
+     background-color: #c9e5f7;
+     height:29px;
+}
+.trTitle
+{
+   height:4px;
+}
+.playerCell
+ {
+  /*  POSITION: relative; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px;*/
+  position:relative; top:0; left:0; width:100%;height:100%;overflow:hidden;
+
+ }
+ .speedTips
+ {
+ 	width:24px; height:29px;float:left; margin-right:8px;
+ }
+ 
+.gridPanelBottomBar .x-toolbar {
+  background: none repeat scroll 0 0 #D2F0FF;
+  padding: 0px;
+}
+.gridPanelBottomBar .x-btn {
+  border: none;
+}
+.bottom_group{ background:url(images/replay/v_bg.jpg) repeat-x; height:29px; position:relative; bottom:0; left:0; width:100%;overflow:hidden;}
+.left_btn{ float:left;  background:url(images/replay/v_line.jpg) no-repeat 100%;height:29px;}
+.left_btn1{ float:left;  background:url(images/replay/v_line.jpg) no-repeat 100%;height:29px;padding-left:10px;}
+.left_btn span{ display:block; cursor:pointer;}
+.right_btn{ width:200px; float:right;  background:url(images/replay/v_line.jpg) no-repeat; padding-left:15px;}
+.right_btn1{float:right;  background:url(images/replay/v_line.jpg) no-repeat ;height:29px; padding-right:200px;}
+.play_jd{margin-right:220px; margin-left:200px; position:relative; height:29px;}
+
+.sound_setbox{ width:130px; float:left;}
+.lf_sounico,.lf_sounico1,.ce_soundbar,.rt_sounico,.capture_ico, .capture_ico_hover, .zoom_ico,.zoom_ico_hover,.zoom_ico2,.zoom_ico2_hover
+{ background:url(images/replay/video_playbtn.gif) no-repeat; }
+.lf_sounico{ background-position:-7px -102px;width:9px; height:11px; float:left; margin-top:9px;}
+.lf_sounico1{ background-position:-7px -102px;width:9px; height:11px; float:left; margin-top:9px;}
+.ce_soundbar{ background-position:-46px -102px; width:82px; margin-top:9px; height:11px;  float:left; position:relative;}
+.ht{ background:url(images/replay/jd_2.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/jd_2.png");  width:14px; height:14px; position:relative; display:block; top:-3px; left:10%}
+.rt_sounico{ background-position:-158px -102px; width:13px; height:11px; margin-top:9px; margin-left:10px; float:left;}
+.capture_ico, .capture_ico_hover{ width:24px; height:29px;float:left; cursor:pointer; margin-left:10px;}
+.capture_ico{ background-position:-305px 0; }
+.capture_ico_hover{ background-position:-305px -43px;}
+.zoom_ico, .bottom_group .zoom_ico_hover{ width:21px; height:29px; float:left; cursor:pointer; margin-left:10px;}
+.zoom_ico2,
+.zoom_ico2_hover{ width:21px; height:29px; float:left; cursor:pointer; margin-left:10px;}
+.zoom_ico2{ background-position:-254px -89px;}
+.zoom_ico2_hover{ background-position:-305px -89px;}
+.zoom_ico{ background-position:-357px 0;}
+.zoom_ico_hover{ background-position:-357px -43px;}
+.rewind,.rewind_hover,.back,.back_hover,.play,.play_hover,.pause,.pause_hover,.going,.going_hover,.fast,.fast_hover{background:url(images/replay/video_playbtn.gif) no-repeat;}
+.rewind,.rewind_hover,.back,.back_hover,.going,.going_hover,.fast,.fast_hover{  width:24px; height:29px; float:left; margin-right:8px;}
+.rewind{background-position:0 0;}
+.rewind_hover{ background-position:0 -43px;}
+.back{ background-position:-51px 0;}
+.back_hover{ background-position:-51px -43px;}
+.play,.play_hover,.pause,.pause_hover{ width:29px; height:29px; float:left; margin-right:8px;}
+.play{ background-position:-99px 0;}
+.play_hover{ background-position:-99px -43px;}
+.pause{ background-position:-150px 0;}
+.pause_hover{ background-position:-150px -43px;}
+.going{ background-position:-203px 0;}
+.going_hover{ background-position:-203px -43px;}
+.fast{ background-position:-254px 0;}
+.fast_hover{ background-position:-254px -43px;}
+        
+.playback_progress{ height:4px; position:relative;  background:#5d5c5c; margin-right:60px; margin-top:12px;width:100%; CURSOR: hand}
+.playback{ background:#0a89c7; position:relative; height:4px;;width:0%;z-index:15; overflow:hidden;}
+.play_ht{ width:12px; height:12px; position:absolute; z-index:99;  background:url(images/replay/jd_1.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/replay/jd_1.png");top:-5px;}
+.play_time{ position:absolute; right:0; top:-10px;_top:0;+top:0;}
+
+/*file view css*/
+.file_view{ border:0px solid #aaa; margin:0px 5px 5px 5px; }
+.search_results{ margin-left:30px; }
+.search_results .btn_group{ padding:5px;}
+.search_results .btn_group input{ _padding: 0 10px; + padding: 0 10px; line-height: 25px;  width:25px;  color:#666;}
+.search_results .search_tab{ padding:0px 5px; _width:98%;}
+.search_results .search_tab table{ border-collapse:collapse;}
+.search_results .search_tab table th{ background:url(images/table_bg.jpg) repeat-x; border:1px solid #dbdbdb; font-weight:normal; text-align:left; padding-left:5px;}
+.search_results .search_tab table .check{ width:30px;}
+.search_results .search_tab table td{ padding-left:5px;}
+.alarm_text{ color:#FF0000;}
+.fanye{ background:#d2f0ff; text-align:right; padding-right:15px;}
+.fanye span{ margin-right:10px;}
+.downing{
+	background-image:url(images/replay/down.gif) !important;
+	background-attachment : scroll !important;
+	background-repeat : no-repeat !important;
+	background-position:5px -63px!important;
+	background-color : transparent !important;
+}
+.downed{
+	background-image:url(images/replay/down.gif) !important;
+	background-attachment : scroll !important;
+	background-repeat : no-repeat !important;
+	background-position:5px -89px!important;
+	background-color : transparent !important;
+}
+.down_tabs{ padding-top:5px; margin-left:115px;}
+.operate span{ width:17px; height:19px; display:block; float:left; cursor:pointer; margin-right:10px;}
+.operate span.begin,.operate span.stop,.operate span.up,.operate span.delete{ background:url(images/video_btn_small.gif) no-repeat;}
+.operate span.begin{ background-position: -159px -244px;}
+.operate span.stop{ background-position:-186px -244px;}
+.operate span.up{ background-position:-92px -276px;}
+.operate span.delete{ background-position:-44px -242px;}
+.lockoperate { text-align:center;}
+.lockoperate span{ width:15px; height:19px; display:block; margin:0px auto;cursor:pointer;}
+.lockoperate span.lock{ background:url(images/replay/lock.gif) repeat-x;}
+
+/*progress bar*/
+.progress_bar{ background:url(images/replay/down.gif) repeat-x 0 -148px; height:12px; border:1px solid #6d6d6d; margin-right:10px; position:relative;}
+.schedule_bar{ background:url(images/replay/down.gif) repeat-x 0 -126px; height:12px; border:1px solid #6d6d6d;  position:absolute; text-align:right; color:#fff; left:-1px; top:-1px; line-height:12px; overflow:hidden;}
+
+.datagrid{
+	position: absolute;
+}
+
+.layer_bottom {
+	padding: 12px 0px;
+	text-align: center;
+	clear: both;
+}
+.textPanel {
+	TEXT-ALIGN: center; FONT-FAMILY: verdana;  HEIGHT: 100%; COLOR: #fff; FONT-SIZE: 14px; FONT-WEIGHT: bold; PADDING-TOP: 13%
+}
+.preFocusHidden
+{
+    display:none;
+}
+.preFocusShow
+{
+    display:block;
+}
+.progressBar{  
+  border: 0; 
+}  
+.progressBar .x-progress-inner{  
+	background:url(images/replay/down.gif) repeat-x 0 -148px; height:12px; border:1px solid #6d6d6d; margin-right:10px; position:relative;
+}         
+.progressBar .x-progress-bar{  
+	background:url(images/replay/down.gif) repeat-x 0 -126px; height:12px; border:1px solid #6d6d6d;  position:absolute; text-align:right; color:#fff; left:-1px; top:-1px; line-height:12px; overflow:hidden;
+}  
+
+

@@ -1,0 +1,165 @@
+html, body{margin: 0;padding: 0;overflow: hidden;}
+body{
+    font-family: arial,'Hiragino Sans GB','Microsoft Yahei',"\u5fae\u8f6f\u96c5\u9ed1",sans-serif !important;
+    background: #ffffff;
+}
+#navigation{
+    height:43px;margin-left:250px;margin-top:10px;
+}
+.navBtnGap{
+    padding: 0 10px !important;
+}
+.textBlue{
+    color: #1B80C2;
+}
+.grap{
+    margin-top: 15px;
+}
+.pic{
+    border:1px solid #999999;
+    margin-right: 3px;
+}
+.colorRed{
+    color:#ff0000;
+}
+/*reset easyui.css*/
+.datagrid-row{
+    height: 50px;
+}
+.pagination-info{
+    float: none;
+    margin-left: 50px;
+}
+.panel-title{
+  font-size: 15px;
+  height: 17px;
+  line-height: 17px;
+}
+.tabs-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+.tabs li.tabs-selected a.tabs-inner{
+    background: #EE8413 !important;
+    color: #ffffff;
+    border-color:#EE8413;
+    filter:none;
+}
+.tabs li a.tabs-inner{
+    height: 22px !important;
+    line-height: 22px !important;
+    border-radius: inherit !important;
+}
+.tabs li{
+    margin: 0 8px -1px 0 !important;
+}
+.tabs li a.tabs-inner:hover{
+    color: #ff0000;
+}
+
+/*北部样式*/
+#header{
+    height:70px;background: url(../images/headerBg.png) repeat-x;
+}
+.headerInfo{
+    padding-left:25px;height:26px;line-height:26px;margin-left:25px;float:left;
+    font-size: 15px;
+    font-weight: bold;
+}
+.user-name{
+    background:url(../images/police.png) no-repeat;
+}
+.org-name{
+    background:url('') no-repeat;
+}
+.exit-system{
+    background:url(../images/exit.gif) no-repeat;
+}
+.first-nav{
+    float:left;text-align:center;color:#ffffff;font-weight:bold;padding:0 10px;cursor: pointer;margin-left: 15px;
+    border-radius: 5px 5px 0 0;
+}
+.first-nav div{
+    float:left;padding-left:25px;height:27px;line-height:28px;
+    /*background:url(../images/search-icon.png) no-repeat left center;*/
+    background-repeat:no-repeat;
+    background-position:left center;
+    font-size: 16px;
+}
+.first-nav-over-text{
+    color: #F9FF00;
+}
+.first-nav-active{
+    color:#0000ff;background:#fff;
+}
+/*西部样式*/
+.second-nav{
+    border-bottom:none;
+}
+.second-nav p{
+    color:#0000ff;cursor: pointer;padding-left:15px;
+    height:27px;line-height:27px;font-size:15px;
+    margin:5px auto;
+    border-bottom:1px solid #f2f2f2;
+    font-weight: bold;
+}
+
+/*图标*/
+.calendar-icon{
+    background:url(../images/calendar-icon.png) -2px -2px;
+}
+.chat-icon{
+    background:url(../images/chat-icon.png) -2px -2px;
+}
+.config-icon{
+    background:url(../images/config-icon.png) -2px -2px;
+}
+.hand-icon{
+    background:url(../images/hand-icon.png) -2px -2px;
+}
+.heart-icon{
+    background:url(../images/heart-icon.png) -2px -2px;
+}
+.search-icon{
+    background:url(../images/search-icon.png) -2px -2px;
+}
+.user-icon{
+    background:url(../images/user-icon.png) -2px -2px;
+}
+.light-icon{
+    background:url(../images/light-icon.png) -2px -2px;
+}
+.camera-icon{
+    background:url(../images/camera-icon.png) -2px -2px;
+}
+
+.calendar-icon-active{
+    background:url(../images/calendar-icon-active.png);
+}
+.chat-icon-active{
+    background:url(../images/chat-icon-active.png);
+}
+.config-icon-active{
+    background:url(../images/config-icon-active.png);
+}
+.hand-icon-active{
+    background:url(../images/hand-icon-active.png);
+}
+.heart-icon-active{
+    background:url(../images/heart-icon-active.png);
+}
+.search-icon-active{
+    background:url(../images/search-icon-active.png);
+}
+.user-icon-active{
+    background:url(../images/user-icon-active.png);
+}
+.light-icon-active{
+    background:url(../images/light-icon-active.png);
+}
+.camera-icon-active{
+    background:url(../images/camera-icon-active.png);
+}
+
+
+

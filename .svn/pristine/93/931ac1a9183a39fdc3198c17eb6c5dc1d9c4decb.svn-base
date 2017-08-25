@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+	<style type="text/css"> 
+	.align-center{ 
+		position:absolute;  
+		left:40%;    
+		top:40%; 
+	} 
+	</style> 
+    <body style="background-color: #AAAAAA;">
+        <div class="align-center"><img src="http://172.31.108.116:8080/Big_Data/images/load.gif"></div>
+    </body>
+</html>

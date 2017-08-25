@@ -1,0 +1,46 @@
+* { margin: 0; padding: 0; }
+body { background: #fff; border: none; font-size: 14px; font-family: "宋体", tahoma, arial, simsun,; line-height: 1.5em; }
+a, a:link, a:hover, a:visited, a:active { text-decoration: none; }
+a, a:focus, :focus { outline: 0 none; }/*css去掉a标签点击后的虚线*/
+p { margin: 0 0 1.6em; padding: 0; }
+img, fieldset { border: 0 none; }
+img { height: auto; max-width: 100%; }
+img:hover { opacity: 0.85; filter: alpha(opacity=80); }
+.ie8 img { height: auto; width: auto; }
+ul, ol, li { list-style: none }
+h1, h2, h3, h4, h5 { font-weight: normal; line-height: normal; }
+h1 { font-size: 3em; margin: 20px auto }
+h2 { font-size: 2em; margin: 15px auto }
+table, th, td { border-collapse: collapse; border-spacing: 0 }/*属性设置表格的边框是否被合并为一个单一的边框*/
+em, strong, cite, i { font-style: normal; }
+button { overflow: visible; cursor: pointer }
+input, select, form, img, button, textarea { vertical-align: middle; }/*便垂直居中*/
+input, button, select, textarea { outline: none; background-color: transparent; } /*防止在IE中点击后出现黄边*/
+a,area,button { blr:expression(this.onFocus=this.blur()) } /*去掉点击虚框*/
+/*:focus { -moz-outline-style: none; } 去掉点击虚框*/
+hr { -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: #DBE8ED -moz-use-text-color -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 1px 0 0; height: 1px; }
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; display: block; }
+.clear { clear: both; }
+.left { float: left; }
+.right { float: right; }
+.font1 { font-family: "微软雅黑"; font-size: 18px; }
+.font2 { font-family: "宋体"; font-size: 18px; }
+.font3 { font-family: 'Microsoft JhengHei'; font-size: 18px; }
+.shadow1 { text-shadow: #000 1px 1px 1px; }/*定义字体阴影*/
+.text2 { text-indent: 2em; }/*定义段落的首缩进2个字*/
+.pos1 { width: 960px; position: relative; left: 50%; margin: 0 0 0 -480px; }/*居中相对定位时所用*/
+.pos2 { width: 800px; height: 328px; position: absolute; left: 50%; top: 50%; margin: -164px 0 0 -400px; background: url(../img/login/bg.png) no-repeat; }/*居中绝对定位时所用*/
+/**************login*************/
+/* input */
+input { padding: 2px; font-size: 12px; }
+input:focus { color: #09C; }
+.us, .pw { border-width: 0; width: 140px; height: 22px; line-height: 22px; position: absolute; }
+.us { left: 398px; top: 105px; }
+.pw { left: 398px; top: 153px; }
+/*btn*/
+.btn1, .btn2 { width: 66px; height: 32px; border: none; cursor: pointer; text-indent: -9999px; position: absolute; top: 199px; background: url(../img/login/btn.png); overflow: hidden; }
+.btn1 { background-position: left top; left: 350px; }
+.btn1:hover { background-position: left top; }
+.btn2 { background-position: right bottom; left: 430px; }
+.btn2:hover { background-position: right bottom; } 

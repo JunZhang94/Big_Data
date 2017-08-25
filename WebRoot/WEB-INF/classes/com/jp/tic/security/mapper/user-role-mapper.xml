@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.security.mapper.UserRoleMapper">
+
+	<!--权限角色关联表 -->
+    <select id="getRolesByRoleId" parameterType="map" resultType="com.jp.tic.security.entity.UserRole">
+		<![CDATA[
+			select 
+				*
+			from SYS_ROLE t
+			where t.roleId in (${roleId})
+		]]>
+	</select>
+	
+    <select id="queryRoles" parameterType="map" resultType="map">
+		<![CDATA[
+			select 
+				t.role_id "roleId", t.role_code "roleCode", t.role_name "roleName", to_char(t.create_date, 'yyyy-MM-dd HH:mm:ss') "createDate", t.create_user "createUser"
+			from SYS_T_ROLEs t
+		]]>
+	</select>
+	
+	<insert id="addRole" parameterType="string" >	
+		insert into SYS_T_Roles(
+		
+			role_id
+			
+			<if test="createDate != null">
+			,create_date
+			</if>
+			<if test="createUser != null">
+			,create_user
+			</if>
+			<if test="is_admin != null">
+			,is_admin
+			</if>
+			<if test="roleCode != null">
+			,role_code
+			</if>
+			<if test="roleName != null">
+			,role_name
+			</if>
+			
+		) values (
+			SEQ_SYS_T_Roles.NEXTVAL
+			<if test="createDate != null">
+			,to_date('${createDate}','yyyy-MM-dd hh24:mi:ss')
+			</if>
+			<if test="createUser != null">
+			,'${createUser}'
+			</if>
+			<if test="is_admin != null">
+			,'${is_admin}'
+			</if>
+			<if test="roleCode != null">
+			,'${roleCode}'
+			</if>
+			<if test="roleName != null">
+			,'${roleName}'
+			</if>
+			<if test="roleId != null">
+			,'${roleId}'
+			</if>
+		)
+		
+	</insert>
+
+
+<update id="updateRole" parameterType="string"> 
+
+		update SYS_T_Roles set
+		<if test="createDate != null">
+		create_date = to_date('${createDate}','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="createUser != null">
+		,create_user = 'a${createUser}'
+		</if>
+		<if test="is_admin != null">
+		,is_admin = '${is_admin}'
+		</if>
+		<if test="roleCode != null">
+		,role_code = '${roleCode}'
+		</if>
+		<if test="roleNames != null">
+		,role_name = '${roleNames}'
+		</if>
+		
+		where role_id = ${roleId}
+	</update>
+</mapper>

@@ -1,0 +1,40 @@
+﻿.ux-combo-selectall{  
+    padding:3px;  
+}
+.ux-combo-selectall-icon-checked{  
+	background-position: 6px 2px ! important;
+    background: transparent url(../../../lib/ext/images/default/menu/checked.gif);
+}  
+.ux-combo-selectall-icon-unchecked {   
+	background-position: 6px 2px ! important; 
+    background: transparent url(../../../lib/ext/images/default/menu/unchecked.gif);
+}
+.ux-lovcombo-iconux-lovcombo-icon-checked{
+	background-position: 6px 2px ! important;
+    background: transparent url(../../../lib/ext/images/default/menu/checked.gif);
+    text-indent:1.8em;
+}
+.ux-lovcombo-iconux-lovcombo-icon-unchecked {
+	background-position: 6px 2px ! important;
+    background: transparent url(../../../lib/ext/images/default/menu/unchecked.gif);
+    text-indent:1.8em;
+}
+.ux-combo-selectall-icon {
+    text-indent:1.8em;  
+    background-position: 6px 2px ! important;
+    background-repeat:no-repeat ! important;
+    height:22px;
+    line-height:20px;
+    font-size:12px;
+    font-weight:bold;
+    -moz-user-select:none;
+}  
+.ux-lovcombo-selectall-icon{
+    text-indent:1.8em;
+    background-position: 6px 2px ! important;
+    background-repeat:no-repeat ! important;
+    height:22px;
+    line-height:20px;
+    font-size:12px;
+    -moz-user-select:none;
+}  

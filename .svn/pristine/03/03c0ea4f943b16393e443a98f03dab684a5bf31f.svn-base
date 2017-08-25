@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.gridPanelBottomBar .x-toolbar {
+  background: none repeat scroll 0 0 #D2F0FF;
+  padding: 0px;
+}
+.gridPanelBottomBar .x-btn {
+  border: none;
+}
+#orgTreeWestPanel .x-panel-header{
+	background:url("images/main_bg.gif") repeat-x;
+	font-weight:bold; 
+	color:#444;
+	line-height:30px;
+}

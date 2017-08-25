@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+	http://www.springframework.org/schema/tx  
+	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+	
+	<!-- 配置c3p0数据源 -->
+	<bean id="centerDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${center.datasource.driver}"/>
+		<property name="jdbcUrl" value="${center.datasource.url}"/>
+		<property name="user" value="${center.datasource.username}"/>
+		<property name="password" value="${center.datasource.password}"/>
+				
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+		<property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+		<property name="maxStatements" value="${c3p0.maxStatements}"/>
+		<property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+		<property name="preferredTestQuery" value="${c3p0.preferredTestQuery}"/>
+		<property name="testConnectionOnCheckout" value="${c3p0.testConnectionOnCheckout}"/>
+		<property name="breakAfterAcquireFailure" value="${c3p0.breakAfterAcquireFailure}"/>
+		<property name="testConnectionOnCheckin" value="${c3p0.testConnectionOnCheckin}"/>
+		<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+	</bean>
+	
+	<bean id="nsDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${ns.datasource.driver}"/>
+		<property name="jdbcUrl" value="${ns.datasource.url}"/>
+		<property name="user" value="${ns.datasource.username}"/>
+		<property name="password" value="${ns.datasource.password}"/>
+				
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+		<property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+		<property name="maxStatements" value="${c3p0.maxStatements}"/>
+		<property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+		<property name="preferredTestQuery" value="${c3p0.preferredTestQuery}"/>
+		<property name="testConnectionOnCheckout" value="${c3p0.testConnectionOnCheckout}"/>
+		<property name="breakAfterAcquireFailure" value="${c3p0.breakAfterAcquireFailure}"/>
+		<property name="testConnectionOnCheckin" value="${c3p0.testConnectionOnCheckin}"/>
+		<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+	</bean>
+<!-- 	
+	<bean id="gdstDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${gdst.datasource.driver}"/>
+		<property name="jdbcUrl" value="${gdst.datasource.url}"/>
+		<property name="user" value="${gdst.datasource.username}"/>
+		<property name="password" value="${gdst.datasource.password}"/>
+				
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+		<property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+		<property name="maxStatements" value="${c3p0.maxStatements}"/>
+		<property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+		<property name="preferredTestQuery" value="${c3p0.preferredTestQuery}"/>
+		<property name="testConnectionOnCheckout" value="${c3p0.testConnectionOnCheckout}"/>
+		<property name="breakAfterAcquireFailure" value="${c3p0.breakAfterAcquireFailure}"/>
+		<property name="testConnectionOnCheckin" value="${c3p0.testConnectionOnCheckin}"/>
+		<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+	</bean>
+	-->
+	<bean id="dynamicDataSource" class="com.jp.tic.framework.spring.DynamicDataSource" >   
+	    <!-- 通过key-value的形式来关联数据源 -->   
+	    <property name="targetDataSources">   
+	        <map>   
+	            <entry value-ref="centerDataSource" key="center"></entry>   
+	            <entry value-ref="centerDataSource" key="inner"></entry>   
+	        </map>   
+	    </property>   
+	    <property name="defaultTargetDataSource" ref="centerDataSource" />   
+	</bean>   
+
+	<!--配置Oracle clob类型字段的处理-->
+	<bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" lazy-init="true"/>
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
+		<property name="nativeJdbcExtractor" ref="nativeJdbcExtractor"/>
+	</bean>
+     	
+	<!-- Annotation 配置sessionFactory，配置数据库连接，注入hibernate数据库配置 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dynamicDataSource"/>
+		<property name="packagesToScan" value="com.jp.tic.**.entity"/>
+		<!--配置Oracle clob类型字段的处理-->
+		<property name="lobHandler" ref="lobHandler"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				<!-- 链接释放策略 on_close | after_transaction | after_statement | auto  -->
+				<prop key="hibernate.connection.release_mode">after_transaction</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+				<!--prop key="hibernate.hbm2ddl.auto">update</prop-->
+			</props>
+		</property>
+		<!-- property name="configLocation" value="classpath:hibernate.cfg.xml" /-->
+		<property name="namingStrategy">
+			<bean class="com.jp.tic.framework.hibernate.PrefixedNamingStrategy" />
+		</property>
+	</bean>
+	
+	<!-- 事务管理器，注入sessionFactory  -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 配置事务的传播特性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="edit*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="modify*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="execute*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean id="userDao" class="com.jp.tic.business.user.dao.impl.UserDaoImpl"></bean> 
+	<bean id="userService" class="com.jp.tic.business.user.service.impl.UserServiceImpl"></bean> 
+	
+	<!-- 配置那些类、方法纳入到事务的管理 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.jp.tic.*.**.service.impl.*.*(..))" id="transactionManagerMethod"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionManagerMethod" />
+	</aop:config>
+	
+	<!-- 配置SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dynamicDataSource"/>
+		<property name="configLocation" value="classpath:mybatis.xml"/>
+		<!-- mapper和resultmap配置路径 --> 
+		<property name="mapperLocations">
+			<list>
+				<!-- 表示在com.jp.tic目录下的任意包下的resultmap包目录中，以-resultmap.xml或-mapper.xml结尾所有文件 --> 
+				<value>classpath:com/jp/tic/framework/mybatis/mybatis-common.xml</value>
+				<value>classpath:com/jp/tic/**/resultmap/*-resultmap.xml</value>
+				<value>classpath:com/jp/tic/**/mapper/*-mapper.xml</value>
+				<value>classpath:com/jp/tic/**/mapper/**/*-mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 通过扫描的模式，扫描目录在com/hoo/任意目录下的mapper目录下，所有的mapper都需要继承SqlMapper接口的接口 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.jp.tic.**.mapper"/>
+		<property name="markerInterface" value="com.jp.tic.framework.mybatis.SqlMapper"/>
+	</bean>
+	
+	<bean id="centerJdbcDao" class="com.jp.tic.framework.jdbc.JdbcDao">
+		<property name="dataSource">
+			<ref bean="centerDataSource" />
+		</property>
+	</bean>
+
+	<bean id="innerJdbcDao" class="com.jp.tic.framework.jdbc.JdbcDao">
+		<property name="dataSource">
+			<ref bean="centerDataSource" />
+		</property>
+	</bean>
+	
+	<bean id="gdstJdbcDao" class="com.jp.tic.framework.jdbc.JdbcDao">
+		<property name="dataSource">
+			<ref bean="centerDataSource" />
+		</property>
+	</bean>
+	<bean id="nsJdbcDao" class="com.jp.tic.framework.jdbc.JdbcDao">
+		<property name="dataSource">
+			<ref bean="nsDataSource" />
+		</property>
+	</bean>
+</beans>

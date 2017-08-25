@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.system.mapper.OrganizationMapper">
+	
+	<select id="queryOrgInfoByPage" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		SELECT 
+			*
+		FROM MGMTDEPT_TAB where 1=1
+		<if test="code != null">
+			AND DWXZQH = #{code}
+		</if>
+		<if test="deviceName != null">
+			AND DWMC like '%${deviceName}%'
+		</if>
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="checkOrgInfo" parameterType="string" resultType="Map">
+		select * from MGMTDEPT_TAB
+		<if test="DWBH != null">
+			WHERE DWBH = #{DWBH}
+		</if>
+	</select>
+	
+	<select id="countOrgInfoDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM MGMTDEPT_TAB where 1=1 
+		<if test="code != null">
+			AND DWXZQH = #{code}
+		</if>
+		<if test="deviceName != null">
+			AND DWMC like '%${deviceName}%'
+		</if>
+	</select>
+	
+	<insert id="addOrgInfo" parameterType="string" >
+		insert into MGMTDEPT_TAB(
+			DWBH
+			<if test="DWMC != null">
+			,DWMC
+			</if>
+			<if test="CZDM != null">
+			,CZDM
+			</if>
+			<if test="DWXZQH != null">
+			,DWXZQH
+			</if>
+			<if test="BYIPDZ != null">
+			,BYIPDZ
+			</if>
+			<if test="LXR != null">
+			,LXR
+			</if>
+			<if test="LXDH != null">
+			,LXDH
+			</if>
+			<if test="IPDZ != null">
+			,IPDZ
+			</if>
+			<if test="GXDWWD != null">
+			,GXDWWD
+			</if>
+			<if test="GXDWJD != null">
+			,GXDWJD
+			</if>
+			<if test="WLFWM != null">
+			,WLFWM
+			</if>
+		) values (
+			'${DWBH}'
+			<if test="DWMC != null">
+			,'${DWMC}'
+			</if>
+			<if test="CZDM != null">
+			,'${CZDM}'
+			</if>
+			<if test="DWXZQH != null">
+			,'${DWXZQH}'
+			</if>
+			<if test="BYIPDZ != null">
+			,'${BYIPDZ}'
+			</if>
+			<if test="LXR != null">
+			,'${LXR}'
+			</if>
+			<if test="LXDH != null">
+			,'${LXDH}'
+			</if>
+			<if test="IPDZ != null">
+			,'${IPDZ}'
+			</if>
+			<if test="GXDWWD != null">
+			,'${GXDWWD}'
+			</if>
+			<if test="GXDWJD != null">
+			,'${GXDWJD}'
+			</if>
+			<if test="WLFWM != null">
+			,'${WLFWM}'
+			</if>
+		)
+		
+	</insert>
+	
+	<update id="updateOrgInfo" parameterType="string"> 
+		update MGMTDEPT_TAB set
+		<if test="DWMC != null">
+			DWMC = #{DWMC}
+		</if>
+		<if test="BYIPDZ != null">
+			,BYIPDZ = #{BYIPDZ}
+		</if>
+		<if test="LXR != null">
+			,LXR = #{LXR}
+		</if>
+		<if test="LXDH != null">
+			,LXDH = #{LXDH}
+		</if>
+		<if test="IPDZ != null">
+			,IPDZ = #{IPDZ}
+		</if>
+		<if test="GXDWWD != null">
+			,GXDWWD = #{GXDWWD}
+		</if>
+		<if test="GXDWJD != null">
+			,GXDWJD = #{GXDWJD}
+		</if>
+		<if test="WLFWM != null">
+			,WLFWM = #{WLFWM}
+		</if>
+		where DWBH = #{DWBH}
+	</update>
+	
+	<delete id="deleteOrgInfo" parameterType="string">
+		delete from MGMTDEPT_TAB where DWBH in (${KKBHS})
+	</delete>
+</mapper>

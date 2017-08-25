@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>Big_Data</display-name>
+  	<!-- 加载Spring容器配置 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 设置Spring容器加载配置文件路径 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext-*.xml</param-value>
+	</context-param>
+	
+		
+	<context-param>
+        <param-name>org.apache.activemq.brokerURL</param-name>
+        <param-value>tcp://10.235.36.107:61616</param-value>
+    </context-param> 
+    
+    <!-- 用户认证随机报文配置 -->
+    <servlet>
+		<servlet-name>RandomServlet</servlet-name>
+		<servlet-class>com.jp.tic.security.servlet.RandomServlet</servlet-class>
+		<!-- 初始化程序跳转页面 -->
+		<init-param>
+			<param-name>url</param-name>
+			<param-value>/WEB-INF/authentication.jsp</param-value>
+		</init-param>
+		<!-- 配置文件的路径 -->
+		<init-param>
+			<param-name>propertiesURL</param-name>
+			<param-value>/message.properties</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>AuthenServlet</servlet-name>
+		<servlet-class>com.jp.tic.security.servlet.AuthenServlet</servlet-class>
+		<!-- 认证结果提示消息页面 -->
+		<init-param>
+			<param-name>url</param-name>
+			<param-value>/WEB-INF/authentication-context.jsp</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>propertiesURL</param-name>
+			<param-value>/message.properties</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RandomServlet</servlet-name>
+		<url-pattern>/random</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AuthenServlet</servlet-name>
+		<url-pattern>/auth</url-pattern>
+	</servlet-mapping>
+
+	<!-- 配置Spring核心控制器 -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.mvc</url-pattern>
+	</servlet-mapping>
+	
+	<!-- CXF WebService核心控制器配置 -->
+	<servlet>
+	    <servlet-name>CXFService</servlet-name>
+	    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>CXFService</servlet-name>
+	    <url-pattern>/ws/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>BatchTaskInitServlet</servlet-name>
+		<servlet-class>com.jp.tic.business.batch.servlet.BatchTaskInitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- 解决工程编码过滤器 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+		
+   <filter>     
+       <filter-name>UtilFilterImpl</filter-name>     
+       <filter-class>com.jp.tic.utils.filters.UtilFilterImpl</filter-class>     
+	</filter>     
+	       
+	       
+	<filter-mapping>     
+	       <filter-name>UtilFilterImpl</filter-name>     
+	       <url-pattern>*.mvc</url-pattern>     
+	</filter-mapping>
+ 
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>AjaxServlet</servlet-name>
+		<servlet-class>org.apache.activemq.web.AjaxServlet</servlet-class>
+        <async-supported>true</async-supported>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>AjaxServlet</servlet-name>
+		<url-pattern>/amq/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AjaxServlet</servlet-name>
+		<url-pattern>/deviceinfo/amq/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AjaxServlet</servlet-name>
+		<url-pattern>/controlAlarm/amq/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AjaxServlet</servlet-name>
+		<url-pattern>/user/to/amq/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AjaxServlet</servlet-name>
+		<url-pattern>/mountOnline/amq/*</url-pattern>
+	</servlet-mapping>
+	                                                                                                                                                                  
+	<!-- ActiveMQ -->
+    <filter>
+		<filter-name>session</filter-name>
+      	<filter-class>org.eclipse.jetty.continuation.ContinuationFilter</filter-class>
+      	<async-supported>true</async-supported>
+    </filter>
+    
+    <filter-mapping>
+      	<filter-name>session</filter-name>
+      	<url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/global/error-404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/global/error-500.jsp</location>
+	</error-page>
+	
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>

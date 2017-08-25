@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="useColumnLabel" value="true"/>
+	</settings>
+
+	<!-- 别名 -->
+	<typeAliases>
+		<typeAlias alias="deviceInfo" type="com.jp.tic.business.device.entity.DeviceInfo"/>
+		<!-- 
+			<typeAlias alias="deviceState" type="com.jp.tic.zhsics.device.entity.DeviceState"/>
+		 -->	
+	</typeAliases>
+</configuration>

@@ -1,0 +1,422 @@
+/*
+���accordion ��ʽ ָ��ID westPanel
+*/
+#westPanel .x-panel-body {
+	border: 0 none
+}
+
+#westPanel .x-panel-header {
+	border: 0 none
+}
+
+#westPanel .x-accordion-hd {
+	background: url(images/smenubg.gif) no-repeat 100% -35px;
+	/*background: url("images/alarm/alarm.gif") repeat-x scroll 0 -37px transparent;*/
+	font-family: tahoma, arial, verdana, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	height: 20px;
+	color: white;
+	padding: 4px 4px;
+}
+
+#westPanel .x-accordion-hd span.x-panel-header-text {
+	margin-left: 10px
+}
+
+#westPanel .x-accordion-hd .x-tool-toggle {
+	background: url(images/smenubg.gif) no-repeat -172px -131px;
+}
+
+#westPanel .x-panel-collapsed .x-accordion-hd .x-tool-toggle {
+	background: url(images/smenubg.gif) no-repeat -172px -83px;
+}
+
+#westPanel .x-tree-node-leaf .x-tree-node-icon {
+	background-image: url(images/none.gif);
+}
+
+#westPanel .x-tree-selected {
+	background: url(images/s_menu.gif) repeat-x 0 -173px;
+	font-weight: bold;
+	color: #069CDF;
+	border: 1px solid #CCC;
+}
+
+#westPanel .x-tree-node-leaf {
+	background: url(images/s_menu.gif) no-repeat 0px -91px;
+}
+
+#westPanel .x-tree-node-over span {
+	color: #069CDF;
+}
+
+#westPanel .x-panel {
+	background: url(images/smenubg.gif) no-repeat;
+	margin-top: 3px;
+}
+
+#westPanel.x-panel .x-panel-collapsed {
+	background: url(images/smenubg.gif) no-repeat;
+}
+
+/*
+	ѡ���ʽ
+*/
+.x-tab-strip-wrap {
+	overflow: hidden;
+	position: relative;
+}
+
+.x-tab-panel-header,.x-tab-panel-footer {
+	background-color: white;
+	border: 0px;
+}
+.x-tab-panel-noborder .x-tab-panel-header-noborder {
+	border: 0px;
+}
+
+.x-tab-strip-top .x-tab-right,.x-tab-strip-top .x-tab-left,.x-tab-strip-top .x-tab-strip-inner
+	{
+	background-image: url(images/default/tabs/tabs-sprite.gif);
+	background: transparent;
+	height: 27px;
+	width: 150px;
+}
+
+ul.x-tab-strip-top {
+	background: url("images/bg.gif") repeat-x scroll 0 -7px transparent;
+	padding-left: 5px;
+	border-bottom-width: 0px;
+}
+
+ul.x-tab-strip li {
+	background: transparent;
+	border-style: solid;
+	border-width: 1px 1px 0 1px;
+	border-color: #B5B5B5;
+	margin-left: 5px;
+	height: 25px;
+	width: 180px;
+}
+
+.x-tab-strip-top .x-tab-right {
+	padding-left: 10px;
+	width: 80px;
+	text-align: center;
+}
+
+.x-tab-strip-top .x-tab-strip-active .x-tab-right {
+	background: repeat-x scroll 0 -40px transparent;
+	padding-left: 0px;
+	width: 80px;
+	height: 26px;
+	text-align: center;
+	color: #1088DB;
+}
+
+.x-tab-strip-active {
+	border-color: #B5B5B5;
+	border-style: solid;
+	margin-left: -1px;
+	margin-right: -1px;
+	border-width: 1px 1px 0 1px;
+}
+
+.x-tab-strip-active a.x-tab-right {
+	border-color: #B5B5B5;
+	border-style: solid;
+	margin-left: -1px;
+	margin-right: -1px;
+	border-width: 0px 1px;
+}
+
+.x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text
+	{
+	color: #1088DB;
+}
+
+.x-tab-strip-top .x-tab-strip-active .x-tab-strip-inner {
+	background: url("images/bg.gif") repeat-x scroll 0 -40px transparent;
+	width: 180px;
+}
+
+.x-tab-strip span.x-tab-strip-text {
+	color: #666666;
+	font-weight: bold;
+}
+
+.x-tab-panel-body-top {
+	border-bottom-width: 0px;
+	border-color: #BBBBBB;
+}
+
+.x-tab-strip-top .x-tab-left {
+	padding-right: 0px;
+}
+
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+	background: url("images/tab.gif") no-repeat 3px -114px;
+	top: 5px;
+	right: 8px;
+}
+
+.x-tab-strip .x-tab-strip-closable a.x-tab-strip-close:hover {
+	width: 14px;
+	height: 13px;
+	background: url("images/tab.gif") no-repeat -53px -118px;
+}
+
+/*
+	��ť��ʽ  ������cls�������blue_button
+*/
+.blue-button-ct .x-btn {
+	background: url(images/btn.gif);
+	background-position: 0 -61px;
+	height: 18px;
+	border: 1px #1D95DD;
+	padding: 0 0px
+}
+
+.normal-btn-button button {
+	height: 25px!important;
+}
+
+.normal-tree-btn-button button {
+	height: 25px!important;
+	margin-left: 80px;;
+}
+
+.btn button {
+	border: 0 none!important;
+	background-color: transparent;
+}
+
+.btn1 button {
+	height: 25px!important;
+}
+
+.blue-button-ct .x-btn button,.x-date-picker .x-btn button {
+	/*color: white*/
+}
+
+.blue-button-ct .x-btn-over {
+	background-position: 0 -94px;
+}
+
+/*
+	��ҳ������
+*/
+.x-item-disabled .x-tbar-page-first {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -202px
+		transparent !important;
+}
+
+.x-tbar-page-first {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -202px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-prev {
+	background: url("images/btn_ico.gif") no-repeat scroll -55px -202px
+		transparent !important;
+}
+
+.x-tbar-page-prev {
+	background: url("images/btn_ico.gif") no-repeat scroll -55px -202px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-next {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -251px
+		transparent !important;
+}
+
+.x-tbar-page-next {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -251px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-last {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -251px
+		transparent !important;
+}
+
+.x-tbar-page-last {
+	background: url("images/btn_ico.gif") no-repeat scroll -28px -251px
+		transparent !important;
+}
+
+.x-item-disabled .x-tbar-page-go {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -202px
+		transparent !important;
+}
+
+.x-tbar-page-go {
+	background: url("images/btn_ico.gif") no-repeat scroll 0px -202px
+		transparent !important;
+}
+
+#PagingToolbar .x-toolbar-ct , .PagingToolbar .x-toolbar-ct {
+	background: #D2F0FF;
+}
+
+#PagingToolbarCar .x-toolbar-ct , .PagingToolbarCar .x-toolbar-ct {
+	background: #D2F0FF;
+}
+
+#PigPagingToolbarCar .x-toolbar-ct , .PigPagingToolbarCar .x-toolbar-ct {
+	background: #D2F0FF;
+}
+
+#PagingToolbar .x-btn-icon .x-btn-small .x-btn-text, .PagingToolbar .x-btn-icon .x-btn-small .x-btn-text {
+	height: 22px;
+	width: 23px;
+}
+
+#PagingToolbarCar .x-btn-icon .x-btn-small .x-btn-text, .PagingToolbarCar .x-btn-icon .x-btn-small .x-btn-text {
+	height: 22px;
+	width: 23px;
+}
+
+#PigPagingToolbarCar .x-btn-icon .x-btn-small .x-btn-text, .PigPagingToolbarCar .x-btn-icon .x-btn-small .x-btn-text {
+	height: 22px;
+	width: 23px;
+}
+
+/*
+panel ����ɫ
+*/
+.x-border-layout-ct {
+	background-color: white;
+}
+
+.x-panel-ml,.x-panel-mc {
+	background-color: white;
+	padding: 0px 0px 0px 6px;
+}
+
+.x-window-mc,.x-panel-mc,.x-panel-body {
+	background-color: white
+}
+
+.x-panel-bc,.x-panel-tl,.x-panel-tr,.x-panel-bl,.x-panel-br {
+	background-image: url(corners-sprite.gif);
+	border-bottom-color: white;
+	height: 0px;
+	width: 0px
+}
+
+.x-panel-mr,.x-panel-ml {
+	background: none
+}
+
+.x-panel-header {
+	background: true
+}
+
+.x-panel-noborder .x-panel-header-noborder {
+	border: 0 none
+}
+
+.x-panel-noborder .x-panel-bbar-noborder .x-toolbar {
+	background: none;
+	border: 0 none
+}
+/*ȥ��search form ���ߵı߿�*/
+.blue-button-ct .x-panel-ml {
+	padding-left: 0px
+}
+
+.blue-button-ct .x-panel-ml .x-panel-mr {
+	padding-right: 0px
+}
+
+/* Teon add the following styles */
+.orgtree .x-panel-header,.dictcattree .x-panel-header {
+	border: 1px solid #CCCCCC;
+	border-bottom: 0px;
+	background: url(images/main_bg.gif) repeat-x scroll 0 0;
+	font-weight: bold;
+	line-height: 30px;
+	height: 30px;
+	padding: 0px;
+	padding-left: 10px;
+	background: url(images/main_bg.gif) repeat-x scroll 0 0;
+}
+
+.orgtree .x-panel-body,.dictcattree .x-panel-body {
+	border: 1px solid #CCCCCC;
+	border-top: 0px;
+}
+
+.wstab .x-tab-panel-body {
+	border: 0px;
+}
+
+.orgusertree .x-node-department {
+	background: url(images/department.png) no-repeat;
+}
+
+.orgusertree .x-node-staff {
+	background: url(images/direction_normal.gif) no-repeat!important;
+}
+
+.dictcattree .x-tree-root-ct {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.dictcattree .x-tree-node-el {
+	line-height: 30px;
+}
+
+.dictcattree .x-tree-lines .x-tree-elbow {
+	background-image: none;
+	width: 0px;
+	height: 0px;
+}
+
+.dictcattree .x-tree-lines .x-tree-elbow-end {
+	background-image: none;
+	width: 0px;
+	height: 0px;
+}
+
+.dictcattree .x-tree-node-leaf .x-tree-node-icon {
+	background-image: none;
+	width: 0px;
+	height: 0px;
+}
+
+.dictcattree .x-tree-node a {
+	margin-left: 35px;
+}
+.window-margin-left {
+	margin-left: 18px;
+}
+
+.x-selectable, .x-selectable * {
+	-moz-user-select: text !important ;
+	-khtml-user-select: text !important ;
+}
+
+.xtb-text {
+	font-size: 15px !important;
+}
+
+.panel-body { 
+	overflow : hidden !important;
+}
+
+.loading-indicator {
+	font-size: 15px;
+	background-image: url(images/default/grid/loading.gif);
+	position:absolute;
+	top:50%;         
+	left:43%; 
+}
+
+.ext-strict .ext-ie8 .x-form-display-field {
+	padding-top: 3px; !important;
+}

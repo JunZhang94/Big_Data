@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.system.mapper.OperationLogMapper">
+	
+	<select id="queryOperationLogInfo" parameterType="string" resultType="Map">
+		<if test="start == 0">
+			select * from (
+		</if>
+		<if test="start > 0">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+		select * from SYS_T_LOG where 1=1
+		<if test="userName != null">
+			and USERCODE like '%${userName}%' 
+		</if>
+		<if test="operationType != null">
+			and LOG_TYPE = '${operationType}' 
+		</if>
+		<if test="operationType == null">
+			<if test="operations != null">
+				and (${operations})
+			</if>
+		</if>
+		<if test="startTime != null">
+			<if test="endTime != null">
+				<if test="usingFlag == 0">
+					and GENERATETIME between to_date('${startTime}','yyyy-MM-dd HH24:mi:ss') and to_date('${endTime}','yyyy-MM-dd HH24:mi:ss')
+				</if>
+				<if test="usingFlag == 1">
+					and to_char(GENERATETIME,'HH24') between ${startPoint} and ${endPoint}
+					and GENERATETIME between to_date('${startDate}','yyyy-mm-dd hh24:mi:ss') 
+						and to_date('${endDate}','yyyy-mm-dd hh24:mi:ss')
+				</if>
+			</if>
+		</if>
+		 order by GENERATETIME desc
+		<if test="start == 0">
+			<![CDATA[ ) row_ where rownum <= #{limit} ]]>  
+		</if>
+		<if test="start > 0">
+			<![CDATA[ ) row_ where rownum <= #{start} + #{limit}) where rownum_ > #{start} ]]>  
+		</if>
+	</select>
+	
+	<select id="countOperationLogDatas" parameterType="string" resultType="Map">
+		SELECT 
+			count(*) as COUNTS 
+		FROM SYS_T_LOG where 1=1 
+		<if test="userName != null">
+			and USERCODE like '%${userName}%' 
+		</if>
+		<if test="operationType != null">
+			and LOG_TYPE = '${operationType}' 
+		</if>
+		<if test="operationType == null">
+			<if test="operations != null">
+				and (${operations})
+			</if>
+		</if>
+		<if test="startTime != null">
+			<if test="endTime != null">
+				<if test="usingFlag == 0">
+					and GENERATETIME between to_date('${startTime}','yyyy-MM-dd HH24:mi:ss') and to_date('${endTime}','yyyy-MM-dd HH24:mi:ss')
+				</if>
+				<if test="usingFlag == 1">
+					and to_char(GENERATETIME,'HH24') between ${startPoint} and ${endPoint} 
+					and GENERATETIME between to_date('${startDate}','yyyy-mm-dd hh24:mi:ss') 
+						and to_date('${endDate}','yyyy-mm-dd hh24:mi:ss')
+				</if>
+			</if>
+		</if>
+	</select>
+	
+</mapper>

@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height: 100%; width: 100%; margin: 0; padding: 0; 
+      }
+      #controls {
+        background: #fff;
+        box-shadow: 0 6px 6px -6px #999;
+        color: #444;
+        font-family: sans-serif;
+        height: auto;
+        left: 1em;
+        padding: 1em;
+        position: absolute;
+        top: 1em;
+        width: auto;
+        z-index: 40;
+      }
+      #controls div {
+        padding: 0 0 1em 0;
+      }
+    </style>
+
+    <script src="http://js.arcgis.com/3.9/"></script>
+    <script>
+      var map, graphicLayer;
+      //标记数组
+            var allMarkers = [];
+    
+      require([
+        "esri/map", "esri/geometry/Circle", "esri/symbols/SimpleFillSymbol",  
+        "esri/graphic", "esri/layers/GraphicsLayer", 
+        "dojo/dom", "dojo/dom-attr", "dojo/domReady!"
+      ], function(
+        Map, Circle, SimpleFillSymbol, 
+        Grahpic, GraphicsLayer,
+        dom, domAttr
+      ) {
+        map = new Map("map", {
+          basemap: "streets",
+          center: [120.741, 30.39],
+          slider: false,
+          zoom: 2
+        });
+        
+        //创建图层
+        graphicLayer = new GraphicsLayer();
+        //把图层添加到地图上
+        map.addLayer(graphicLayer);
+        
+        map.on("click", function(e) {
+                addMarker(e.mapPoint.x, e.mapPoint.y);
+        });
+        map.showZoomSlider();
+
+      });
+
+                        function addMarker(xx, yy) {
+
+        //设置标注的经纬度
+        //方法一
+        var pt = new esri.geometry.Point(xx, yy, map.spatialReference);
+        //方法二
+        //  var pt = new esri.geometry.geographicToWebMercator(new esri.geometry.Point({
+        //    "x": 118.0605760000,
+        //    "y": 36.8424320000,
+        //    "spatialReference": { "wkid": 102113 }
+        //            }));
+
+        //设置标注显示的图标
+        //var symbol = new esri.symbol.SimpleMarkerSymbol();
+        var symbol1 = new esri.symbol.PictureMarkerSymbol("images/iconA_32.png", 25, 25);
+
+        //要在模版中显示的参数
+        var attr = { "address": "山东省淄博市张店区" };
+
+        //创建模版
+        var infoTemplate = new esri.InfoTemplate("标题", "地址:${address}");
+        //创建图像
+        var graphic = new esri.Graphic(pt, symbol1, attr, infoTemplate);
+        //把图像添加到刚才创建的图层上
+        graphicLayer.add(graphic);
+        setMapCenter(xx, yy , 1);
+                        }
+                        
+                        function setMapCenter(xx, yy , level) {
+                                var point = new esri.geometry.Point(xx, yy, map.spatialReference);
+                                map.centerAndZoom(point, level);
+                        }
+                        
+                        //添加标注
+            function mapAddOverLay(xx, yy, id, labelname) {
+                var point = new BMap.Point(xx, yy);
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker); //添加标注
+        
+                allMarkers.push(marker); //记录覆盖物句柄
+        
+                if (labelname != "") {
+                    var label = new BMap.Label(labelname, { offset: new BMap.Size(20, -10) });
+                    marker.setLabel(label); //添加Label
+                }
+        
+                //添加标注回调
+                addOverlayCallback(marker, xx, yy, id);
+            }
+        
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <!--<div id="controls">
+      <div>Click the map.</div>
+      <input type="checkbox" id="geodesic">
+      <label for="geodesic">Geodesic?</label>
+    </div> -->
+  </body>
+</html>

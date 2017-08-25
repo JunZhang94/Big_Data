@@ -1,0 +1,36 @@
+.titleBc {
+  width:350px;
+  background:#fafafa;
+}
+
+.viewForm {
+	padding:10px 30px 20px 30px;
+}
+
+.search-info {
+	padding:10px;
+	background:#fafafa;
+	margin-bottom: 5px;
+}
+
+.text-display {
+	display: inline-block;
+}
+
+.dataCenter {
+	padding:5px;
+}
+
+form table {
+	text-align:right !important;
+}
+
+.buttonInfo {
+	text-align:center;
+	padding:5px;
+}
+
+.pagination table {
+  float: right;
+  height: 30px;
+}

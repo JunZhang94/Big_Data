@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 编辑使用 XMLSpy v2006 U (http://www.altova.com) 由 any (any) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="RBSPMessage">
+		<xs:annotation>
+			<xs:documentation>请求报文</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Version" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>版本号</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SenderID" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>发送方ID</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="TimeStamp" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>报文发送时间戳</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Validity" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>服务时限</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="Security"/>
+				<xs:element name="Method" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>服务方法</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="EndUser"/>
+							<xs:element name="Name" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>服务方法名</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Items">
+								<xs:annotation>
+									<xs:documentation>数据项集</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="Item" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="SecurityType">
+		<xs:annotation>
+			<xs:documentation>安全相关数据项</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Signature" >
+				<xs:annotation>
+					<xs:documentation>数字签名</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="Algorithm" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>算法类型</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CheckCode" >
+				<xs:annotation>
+					<xs:documentation>数据完整性校验码</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="Algorithm" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>算法类型</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Encrypt">
+				<xs:annotation>
+					<xs:documentation>数据加密</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ParameterType">
+		<xs:annotation>
+			<xs:documentation>头元素</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>数据项名</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>数据项值</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="Data" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>单数据值</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Row" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>数组行</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Data" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>数组元素值</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+					<xs:attribute name="Type">
+						<xs:annotation>
+							<xs:documentation>数据类型</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="Security" type="SecurityType">
+		<xs:annotation>
+			<xs:documentation>安全相关数据项</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="Item" type="ParameterType">
+		<xs:annotation>
+			<xs:documentation>数据项</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="EndUser">
+		<xs:annotation>
+			<xs:documentation>前端用户信息</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UserName" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>用户名</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UserIDCard" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>身份证号</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UserDept" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>用户单位</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UserCertID" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>用户身份证书标识号</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

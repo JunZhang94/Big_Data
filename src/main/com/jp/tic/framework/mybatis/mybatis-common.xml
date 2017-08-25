@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 全局公用语句 -->
+<mapper namespace="common">
+
+	<!-- Order clause -->
+	<sql id="order_clause">
+		<if test="orderBy != null">ORDER BY ${orderBy} <if test="orderDir != null"> ${orderDir}</if></if>
+	</sql>
+	
+	<sql id="conditions_clause">
+		<if test="searchConditions != null and searchConditions.length() > 0">
+			and ${searchConditions}
+		</if>
+	</sql>
+	
+	<!--
+		分页语句示例
+		select * from (
+		     select t.*, rownum as num from (
+		     	
+		     	select * from qb_orderinfo order by order_code
+		     	
+			 ) t where rownum <= 20
+		) where num > 10;	 
+	-->
+	<sql id="pager_before">
+		select * from (
+		     select tab.*, rownum as num from (
+	</sql>
+	<sql id="pager_after">
+		<include refid="common.order_clause"/>
+		<![CDATA[
+				) tab where rownum <= #{offsetLast}
+			) where num > #{offset}
+		]]>
+	</sql>
+</mapper>

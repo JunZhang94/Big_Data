@@ -1,0 +1,77 @@
+@charset "utf-8";
+html, body{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+body{
+  background: #1B80C2;
+  color: #ffffff;
+  font-family: arial,'Hiragino Sans GB','Microsoft Yahei',"微软雅黑",sans-serif;
+}
+#main{
+  width: 800px;
+  height: 478px;
+  background: #1B80C2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -400px;
+  margin-top: -239px;
+}
+#logo{
+  width: 422px;
+  height: 62px;
+  margin: 0 auto;
+}
+#title{
+  margin: 0 auto;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+#login{
+  height: 80px;
+  padding-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+#loginFm{
+  width: 350px;
+  padding-left: 250px;
+}
+label{
+  width: 100px;
+}
+input{
+  width: 156px;
+  height: 22px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #067EF5;
+  color: #333333;
+}
+.oneWordSapce{
+  padding-left: 15px;
+}
+#submit{
+  width: 82px;
+  height: 47px;
+  float: right;
+  margin-top: 8px;
+  margin-right: 15px;
+  border: 0 none;
+  color:#333333;
+  font-size: 16px;
+  cursor: pointer;
+}
+#copyright{
+  height: 55px;
+  line-height: 90px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+

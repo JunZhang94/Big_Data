@@ -1,0 +1,123 @@
+/**
+ * @title NetWorkServiec
+ * @function css
+ * @author hoojo
+ * @createdate 2010-8
+ * @version 1.1
+ **/
+
+
+@CHARSET "UTF-8";
+
+.mainHeader {
+/*	background: #DAE7F8 url(../img/main/bg_re.gif) scroll center center; */
+	background: #DAE7F8  scroll center center; 
+	height: 60px;
+	left: 5px; 
+	right: 5px; 
+	top: 0px;
+}
+
+.mainHeader h1 {
+	color: white; 
+}
+
+.systemMenu {
+	font-size: 12px;
+}
+
+.systemMenu div {
+	line-height: 22px;
+	padding-left: 1em;
+	cursor: pointer;
+}
+
+.menuHover {
+  background-color: #E6F3FF;
+  color: blue;
+}
+
+.menuActive  {
+  background-color: #ffffff;
+  color: black;
+}
+
+.menuVisited  {
+  background-color: #FFFFCC;
+  color: #FF0000;
+}
+
+.expandIcon {
+	background-image: url("../img/main/expand-all.gif") !important;
+}
+
+.collaspeIcon {
+	background-image: url("../img/main/collapse-all.gif") !important;
+}
+
+.refreshTree {
+	/*background: transparent url("../img/main/tools.gif") repeat scroll 0 135px !important;*/
+	background-image: url("../img/main/refresh.gif") !important;
+}
+
+.grid-search {
+	background-image: url("../img/main/srch.gif") !important;
+}
+
+.viewIcon {
+	background-image: url("../img/main/view.gif") !important;
+}
+
+.checked {
+	background-image: url("../img/main/checked.gif") !important;
+}
+
+.menuPosition {
+	-margin-right: 5px;
+	padding-right: 13px;
+	padding-bottom: 3px;
+	background-repeat: no-repeat;
+}
+
+.nav {
+	background-image: url("../img/main/folder_go.png") !important;
+}
+
+.homeIcon {
+	background-image: url("../img/main/home.gif") !important;
+}
+
+a:link {
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    font-size: 12px;
+    text-decoration: none;
+    color: red;
+}
+
+a:active {
+    font-size: 12px;
+    text-decoration: none;
+    color: blue;
+}
+
+a:visited {
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+}
+
+.portalFont {
+	color: #07519A;
+    font-size: 12px;
+    overflow: hidden;
+    text-indent: 24px;
+    line-height: 22px;
+    text-align: justify;
+    /*text-overflow : ellipsis;*/
+    font-family: "����",Verdana,Arial;
+}

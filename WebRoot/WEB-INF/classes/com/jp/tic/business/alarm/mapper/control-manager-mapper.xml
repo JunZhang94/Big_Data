@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jp.tic.business.alarm.mapper.ControlManagerMapper">
+	
+	<select id="loadControlDetailInfo" parameterType="string" resultType="Map">
+		select a.*,b.orgName from SETCONTROL_TAB a left join organization_view b on a.ckdw = b.id where 1=1 
+		<if test="controlId != null">
+			AND a.BKXXBH = '${controlId}'
+		</if>
+	</select>
+	
+	<select id="checkControlCarNum" parameterType="string" resultType="Map">
+		SELECT * FROM SETCONTROL_TAB where 1=1 
+		<if test="carNum != null">
+			AND HPHM = '${carNum}'
+		</if>
+	</select>
+	
+	<update id="updateControlInfo" parameterType="string"> 
+		update SETCONTROL_TAB set
+		<if test="startDate != null">
+			BKSK = to_date('${startDate}','yyyy-MM-dd HH24:mi:ss')
+		</if>
+		<if test="endDate != null">
+			,BKLEN = to_date('${endDate}','yyyy-MM-dd HH24:mi:ss')
+		</if>
+		<if test="surLevel != null">
+			BKJB = '${surLevel}'
+		</if>
+		<if test="controlType != null">
+			,BKLX = '${controlType}'
+		</if>
+		<if test="carColor != null">
+			,CSYS = '${carColor}'
+		</if>
+		<if test="carType != null">
+			,CLLX = '${carType}'
+		</if>
+		<if test="alarmLevel != null">
+			,BJDJ = '${alarmLevel}'
+		</if>
+		<if test="carBrandWin != null">
+			,CLPP = '${carBrandWin}'
+		</if>		
+		<if test="carLicenseType != null">
+			,HPYS = '${carLicenseType}'
+		</if>
+		<if test="carNumberType != null">
+			,HPZL = '${carNumberType}'
+		</if>
+		<if test="controlNature != null">
+			,BKSZ = '${controlNature}'
+		</if>
+		<if test="attribution != null">
+			,CLWX = '${attribution}'
+		</if>
+		<if test="linkMan != null">
+			,CZ = '${linkMan}'
+		</if>
+		<if test="linkManPhone != null">
+			,LXDH = '${linkManPhone}'
+		</if>
+		<if test="orgName != null">
+			,BKDW = '${orgName}'
+		</if>
+		<if test="describer != null">
+			,AJMS = '${describer}'
+		</if>
+		<if test="carCategory != null">
+			,CATEGORY = '${carCategory}'
+		</if>
+		<if test="bkCategory != null">
+			,BKLB = '${bkCategory}'
+		</if>
+		<if test="bkfw != null">
+			,BKFW = '${bkfw}'
+		</if>
+		where BKXXBH = '${id}'
+	</update>
+	
+	<delete id="deleteControlInfo" parameterType="string">
+		delete from SETCONTROL_TAB where BKXXBH in (${controlIds})
+	</delete>
+</mapper>

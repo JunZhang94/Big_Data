@@ -1,0 +1,339 @@
+/*
+ * icyfire
+ * 
+ * http://icyfire.javaeye.com
+ */
+ 
+ @CHARSET "UTF-8";
+
+.x-tab-panel-vertical .x-tab-panel-header {
+    background: #FFFFFF;
+    border: none;
+}
+
+.x-tab-panel-vertical-left .x-tab-panel-header {
+    float: left;
+}
+
+.x-tab-panel-vertical-right .x-tab-panel-header {
+    float: right;
+}
+
+.x-tab-panel-vertical .x-tab-strip-wrap {
+    clear: both;
+    height: 100%;
+}
+
+.x-tab-panel-vertical ul.x-tab-strip-top {
+    background: none;
+    border-bottom: none;
+    padding-top: 0px;
+}
+
+.x-tab-panel-vertical-left ul.x-tab-strip-top {
+    padding-left: 1px;
+}
+
+.x-tab-panel-vertical-right ul.x-tab-strip-top {
+    padding-right: 1px;
+}
+
+.x-tab-panel-vertical ul.x-tab-strip {
+    display: block;
+    width: 100%;
+    height: 5000px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.x-tab-panel-vertical ul.x-tab-strip li {
+    clear: both;
+    margin-left: 0px;
+    float: none;
+}
+
+.x-tab-panel-vertical ul.x-tab-strip li {
+    margin-bottom: 2px;
+}
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-strip-active .x-tab-right
+    {
+    margin-bottom: 0px;
+}
+
+.x-tab-panel-vertical-left .x-tab-strip-top .x-tab-right {
+    margin-left: 0px;
+}
+
+.x-tab-panel-vertical-right .x-tab-strip-top .x-tab-right {
+    margin-right: 0px;
+}
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-strip-over .x-tab-right {
+    background-color: #DDDDDD;
+    border-top: 0px solid ;
+    border-bottom: 0px solid ;
+}
+
+.x-tab-panel-vertical-left .x-tab-strip-top .x-tab-strip-over .x-tab-right
+    {
+    margin-left: 0px;
+    border-left: 1px solid ;
+}
+
+.x-tab-panel-vertical-right .x-tab-strip-top .x-tab-strip-over .x-tab-right
+    {
+    margin-right: 0px;
+    border-right: 1px solid ;
+}
+
+
+
+.x-tab-panel-vertical-left .x-tab-strip-top .x-tab-strip-active .x-tab-right
+    {
+    background:url(images/replay/file_tabbg.gif) repeat-y -33px 0;
+}
+
+
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-right {
+    padding-left: 0px;
+    border-top: 0px solid ;
+    border-bottom: 0px solid ;
+}
+
+.x-tab-panel-vertical-left .x-tab-strip-top .x-tab-right {
+  background:url(images/replay/file_tabbg.gif) repeat-y; 
+}
+
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-left {
+    background: none;
+    padding-right: 0px;
+}
+
+.x-tab-panel-vertical-left .x-tab-strip-top .x-tab-left {
+    background: none;
+    padding-top: 5px;
+}
+
+.x-tab-panel-vertical-right .x-tab-strip-top .x-tab-left {
+    background: none;
+    padding-bottom: 5px;
+}
+
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-strip-inner {
+    background: none;
+}
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-right span.x-tab-strip-text
+    {
+    padding-bottom: 0px;
+    font-weight:bold; border-bottom:1px solid #aaa; cursor:pointer; padding:5px 9px;
+}
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-right span.x-tab-strip-text
+    {
+    padding-right: 5px;
+    padding-left: 5px;
+    font-weight:bold; border-bottom:1px solid #aaa; cursor:pointer; padding:5px 9px;
+}
+
+.x-tab-panel-vertical .x-tab-strip span.x-tab-strip-text {
+    white-space: normal;
+}
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-right span.x-tab-strip-text
+    {
+    color: #000000;
+}
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-strip-over .x-tab-right span.x-tab-strip-text
+    {
+    color: #000000;
+    font-weight:bold; border-bottom:1px solid #aaa; cursor:pointer; padding:5px 9px;
+}
+
+.x-tab-panel-vertical .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text
+    {
+    color: #000000;
+    font-weight:bold; border-bottom:1px solid #aaa; cursor:pointer; padding:5px 9px;
+}
+
+.x-tab-panel-vertical .x-tab-strip .x-tab-with-icon span.x-tab-strip-text
+    {
+    background-position: 2px 0;
+    background-repeat: no-repeat;
+    padding-top: 20px;
+}
+
+.x-tab-panel-vertical .x-tab-scrolling .x-tab-strip-wrap {
+    margin: 18px 0px;
+    *top: 18px;
+}
+
+.x-tab-panel-vertical .x-tab-scroller-right {
+    background: transparent url('../images/scroll-right-v.gif') no-repeat scroll;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: auto;
+    top: auto;
+    border: none;
+}
+
+.x-tab-panel-vertical-left .x-tab-scroller-right {
+    background-position: 4px 0;
+}
+
+.x-tab-panel-vertical-right .x-tab-scroller-right {
+    background-position: 0 0;
+}
+
+.x-tab-panel-vertical .x-tab-scroller-left {
+    background: transparent url('../images/scroll-left-v.gif') no-repeat scroll;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: auto;
+    bottom: auto;
+    border: none;
+}
+
+.x-tab-panel-vertical-left .x-tab-scroller-left {
+    background-position: 4px -18px;
+}
+
+.x-tab-panel-vertical-right .x-tab-scroller-left {
+    background-position: 0 -18px;
+}
+
+.x-tab-panel-vertical .x-tab-strip-closable .x-tab-left {
+    padding-right: 0px;
+    padding-bottom: 19px;
+}
+
+.x-tab-panel-vertical-left .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close
+    {
+    right: 0px;
+    top: auto;
+    bottom: 0px;
+}
+
+.x-tab-panel-vertical-right .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close
+    {
+    left: 0px;
+    top: auto;
+    bottom: 0px;
+    right: auto;
+}
+
+
+
+.ux-vertical-tabs{
+ 
+}
+
+.x-window .ux-vertical-tabs{
+  border:none;
+}
+
+.ux-vertical-tabs-left .x-tab-panel-header {
+  float: left;
+}
+
+.ux-vertical-tabs-right .x-tab-panel-header {
+  float: right;
+}
+
+.ux-vertical-tabs .x-tab-strip .x-tab-with-icon span.x-tab-strip-text{
+  padding-top: 5px;
+  padding-right:10px;
+  padding-left:20px;
+  background-position:right 3px; 
+}
+
+.ux-vertical-tabs, .ux-vertical-tabs .x-tab-panel-bwrap, .ux-vertical-tabs .x-tab-panel-body{
+  height:100%;
+}
+
+.ux-vertical-tabs ul.x-tab-strip li {
+  margin: 0;
+  width: 100%;
+}
+
+.ux-vertical-tabs .x-tab-strip a.x-tab-strip-close,
+.ux-vertical-tabs .x-tab-edge{
+  display: none;
+}
+
+
+.ux-vertical-tabs .x-tab-left, .ux-vertical-tabs .x-tab-strip .x-tab-with-icon .x-tab-right, .ux-vertical-tabs .x-tab-strip-top .x-tab-right , .ux-vertical-tabs .x-tab-strip-top .x-tab-left{
+  background: none;
+  padding: 0;
+}
+
+.ux-vertical-tabs ul.x-tab-strip-top {
+  background: none;
+  border: none;
+  padding-top: 0;
+}
+
+.ux-vertical-tabs .x-tab-panel-header {
+  border:0 none transparent;
+}
+
+
+.ux-vertical-tabs-alignright ul.x-tab-strip {
+  width: 100%;
+}
+
+.ux-vertical-tabs-alignright ul.x-tab-strip li {
+  clear: both;
+  margin: 0;
+  text-align: right;
+  width: 100%;
+}
+
+.ux-vertical-tabs .x-tab-panel-body{
+  padding:0;
+  border:0;
+}
+
+.ux-vertical-tabs-left .x-tab-panel-bwrap{
+  border-left:1px solid #8DB2E3;
+}
+
+.ux-vertical-tabs-right .x-tab-panel-bwrap{
+  border-right:1px solid #8DB2E3;    
+}
+
+.ux-vertical-tabs .x-tab-strip-top .x-tab-strip-inner {
+  background-position:0 -202px;
+}
+
+.ux-vertical-tabs ul.x-tab-strip-top{
+  background:url(images/replay/down.gif) repeat-x 0 -35px;
+  height:25px; 
+}
+
+.ux-vertical-tabs .x-tab-strip-top .x-tab-strip-active .x-tab-right {
+  background:url(images/replay/down.gif) repeat-x;
+  margin-bottom:0;
+}
+
+.ux-vertical-tabs .x-tab-strip-top .x-tab-strip-over .x-tab-right span.x-tab-strip-text
+    {
+    color: #000000;
+    font-weight:bold; border-bottom:1px solid #aaa; cursor:pointer; padding:5px 20px;
+}
+
+.ux-vertical-tabs .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text
+    {
+    color: #000000;
+    font-weight:bold; border-bottom:1px solid #aaa; cursor:pointer; padding:5px 20px;
+}
+.ext-ie6 .ux-vertical-tabs .x-tab-panel-bwrap{
+  position:absolute;
+}
