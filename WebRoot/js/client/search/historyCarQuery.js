@@ -183,9 +183,10 @@ Jinpeng.historyQuery.NorthFormPanel = Ext.extend(Ext.Panel,{
 						columns : 2
 					},
 					items : [{
-						/*items :[{
+						items :[{
 							fieldLabel : '车牌号码',
-							xtype : 'carNumSelecter',
+							/*xtype : 'carNumSelecter',*/
+							xtype : 'textfield',
 							name : 'carNumStr',
 							id : 'carNumStr',
 							emptyText : '支持模糊查询“?”,"*"',
@@ -210,24 +211,7 @@ Jinpeng.historyQuery.NorthFormPanel = Ext.extend(Ext.Panel,{
 									Ext.getCmp('carNumStr').setValue(carNum);
 								}
 							}
-						}]*/
-						items: [ {
-				        	xtype : 'carNumSelecter',
-							id : 'carNumStr',
-							name:'carNumStr',
-							fieldLabel: '车牌号码',
-							anchor : '94%',
-							editable : false,
-							disabled : true,
-							selectOnFocus : true,
-							forceSelection : true,
-							emptyText:'支持模糊查询“?”,"*"',
-							store: [],
-							displayField : 'TEXT',
-							valueField:'ID',
-							mode : 'local',
-							triggerAction : 'all'
-				        }]
+						}]
 					}, { 
 //						xtype : 'spacer'
 						items : [ {
